@@ -1,20 +1,19 @@
 /** @type {import('next').NextConfig} */
 
-const isProd = process.env.NODE_ENV == "production";
+import withPWAInit from "@ducanh2912/next-pwa";
 
-// console.log("isProd", process.env);
-
-const nextConfig = {
-  basePath: isProd ? "" : "",
-  // distDir: "dist",
-  images: {
-    path: "/FindIt",
-
-    unoptimized: true, // FIXME see here
+const withPWA = withPWAInit({
+  dest: "public",
+  cacheOnFrontEndNav: true,
+  aggressiveFrontEndNavCaching: true,
+  reloadOnOnline: true,
+  swcMinify: true,
+  disable: false, //process.env.NODE_ENV === "development",
+  workboxOptions: {
+    disableDevLogs: true,
   },
-  output: "export",
+});
 
-  reactStrictMode: true,
-};
-
-export default nextConfig;
+export default withPWA({
+  // Your Next.js config
+});

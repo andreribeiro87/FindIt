@@ -5,13 +5,14 @@ const isProd = process.env.NODE_ENV == "production";
 // console.log("isProd", process.env);
 
 const nextConfig = {
-  basePath: isProd ? "/FindIt" : "",
-  distDir: "dist",
+  basePath: isProd ? "" : "",
+  // distDir: "dist",
   images: {
     path: "/FindIt",
 
     unoptimized: true, // FIXME see here
   },
+  output: "export",
 
   reactStrictMode: true,
 };

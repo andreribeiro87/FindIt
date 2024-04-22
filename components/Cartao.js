@@ -39,7 +39,7 @@ export default function Cartao() {
         </CardContent>
         </CardContent>
         <CardContent sx={{}}>
-          <Typography level="body-sm">in stock</Typography>
+          <Typography level="body-sm">olá</Typography>
 
 
         </CardContent>

@@ -1,9 +1,12 @@
-import Cartao from "../../components/Cartao";
+import ProdutSearchCard from "../../components/ProductSearchCard";
+import ProductDetails from "../../components/ProductDetails";
 
 export default function Home() {
   return (
     <>
-      <Cartao />
+      <ProdutSearchCard />
+
+      
 
       <h1>Home</h1>
     </>

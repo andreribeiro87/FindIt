@@ -32,3 +32,29 @@ export default function Home() {
   );
 }
 ```
+
+## data:
+
+- info para supermercados
+- info de produtos
+
+## super:
+
+mercadoana
+Auchan
+continente
+
+### info super:
+
+localizacao/distancia:
+acessibilidade true/false
+detalhes #TODO
+
+## produtos:
+
+- preco
+- nome
+- imagem
+- descricao -> cenas caloricas
+- qtd
+- supermercado

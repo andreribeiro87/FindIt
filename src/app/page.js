@@ -1,5 +1,6 @@
 import { useEffect } from "react";
-import Cartao from "../../components/Cartao";
+import ProdutSearchCard from "../../components/ProductSearchCard";
+//import ProductDetails from "../../components/ProductDetails";
 import Filter from "../../components/Filter";
 
 export default function Home() {
@@ -12,8 +13,7 @@ export default function Home() {
   return (
     <>
       {/* <Cartao /> */}
-
-      <Filter />
+      <Filter/>
       <h1>Home</h1>
     </>
   );

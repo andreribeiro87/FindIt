@@ -2,7 +2,7 @@ import { NextResponse } from "next/server";
 
 export async function GET(req) {
   //this function should return a json like {id: x, nome: 'nome do prod'}
-  const res = await fetch("http://127.ga0.0.1:3001/produto").then((res) =>
+  const res = await fetch("http://127.0.0.1:3001/produto").then((res) =>
     res.json()
   );
 

@@ -1,5 +1,4 @@
 "use client";
-import { useState } from "react";
 
 import Button from "@mui/joy/Button";
 import Modal from "@mui/joy/Modal";
@@ -8,8 +7,7 @@ import Sheet from "@mui/joy/Sheet";
 import Autocomplete from "@mui/joy/Autocomplete";
 import Card from "@mui/joy/Card";
 import Switch from "@mui/joy/Switch";
-import Typography from "@mui/joy/Typography"
-
+import Typography from "@mui/joy/Typography";
 
 import Close from "@mui/icons-material/Close";
 import SearchIcon from "@mui/icons-material/Search";
@@ -18,15 +16,22 @@ import SearchIcon from "@mui/icons-material/Search";
 // CLOSE MODAL esta em cima da barra de pesquisa
 // os markets nao estao no centro do card
 // preparar as variaveis pra serem recebidas ANDRE
+// umas animacoes please
 
+// enter nao funciona
+// apagar o input assim que o user mete
+// ao clicar em order devia mudar o switch
 
-export default function BasicModal() {
-  const [open, setOpen] = useState(false);
-  const [accessibility, setAccessibility] = useState(false);
-  const [alphabetical, setAlphabetical] = useState(false);
-  const [order, setOrder] = useState(false);
-  const [superMarket, setSuperMarket] = useState([]);
-
+export default function BasicModal({
+  markets,
+  open,
+  superMarket,
+  closeModal,
+  setAccessibility,
+  setAlphabetical,
+  setOrder,
+  setSuperMarket,
+}) {
   const getIndex = (superMarket, value) => {
     for (let i = 0; i < superMarket.length; i++) {
       if (superMarket[i].id == value.id) return i;
@@ -42,30 +47,18 @@ export default function BasicModal() {
     setSuperMarket(superMarket.filter((item) => item.id !== id));
   };
 
-  var id = 0;
-  const markets = [
-    { id: id++, name: "continente" },
-    { id: id++, name: "pingo Doce" },
-    { id: id++, name: "mercadona" },
-    { id: id++, name: "auchan" },
-    { id: id++, name: "intermarche" },
-  ];
-
   return (
     <>
-      <Button variant="outlined" color="neutral" onClick={() => setOpen(true)}>
-        Open modal
-      </Button>
       <Modal
         open={open}
-        onClose={() => setOpen(false)}
+        onClose={closeModal}
         sx={{ display: "flex", justifyContent: "center", alignItems: "center" }}
       >
         <Sheet
           variant="outlined"
           sx={{
             maxWidth: 500,
-            width: "90%",
+            width: "80%",
             borderRadius: "md",
             p: 2.5,
             boxShadow: "lg",
@@ -133,28 +126,20 @@ export default function BasicModal() {
           <Card>
             <Typography
               startDecorator={
-                <Switch
-                  sx={{ ml: 1 }}
-                  onChange={() => setAccessibility(!accessibility)}
-                />
+                <Switch sx={{ ml: 1 }} onChange={setAccessibility} />
               }
             >
               Accessibility
             </Typography>
             <Typography
               startDecorator={
-                <Switch
-                  sx={{ ml: 1 }}
-                  onChange={() => setAlphabetical(!alphabetical)}
-                />
+                <Switch sx={{ ml: 1 }} onChange={setAlphabetical} />
               }
             >
               Alphabetical order
             </Typography>
             <Typography
-              startDecorator={
-                <Switch sx={{ ml: 1 }} onChange={() => setOrder(!order)} />
-              }
+              startDecorator={<Switch sx={{ ml: 1 }} onChange={setOrder} />}
             >
               Low to High
             </Typography>

@@ -1,9 +1,15 @@
-import ProdutSearchCard from "../../components/ProductSearchCard";
-// import ProductDetails from "../../components/ProductDetails";
+import { useEffect } from "react";
+import Cartao from "../../components/Cartao";
 import Filter from "../../components/Filter";
 import NavBar from "../../components/NavBar";
 
 export default function Home() {
+  useEffect(() => {
+    fetch("/api/getAllProducts", { method: "GET" })
+      .then((res) => res.json())
+      .then((data) => console.log(data));
+  }, []);
+
   return (
     <>
       {/* <ProdutSearchCard /> */}
@@ -11,7 +17,6 @@ export default function Home() {
       
 
       <Filter/>
-      <NavBar/>
       <h1>Home</h1>
     </>
   );

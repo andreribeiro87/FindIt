@@ -9,16 +9,26 @@ export default function Home() {
   useEffect(() => {
     fetch("/api/getAllProducts", { method: "GET" })
       .then((res) => res.json())
-      .then((data) => setProdutos(data));
+
+      .then((data) => {
+        console.log(data);
+        return setProdutos(data);
+      });
+
+    fetch("/api/getAllProdId_Name", { method: "GET" })
+      .then((res) => res.json())
+
+      .then((data) => {
+        console.log(data);
+        // return setProdutos(data);
+      });
   }, []);
 
   return (
     <>
       {/* <ProdutSearchCard /> */}
 
-      
-
-      <Filter/>
+      <Filter />
       <h1>Home</h1>
     </>
   );

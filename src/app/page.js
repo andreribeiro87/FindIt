@@ -1,12 +1,14 @@
-import { useEffect } from "react";
-import Cartao from "../../components/Cartao";
+"use client";
+
+import { useEffect, useState } from "react";
 import Filter from "../../components/Filter";
 
 export default function Home() {
+  const [produtos, setProdutos] = useState([]);
   useEffect(() => {
     fetch("/api/getAllProducts", { method: "GET" })
       .then((res) => res.json())
-      .then((data) => console.log(data));
+      .then((data) => setProdutos(data));
   }, []);
 
   return (

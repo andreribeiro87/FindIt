@@ -1,20 +1,31 @@
 "use client";
+import { useState } from "react";
+
 import Button from "@mui/joy/Button";
 import Modal from "@mui/joy/Modal";
 import ModalClose from "@mui/joy/ModalClose";
 import Sheet from "@mui/joy/Sheet";
-import Typography from "@mui/joy/Typography";
-import * as React from "react";
-
-import SearchIcon from "@mui/icons-material/Search";
 import Autocomplete from "@mui/joy/Autocomplete";
+import Card from "@mui/joy/Card";
+import Switch from "@mui/joy/Switch";
+import Typography from "@mui/joy/Typography"
+
 
 import Close from "@mui/icons-material/Close";
-import Card from "@mui/joy/Card";
+import SearchIcon from "@mui/icons-material/Search";
+
+// TODO
+// CLOSE MODAL esta em cima da barra de pesquisa
+// os markets nao estao no centro do card
+// preparar as variaveis pra serem recebidas ANDRE
+
 
 export default function BasicModal() {
-  const [open, setOpen] = React.useState(false);
-  const [superMarket, setSuperMarket] = React.useState([]);
+  const [open, setOpen] = useState(false);
+  const [accessibility, setAccessibility] = useState(false);
+  const [alphabetical, setAlphabetical] = useState(false);
+  const [order, setOrder] = useState(false);
+  const [superMarket, setSuperMarket] = useState([]);
 
   const getIndex = (superMarket, value) => {
     for (let i = 0; i < superMarket.length; i++) {
@@ -110,7 +121,7 @@ export default function BasicModal() {
                     size="sm"
                     variant="outlined"
                     color="danger"
-                    sx={{ ml: 1 }}
+                    sx={{ ml: 1, p: 0.5 }}
                     onClick={() => deleteID(e.id)}
                   >
                     <Close fontSize="sm" />
@@ -118,6 +129,35 @@ export default function BasicModal() {
                 </Card>
               ))}
             </Sheet>
+          </Card>
+          <Card>
+            <Typography
+              startDecorator={
+                <Switch
+                  sx={{ ml: 1 }}
+                  onChange={() => setAccessibility(!accessibility)}
+                />
+              }
+            >
+              Accessibility
+            </Typography>
+            <Typography
+              startDecorator={
+                <Switch
+                  sx={{ ml: 1 }}
+                  onChange={() => setAlphabetical(!alphabetical)}
+                />
+              }
+            >
+              Alphabetical order
+            </Typography>
+            <Typography
+              startDecorator={
+                <Switch sx={{ ml: 1 }} onChange={() => setOrder(!order)} />
+              }
+            >
+              Low to High
+            </Typography>
           </Card>
         </Sheet>
       </Modal>

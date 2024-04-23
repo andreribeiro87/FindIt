@@ -2,6 +2,7 @@
 
 import { useEffect, useState } from "react";
 import Filter from "../../components/Filter";
+import NavBar from "../../components/NavBar";
 
 export default function Home() {
   const [produtos, setProdutos] = useState([]);
@@ -13,9 +14,11 @@ export default function Home() {
 
   return (
     <>
-      {/* <Cartao /> */}
+      {/* <ProdutSearchCard /> */}
 
-      <Filter />
+      
+
+      <Filter/>
       <h1>Home</h1>
     </>
   );

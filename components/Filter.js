@@ -15,7 +15,6 @@ import SearchIcon from "@mui/icons-material/Search";
 // TODO
 // CLOSE MODAL esta em cima da barra de pesquisa
 // os markets nao estao no centro do card
-// preparar as variaveis pra serem recebidas ANDRE
 // umas animacoes please
 
 // enter nao funciona

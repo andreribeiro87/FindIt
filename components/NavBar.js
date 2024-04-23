@@ -12,11 +12,8 @@ import Search from "@mui/icons-material/Search";
 import ShoppingCartIcon from "@mui/icons-material/ShoppingCart";
 
 //TODO
-// deixar as cores??
-// deixar o texto ??
-// mudar algum simbolo??
 
-// texto a dar cliping
+// texto a dar cliping  
 
 
 export default function NavBar({index,changeIndex}) {

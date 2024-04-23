@@ -4,6 +4,7 @@ import { useEffect, useState } from "react";
 import NavBar from "../../components/NavBar";
 import SearchPage from "../../components/Pages/Search";
 import User from "../../components/Pages/User";
+import Cart from "../../components/Pages/Cart";
 
 export default function Home() {
   // const [produtos, setProdutos] = useState([]);
@@ -30,7 +31,7 @@ export default function Home() {
       {/* <ProdutSearchCard /> */}
 
       {index==0 && <>page0</>}
-      {index==1 && <>page1</>}
+      {index==1 && <Cart/>}
       {index==2 && <SearchPage/>}
       {index==3 && <>page3</>}
       {index==4 && <User/>}

@@ -5,6 +5,8 @@ import NavBar from "../../components/NavBar";
 import SearchPage from "../../components/Pages/Search";
 import User from "../../components/Pages/User";
 import Cart from "../../components/Pages/Cart";
+import Map from "../../components/Pages/Map";
+import Promotions from "../../components/Pages/Promations";
 
 export default function Home() {
   // const [produtos, setProdutos] = useState([]);
@@ -30,10 +32,10 @@ export default function Home() {
     <>
       {/* <ProdutSearchCard /> */}
 
-      {index==0 && <>page0</>}
+      {index==0 && <Promotions/>}
       {index==1 && <Cart/>}
       {index==2 && <SearchPage/>}
-      {index==3 && <>page3</>}
+      {index==3 && <Map/>}
       {index==4 && <User/>}
 
       <NavBar index={index} changeIndex={(event, value) => setIndex(value)}/>

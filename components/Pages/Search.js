@@ -29,6 +29,16 @@ export default function SearchPage() {
 
   return (
     <>
+      <Card color="primary" variant="soft"      sx={{
+        boxShadow: "lg",
+        position: "absolute",
+        top: "5%",
+        left: 0,
+        right: 0,
+        margin: "auto",
+        maxWidth: "75%",
+        height: "73%",
+      }}>
       <Card
         orientation="horizontal"
         variant="outline"
@@ -37,7 +47,6 @@ export default function SearchPage() {
       >
         <Autocomplete
           variant="soft"
-          color="primary"
           size="lg"
           sx={{ width: "90%" }}
           options={["oi", "pixa"]}
@@ -51,8 +60,7 @@ export default function SearchPage() {
           <FilterAltIcon />
         </Button>
       </Card>
-      <Divider orientation="horizontal" sx={{marginTop:1,marginBottom:1}} />
-      <Card color="primary" variant="soft">
+      <Divider orientation="horizontal" sx={{marginBottom:1}} />
             
             cartoes
             {/* TODO CARTOES  */}

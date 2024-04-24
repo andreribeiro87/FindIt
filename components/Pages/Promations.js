@@ -1,9 +1,9 @@
 import Card from "@mui/joy/Card";
 
-export default function Cart() {
+export default function Promotions() {
   return (
     <Card
-      color="success"
+      color="neutral"
       variant="soft"
       sx={{
         boxShadow: "lg",
@@ -16,8 +16,8 @@ export default function Cart() {
         height: "73%",
       }}
     >
-      cartoes
-      {/* TODO CARTOES  */}
+      map
+      {/* TODO map  */}
     </Card>
   );
 }

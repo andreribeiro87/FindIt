@@ -14,25 +14,11 @@ export default function Home() {
   const [superMarkets, setSuperMarkets] = useState([]);
 
   useEffect(() => {
-    fetch("/api/getAllProducts", { method: "GET" })
-      .then((res) => res.json())
-
-      .then((data) => {
-        console.log(data);
-        return setProdutos(data);
-      });
-
-    fetch("/api/getAllProdId_Name", { method: "GET" })
-      .then((res) => res.json())
-
-      .then((data) => {
-        return setProdIdName(data);
-      });
     fetch("/api/getSupermarket", { method: "GET" })
       .then((res) => res.json())
 
       .then((data) => {
-        console.log(data);
+        console.log(data, "PIXA");
         return setSuperMarkets(data);
       });
   }, []);

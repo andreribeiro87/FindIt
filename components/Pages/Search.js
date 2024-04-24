@@ -13,66 +13,60 @@ import Divider from "@mui/joy/Divider";
 
 export default function SearchPage() {
   const [open, setOpen] = useState(false);
-  const [accessibility, setAccessibility] = useState(false);
   const [alphabetical, setAlphabetical] = useState(false);
-  const [order, setOrder] = useState(false);
+  const [order, setOrder] = useState(null);
   const [superMarket, setSuperMarket] = useState([]);
-
-  var id = 0;
-  const markets = [
-    { id: id++, name: "continente" },
-    { id: id++, name: "pingo Doce" },
-    { id: id++, name: "mercadona" },
-    { id: id++, name: "auchan" },
-    { id: id++, name: "intermarche" },
-  ];
 
   return (
     <>
-      <Card color="primary" variant="soft"      sx={{
-        boxShadow: "lg",
-        position: "absolute",
-        top: "5%",
-        left: 0,
-        right: 0,
-        margin: "auto",
-        maxWidth: "75%",
-        height: "73%",
-      }}>
       <Card
-        orientation="horizontal"
-        variant="outline"
-        size="sm"
         color="primary"
+        variant="soft"
+        sx={{
+          boxShadow: "lg",
+          position: "absolute",
+          top: "5%",
+          left: 0,
+          right: 0,
+          margin: "auto",
+          maxWidth: "75%",
+          height: "73%",
+        }}
       >
-        <Autocomplete
-          variant="soft"
-          size="lg"
-          sx={{ width: "90%" }}
-          options={["oi", "pixa"]}
-        ></Autocomplete>
-        <Button
-          sx={{ width: "10%" }}
-          variant="solid"
+        <Card
+          orientation="horizontal"
+          variant="outline"
+          size="sm"
           color="primary"
-          onClick={() => setOpen(true)}
         >
-          <FilterAltIcon />
-        </Button>
-      </Card>
-      <Divider orientation="horizontal" sx={{marginBottom:1}} />
-            
-            cartoes
-            {/* TODO CARTOES  */}
+          <Autocomplete
+            variant="soft"
+            size="lg"
+            sx={{ width: "90%" }}
+            options={["oi", "pixa"]}
+          ></Autocomplete>
+          <Button
+            sx={{ width: "10%" }}
+            variant="solid"
+            color="primary"
+            onClick={() => setOpen(true)}
+          >
+            <FilterAltIcon />
+          </Button>
         </Card>
+        <Divider orientation="horizontal" sx={{ marginBottom: 1 }} />
+        cartoes
+        {/* TODO CARTOES  */}
+      </Card>
+      <Button onClick={() => console.log("MYPIXA")}>pixa</Button>
       <Filter
-        markets={markets}
         open={open}
         superMarket={superMarket}
         closeModal={() => setOpen(false)}
-        setAccessibility={() => setAccessibility(!accessibility)}
+        alphabetical={alphabetical}
         setAlphabetical={() => setAlphabetical(!alphabetical)}
-        setOrder={() => setOrder(!order)}
+        order={order}
+        setOrder={(p) => setOrder(p)}
         setSuperMarket={(array) => setSuperMarket(array)}
       />
     </>

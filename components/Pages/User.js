@@ -1,3 +1,4 @@
+/* eslint-disable react/no-children-prop */
 import { useState } from "react";
 
 import Card from "@mui/joy/Card";

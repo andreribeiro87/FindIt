@@ -34,7 +34,6 @@ export default function SearchPage() {
         variant="outline"
         size="sm"
         color="primary"
-        sx={{ marginBottom: 1 }}
       >
         <Autocomplete
           variant="soft"
@@ -52,9 +51,12 @@ export default function SearchPage() {
           <FilterAltIcon />
         </Button>
       </Card>
-      <Divider orientation="horizontal" />
-      cartoes
-      {/* TODO CARTOES  */}
+      <Divider orientation="horizontal" sx={{marginTop:1,marginBottom:1}} />
+      <Card color="primary" variant="soft">
+            
+            cartoes
+            {/* TODO CARTOES  */}
+        </Card>
       <Filter
         markets={markets}
         open={open}

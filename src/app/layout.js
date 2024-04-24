@@ -11,7 +11,7 @@ export const metadata = {
 
 export default function RootLayout({ children }) {
   return (
-    <html lang="en">
+    <html lang="en" style={{height:"100%",width:"100%"}}>
       <body className={inter.className} style={{backgroundColor:"#dbdbd9"}}>
         <meta
           name="viewport"

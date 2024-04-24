@@ -3,7 +3,7 @@
   "version": "0.1.0",
   "private": true,
   "scripts": {
-    "dev": "npx json-server --watch db.json & next dev",
+    "dev": "npx json-server db.json --port 3001 & next dev",
     "build": "json-server db.json --port 3001 & next build",
     "start": "json-server db.json --port 3001 & next start",
     "lint": "next lint"

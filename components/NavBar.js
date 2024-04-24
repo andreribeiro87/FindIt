@@ -1,102 +1,113 @@
-"use client"
-import * as React from 'react';
-import Box from '@mui/joy/Box';
-import ListItemDecorator from '@mui/joy/ListItemDecorator';
-import Tabs from '@mui/joy/Tabs';
-import TabList from '@mui/joy/TabList';
-import Tab, { tabClasses } from '@mui/joy/Tab';
-import HomeRoundedIcon from '@mui/icons-material/HomeRounded';
-import FavoriteBorder from '@mui/icons-material/FavoriteBorder';
-import Search from '@mui/icons-material/Search';
-import Person from '@mui/icons-material/Person';
+"use client";
 
-export default function NavBar() {
-  const [index, setIndex] = React.useState(0);
-  const colors = ['primary', 'danger', 'success', 'warning','neutral'];
+import ListItemDecorator from "@mui/joy/ListItemDecorator";
+import Tab, { tabClasses } from "@mui/joy/Tab";
+import TabList from "@mui/joy/TabList";
+import Tabs from "@mui/joy/Tabs";
+
+import AccountCircleIcon from "@mui/icons-material/AccountCircle";
+import MapIcon from "@mui/icons-material/Map";
+import NotificationsActiveIcon from "@mui/icons-material/NotificationsActive";
+import Search from "@mui/icons-material/Search";
+import ShoppingCartIcon from "@mui/icons-material/ShoppingCart";
+
+//TODO
+
+// texto a dar cliping  
+
+
+export default function NavBar({index,changeIndex}) {
+
+  const colors = [ "neutral","success","primary", "warning","danger" ];
   return (
-    <Box>
-      <Tabs
-        size="lg"
-        value={index}
-        onChange={(event, value) => setIndex(value)}
-        sx={(theme) => ({
-          
-          p: 1,
-          borderRadius: 16,
-          maxWidth: 400,
-          mx: 'auto',
-          boxShadow: theme.shadow.sm,
-          '--joy-shadowChannel': theme.vars.palette[colors[index]].darkChannel,
-          [`& .${tabClasses.root}`]: {
-            py: 1,
-            flex: 1,
-            transition: '0.3s',
-            fontWeight: 'md',
-            fontSize: 'md',
-            [`&:not(.${tabClasses.selected}):not(:hover)`]: {
-              opacity: 0.7,
-            },
+    <Tabs
+      size="lg"
+      value={index}
+      onChange={changeIndex}
+      sx={(theme) => ({
+        position: "fixed",
+        bottom: 10,
+        left: 0,
+        right: 0,
+        margin: "auto",
+        p: 1,
+        borderRadius: 16,
+        maxWidth: 500,
+        mx: "auto",
+        
+        //TODO cenas da VI
+        boxShadow: theme.shadow.sm,
+        "--joy-shadowChannel": theme.vars.palette[colors[index]].darkChannel,
+        [`& .${tabClasses.root}`]: {
+          py: 1,
+          flex: 1,
+          transition: "0.7s",
+          fontWeight: "md",
+          fontSize: "md",
+          [`&:not(.${tabClasses.selected}):not(:hover)`]: {
+            opacity: 0.7,
+            fontSize:0
           },
-        })}
+        },
+      })}
+    >
+      <TabList
+        variant="plain"
+        size="sm"
+        disableUnderline
+        sx={{ borderRadius: "lg", p: 0 }}
       >
-        <TabList
-          variant="plain"
-          size="sm"
-          disableUnderline
-          sx={{ borderRadius: 'lg', p: 0 }}
+        <Tab
+          disableIndicator
+          orientation="vertical"
+          {...(index === 0 && { color: colors[0] })}
         >
-          <Tab
-            disableIndicator
-            orientation="vertical"
-            {...(index === 0 && { color: colors[0] })}
-          >
-            <ListItemDecorator>
-              <HomeRoundedIcon />
-            </ListItemDecorator>
-            Home
-          </Tab>
-          <Tab
-            disableIndicator
-            orientation="vertical"
-            {...(index === 1 && { color: colors[1] })}
-          >
-            <ListItemDecorator>
-              <FavoriteBorder />
-            </ListItemDecorator>
-            Likes
-          </Tab>
-          <Tab
-            disableIndicator
-            orientation="vertical"
-            {...(index === 2 && { color: colors[2] })}
-          >
-            <ListItemDecorator>
-              <Search />
-            </ListItemDecorator>
-            Search
-          </Tab>
-          <Tab
-            disableIndicator
-            orientation="vertical"
-            {...(index === 3 && { color: colors[3] })}
-          >
-            <ListItemDecorator>
-              <Person />
-            </ListItemDecorator>
-            Profile
-          </Tab>
-          <Tab
-            disableIndicator
-            orientation="vertical"
-            {...(index === 4 && { color: colors[4] })}
-          >
-            <ListItemDecorator>
-              <Person />
-            </ListItemDecorator>
-            Profile
-          </Tab>
-        </TabList>
-      </Tabs>
-    </Box>
+          <ListItemDecorator>
+            <NotificationsActiveIcon />
+          </ListItemDecorator>
+          Notifications
+        </Tab>
+        <Tab
+          disableIndicator
+          orientation="vertical"
+          {...(index === 1 && { color: colors[1] })}
+        >
+          <ListItemDecorator>
+            <ShoppingCartIcon />
+          </ListItemDecorator>
+          Cart
+        </Tab>
+        <Tab
+          disableIndicator
+          orientation="vertical"
+          {...(index === 2 && { color: colors[2] })}
+        >
+          <ListItemDecorator>
+            <Search />
+          </ListItemDecorator>
+          Search
+        </Tab>
+        <Tab
+          disableIndicator
+          orientation="vertical"
+          {...(index === 3 && { color: colors[3] })}
+        >
+          <ListItemDecorator>
+            <MapIcon />
+          </ListItemDecorator>
+          Map
+        </Tab>
+        <Tab
+          disableIndicator
+          orientation="vertical"
+          {...(index === 4 && { color: colors[4] })}
+        >
+          <ListItemDecorator>
+            <AccountCircleIcon />
+          </ListItemDecorator>
+          Profile
+        </Tab>
+      </TabList>
+    </Tabs>
   );
 }

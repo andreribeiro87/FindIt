@@ -11,13 +11,12 @@ import RestoreIcon from "@mui/icons-material/Restore";
 import NotificationsActiveIcon from "@mui/icons-material/NotificationsActive";
 import PersonIcon from "@mui/icons-material/Person";
 
-import colors from "@mui/joy/colors/colors";
 
 export default function User() {
   const [name, setName] = useState("User");
   return (
     <Card
-      color={colors.blue[900]}
+      color="danger"
       variant="solid"
       size="lg"
       sx={{

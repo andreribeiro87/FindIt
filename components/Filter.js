@@ -61,7 +61,10 @@ export default function BasicModal({
       fetch(`/api/getSupermarket?accessibility=${accessibility.toString()}`, {
         method: "GET",
       })
-        .then((res) => res.json())
+        .then((res) => {
+          console.log(res);
+          return res.json();
+        })
         .then((data) => {
           console.log(
             "3useEffect triggered with accessibility:",

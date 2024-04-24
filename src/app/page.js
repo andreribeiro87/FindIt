@@ -18,6 +18,7 @@ export default function Home() {
       .then((res) => res.json())
 
       .then((data) => {
+        console.log(data);
         return setProdutos(data);
       });
 

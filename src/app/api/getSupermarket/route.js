@@ -1,7 +1,15 @@
-import { NextResponse } from "next/server";
+import { NextResponse, NextRequest } from "next/server";
 
 export async function GET(req) {
-  //   let myurl = new URL(req.url);
+  console.log(
+    "PIXA1\n",
+    req,
+    "PIXA2\n",
+    req.nextUrl.searchParams.get("accessibility"),
+    "DICA"
+  );
+
+  // let myurl = new URL(req.url);
   //   let accessibility = myurl.searchParams.get("accessibility") || "false";
   //   console.log(myurl, "PILAO", accessibility);
 
@@ -21,5 +29,5 @@ export async function GET(req) {
   //     return NextResponse.json(res2);
   //   }
 
-  return NextResponse.json(res);
+  return NextResponse.json({ res });
 }

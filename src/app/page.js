@@ -14,7 +14,10 @@ export default function Home() {
   const [superMarkets, setSuperMarkets] = useState([]);
 
   useEffect(() => {
-    fetch("/api/getSupermarket?accessibility=false", { method: "GET" })
+    fetch("/api/getSupermarket?accessibility=false", {
+      method: "GET",
+      mode: "no-cors",
+    })
       .then((res) => res.json())
 
       .then((data) => {

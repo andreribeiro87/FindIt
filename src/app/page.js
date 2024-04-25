@@ -14,7 +14,7 @@ export default function Home() {
   const [superMarkets, setSuperMarkets] = useState([]);
 
   useEffect(() => {
-    fetch("/api/getSupermarket?accessibility=false", { method: "GET" })
+    fetch("/api/getSupermarket", { method: "GET" })
       .then((res) => res.json())
 
       .then((data) => {

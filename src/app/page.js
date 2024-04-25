@@ -7,6 +7,7 @@ import User from "../../components/Pages/User";
 import Cart from "../../components/Pages/Cart";
 import Map from "../../components/Pages/Map";
 import Promotions from "../../components/Pages/Promations";
+import { Accessibility } from "@mui/icons-material";
 
 export default function Home() {
   const [produtos, setProdutos] = useState([]);
@@ -14,11 +15,12 @@ export default function Home() {
   const [superMarkets, setSuperMarkets] = useState([]);
 
   useEffect(() => {
-    fetch("/api/getSupermarket?accessibility=false", {
-      method: "GET",
+    fetch("/api/getSupermarket", {
+      method: "POST",
       headers: {
         "Content-Type": "application/json",
       },
+      body: JSON.stringify({ accessibility: false }),
     }).then((res) => console.log(res));
 
     // .then((data) => {

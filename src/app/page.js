@@ -16,7 +16,6 @@ export default function Home() {
   useEffect(() => {
     fetch("/api/getSupermarket?accessibility=false", {
       method: "GET",
-      mode: "no-cors",
     })
       .then((res) => res.json())
 

@@ -1,7 +1,7 @@
 import { NextResponse, NextRequest } from "next/server";
 
 export async function GET(req) {
-  console.log("PIXA1\n", req, "PIXA2\n", req.nextUrl.searchParams, "DICA");
+  // console.log("PIXA1\n", req, "PIXA2\n", req.nextUrl.searchParams, "DICA");
 
   // let myurl = new URL(req.url);
   //   let accessibility = myurl.searchParams.get("accessibility") || "false";

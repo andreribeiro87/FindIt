@@ -19,13 +19,12 @@ export default function Home() {
       headers: {
         "Content-Type": "application/json",
       },
-    })
-      .then((res) => res.json())
+    }).then((res) => console.log(res));
 
-      .then((data) => {
-        console.log(data, "PIXA");
-        return setSuperMarkets(data);
-      });
+    // .then((data) => {
+    //   console.log(data, "PIXA");
+    //   return setSuperMarkets(data);
+    // });
   }, []);
   const [index, setIndex] = useState(0);
   return (

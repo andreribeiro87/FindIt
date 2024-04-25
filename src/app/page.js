@@ -21,12 +21,12 @@ export default function Home() {
         "Content-Type": "application/json",
       },
       body: JSON.stringify({ accessibility: false }),
-    }).then((res) => console.log(res));
-
-    // .then((data) => {
-    //   console.log(data, "PIXA");
-    //   return setSuperMarkets(data);
-    // });
+    })
+      .then((res) => res.json())
+      .then((data) => {
+        console.log(data, "PIXA");
+        return setSuperMarkets(data);
+      });
   }, []);
   const [index, setIndex] = useState(0);
   return (

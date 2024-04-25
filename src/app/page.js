@@ -15,12 +15,11 @@ export default function Home() {
   const [superMarkets, setSuperMarkets] = useState([]);
 
   useEffect(() => {
-    fetch("/api/getSupermarket", {
-      method: "POST",
+    fetch("/api/getSupermarket?accessibility=false", {
+      method: "GET",
       headers: {
         "Content-Type": "application/json",
       },
-      body: JSON.stringify({ accessibility: false }),
     })
       .then((res) => res.json())
       .then((data) => {

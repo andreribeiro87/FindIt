@@ -1,9 +1,9 @@
 import { NextResponse } from "next/server";
 
 export async function GET(req) {
-  let myurl = new URL(req.url);
+  //   let myurl = new URL(req.url);
   //   let accessibility = myurl.searchParams.get("accessibility") || "false";
-  console.log(myurl, "PILAO", accessibility);
+  //   console.log(myurl, "PILAO", accessibility);
 
   const res = await fetch("http://127.0.0.1:3001/supermercado").then((res) =>
     res.json()

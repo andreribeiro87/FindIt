@@ -16,6 +16,9 @@ export default function Home() {
   useEffect(() => {
     fetch("/api/getSupermarket?accessibility=false", {
       method: "GET",
+      headers: {
+        "Content-Type": "application/json",
+      },
     })
       .then((res) => res.json())
 

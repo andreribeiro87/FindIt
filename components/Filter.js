@@ -55,10 +55,11 @@ export default function BasicModal({
     if (!loading) {
       return undefined;
     }
+    // debugger;
 
     (async () => {
       console.log("2useEffect triggered with accessibility:", accessibility);
-      fetch(`/api/getSupermarket?accessibility=${accessibility.toString()}`, {
+      fetch(`/api/getSupermarket`, {
         method: "GET",
       })
         .then((res) => {
@@ -72,20 +73,26 @@ export default function BasicModal({
             "data:",
             data
           );
+          if (accessibility) {
+            let newData = [];
+            for (let i = 0; i < data.length; i++) {
+              console.log(
+                "PILOCAS",
+                data[i],
+                data[i].acessibilidade,
+                accessibility,
+                data[i].acessibilidade == accessibility.toString()
+              );
+              if (data[i].acessibilidade == accessibility.toString()) {
+                newData.push(data[i]);
+              }
+            }
+            return setMarkets(newData);
+          }
+
           return setMarkets(data);
         });
     })();
-
-    if (accessibility) {
-      let tmp = [];
-
-      for (let i = 0; i < markets.length; i++) {
-        if (markets[i].acessibilidade.toString() == accessibility) {
-          tmp.push(markets[i]);
-        }
-      }
-      setMarkets(tmp);
-    }
   }, [accessibility, loading]);
 
   const getIndex = (superMarket, value) => {
@@ -136,8 +143,12 @@ export default function BasicModal({
               placeholder="Search SuperMarket..."
               variant="soft"
               startDecorator={<SearchIcon />}
+              // options={markets == null || markets.length == 0 ? [] : markets}
               options={markets}
-              getOptionLabel={(option) => option.nome}
+              getOptionLabel={(option) => {
+                console.log(option);
+                return option.nome;
+              }}
               onChange={addSuperMarket}
               isOptionEqualToValue={(option, value) => {
                 return option.id == value.id;

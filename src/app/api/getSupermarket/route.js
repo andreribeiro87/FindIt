@@ -25,5 +25,7 @@ export async function GET(req) {
   //     return NextResponse.json(res2);
   //   }
 
-  return NextResponse.json({ res });
+  console.log(res, "PIXA");
+
+  return NextResponse.json(res);
 }

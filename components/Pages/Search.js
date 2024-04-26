@@ -5,8 +5,11 @@ import Filter from "../../components/Filter";
 import Button from "@mui/joy/Button";
 
 import FilterAltIcon from "@mui/icons-material/FilterAlt";
+import Search from "@mui/icons-material/Search";
 import { Autocomplete, Card } from "@mui/joy";
 import Divider from "@mui/joy/Divider";
+
+import TextField from "@mui/joy/TextField";
 
 //TODO
 // autocomplete falta
@@ -41,10 +44,17 @@ export default function SearchPage() {
           color="primary"
         >
           <Autocomplete
+            multiple
             variant="soft"
             size="lg"
             sx={{ width: "90%" }}
             options={["oi", "pixa"]}
+            endDecorator={
+              <Button onClick={() => console.log("pixa")}>
+                <Search />
+              </Button>
+            }
+            renderInput={(params) => <TextField {...params} label="Search" />}
           ></Autocomplete>
           <Button
             sx={{ width: "10%" }}

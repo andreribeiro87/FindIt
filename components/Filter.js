@@ -75,6 +75,17 @@ export default function BasicModal({
           return setMarkets(data);
         });
     })();
+
+    if (accessibility) {
+      let tmp = [];
+
+      for (let i = 0; i < markets.length; i++) {
+        if (markets[i].acessibilidade.toString() == accessibility) {
+          tmp.push(markets[i]);
+        }
+      }
+      setMarkets(tmp);
+    }
   }, [accessibility, loading]);
 
   const getIndex = (superMarket, value) => {

@@ -16,6 +16,7 @@ export default function SearchPage() {
   const [alphabetical, setAlphabetical] = useState(false);
   const [order, setOrder] = useState(null);
   const [superMarket, setSuperMarket] = useState([]);
+  const [prod, setProd] = useState([]);
 
   return (
     <>

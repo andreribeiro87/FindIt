@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState,useEffect } from "react";
 
 import Filter from "../../components/Filter";
 
@@ -10,6 +10,7 @@ import { Autocomplete, Card } from "@mui/joy";
 import Divider from "@mui/joy/Divider";
 
 import TextField from "@mui/joy/TextField";
+import { Podcasts } from "@mui/icons-material";
 
 //TODO
 // autocomplete falta
@@ -20,6 +21,45 @@ export default function SearchPage() {
   const [order, setOrder] = useState(null);
   const [superMarket, setSuperMarket] = useState([]);
   const [prod, setProd] = useState([]);
+  const [searchProd, setSearchProd] = useState([]);
+
+  let loading = prod.length === 0;
+  const [value, setValue] = useState("");
+  const fSearch =() =>{
+    console.log(value)
+    let temp =[]
+    for (let i = 0; i < prod.length; i++) {
+      if(prod[i].nome.toLowerCase().normalize('NFD').replace(/[\u0300-\u036f]/g, '').includes(value.toLowerCase().normalize('NFD').replace(/[\u0300-\u036f]/g, ''))){
+        temp.push(prod[i])
+      }
+      
+    }
+    console.log(temp)
+    setSearchProd(temp)
+    console.log(searchProd)
+  }
+  useEffect(() => {
+    if (!loading) {
+      return undefined;
+    }
+    // debugger;
+
+    (async () => {
+      fetch(`/api/getAllProducts`, {
+        method: "GET",
+      })
+        .then((res) => {
+          return res.json();
+        })
+        .then((data) => {
+
+          // supermercados do user
+
+          return setProd(data);
+        });
+    })();
+  }, [loading]);
+
 
   return (
     <>
@@ -44,18 +84,24 @@ export default function SearchPage() {
           color="primary"
         >
           <Autocomplete
-            multiple
             variant="soft"
             size="lg"
             sx={{ width: "90%" }}
-            options={["oi", "pixa"]}
+            options={prod}
+            freeSolo={true}
+            loading={loading}
+            getOptionLabel={(option) => {
+              return option.nome;
+            }}
+            onInputChange={(event,value,reason)=>setValue(value)}
             endDecorator={
-              <Button onClick={() => console.log("pixa")}>
+
+              <Button onClick={fSearch}>
                 <Search />
               </Button>
             }
             renderInput={(params) => <TextField {...params} label="Search" />}
-          ></Autocomplete>
+          />
           <Button
             sx={{ width: "10%" }}
             variant="solid"
@@ -69,7 +115,6 @@ export default function SearchPage() {
         cartoes
         {/* TODO CARTOES  */}
       </Card>
-      <Button onClick={() => console.log("MYPIXA")}>pixa</Button>
       <Filter
         open={open}
         superMarket={superMarket}

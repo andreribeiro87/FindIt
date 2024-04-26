@@ -46,43 +46,22 @@ export default function BasicModal({
   let loading = open && markets.length === 0;
 
   useEffect(() => {
-    console.log(
-      "useEffect triggered with accessibility:",
-      accessibility,
-      "loading:",
-      loading
-    );
     if (!loading) {
       return undefined;
     }
     // debugger;
 
     (async () => {
-      console.log("2useEffect triggered with accessibility:", accessibility);
       fetch(`/api/getSupermarket`, {
         method: "GET",
       })
         .then((res) => {
-          console.log(res);
           return res.json();
         })
         .then((data) => {
-          console.log(
-            "3useEffect triggered with accessibility:",
-            accessibility,
-            "data:",
-            data
-          );
           if (accessibility) {
             let newData = [];
             for (let i = 0; i < data.length; i++) {
-              console.log(
-                "PILOCAS",
-                data[i],
-                data[i].acessibilidade,
-                accessibility,
-                data[i].acessibilidade == accessibility.toString()
-              );
               if (data[i].acessibilidade == accessibility.toString()) {
                 newData.push(data[i]);
               }
@@ -146,7 +125,6 @@ export default function BasicModal({
               // options={markets == null || markets.length == 0 ? [] : markets}
               options={markets}
               getOptionLabel={(option) => {
-                console.log(option);
                 return option.nome;
               }}
               onChange={addSuperMarket}

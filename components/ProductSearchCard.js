@@ -1,91 +1,93 @@
-'use client';
+import * as React from "react";
+import AspectRatio from "@mui/joy/AspectRatio";
+import Link from "@mui/joy/Link";
+import Card from "@mui/joy/Card";
+import CardContent from "@mui/joy/CardContent";
+import Sheet from "@mui/joy/Sheet";
+import Chip from "@mui/joy/Chip";
+import Typography from "@mui/joy/Typography";
 
-import * as React from 'react';
-import Card from '@mui/joy/Card';
-import CardContent from '@mui/joy/CardContent';
-import Divider from '@mui/joy/Divider';
-import CardOverflow from '@mui/joy/CardOverflow';
-import Typography from '@mui/joy/Typography';
-import BallotIcon from '@mui/icons-material/Ballot';
-import CommentOutlinedIcon from '@mui/icons-material/CommentOutlined';
-import InboxOutlinedIcon from '@mui/icons-material/InboxOutlined';
-import { AspectRatio } from '@mui/joy';
-import Button from '@mui/joy/Button';
-import ButtonGroup from '@mui/joy/ButtonGroup';
-import IconButton from '@mui/joy/IconButton';
-import Settings from '@mui/icons-material/Settings';
+import Image from "next/image";
 
-
-
-export default function ProductSearchCard() {
-
-  const [value, setValue] = React.useState(1)
-
-
-  const increment = () => {
-    setValue(prevValue => prevValue + 1)
-  }
-  
-  const decrement = () => {
-    if(value === 1) {
-      return
-    }
-    setValue(prevValue => prevValue - 1)
-  }
-
-
+export default function ProductSearchCard({ produto }) {
+  console.log("MYPIXA", produto);
   return (
-    <Card 
-        orientation="vertical"
-        size="sm"
-        sx={{minHeight: 200, bgcolor: 'background.surface', borderRadius: 0, mb: 1 }}>
-
-        <CardContent 
-        sx={{display:"flex", flexDirection:"row"}}>
-
-      
-        <CardContent
-        sx={{width:"25%",height:"100%"}}>
-        <img style={{maxHeight: 160, maxWidth: 167 }}
-          src="https://images.unsplash.com/photo-1507833423370-a126b89d394b?auto=format&fit=crop&w=90"
-          
-        />
+    <Card
+      variant="outlined"
+      sx={{
+        "&:hover": {
+          boxShadow: "md",
+          borderColor: "neutral.outlinedHoverBorder",
+        },
+        gap: 0,
+      }}
+    >
+      <Card variant="plain" orientation="horizontal" sx={{ p: 1 }}>
+        <AspectRatio ratio="1" sx={{ width: "50%" }}>
+          {/* eslint-disable-next-line @next/next/no-img-element */}
+          <img src="/teste.avif" loading="lazy" alt="" />
+        </AspectRatio>
+        <CardContent>
+          <Typography level="title-lg" id="card-description">
+            {produto.nome}
+          </Typography>
+          <Typography
+            level="body-sm"
+            aria-describedby="card-description"
+            mb={1}
+          >
+            <Link
+              overlay
+              underline="none"
+              href="#interactive-card"
+              sx={{ color: "text.tertiary" }}
+            >
+              {produto.preco}
+            </Link>
+          </Typography>
+          <Typography level="body-xs">
+            {" "}
+            {/*on click adicionar a possibilidade de ver tudo tipo uma tool tip */}
+            Disponivel em{" "}
+            {produto.supermercados
+              .map((x) => x.nome)
+              .join(", ")
+              .slice(0, 10)
+              .concat("...")}
+          </Typography>
         </CardContent>
-        <CardContent sx={{ }}>
-          <div style={{ marginBottom: "30px" }}>
-            <Typography level="h1"> Atum </Typography>
-            <Typography level="h5"> 🛒 Continente Aveiro</Typography>
-            <Typography level="h2">$12.34/un</Typography>
-          </div>  
-          <Typography level="body-sm">in stock</Typography>  
-        </CardContent>
-        </CardContent>
+      </Card>
 
-        <CardContent sx={{display:"flex", flexDirection:"row" }}>
-
-        <div style={{ marginRight: "4px" }}>
-          <ButtonGroup aria-label="outlined primary button group" size="lg">
-            <Button  variant="soft" color="primary" onClick={decrement}> - </Button>
-            <Button>{value}</Button>
-            <Button  variant="soft" color="primary" onClick={increment}> + </Button>
-          </ButtonGroup>
-        </div>
-
-        <ButtonGroup
-        color="primary"
-        disabled={false}
-        orientation="horizontal"
-        size="lg" 
-        spacing={1}
-        variant="solid"
-      >
-        <Button> Add </Button>
-        <Button> Details </Button>
-      </ButtonGroup>
-
-      </CardContent>
-
-
+      <Card variant="plain" sx={{ p: 1 }}>
+        <TooltipButtonGroup />
+      </Card>
     </Card>
+  );
+}
+
+import Button from "@mui/joy/Button";
+import ButtonGroup from "@mui/joy/ButtonGroup";
+import IconButton from "@mui/joy/IconButton";
+import Tooltip from "@mui/joy/Tooltip";
+import Settings from "@mui/icons-material/Settings";
+import Person from "@mui/icons-material/Person";
+
+export function TooltipButtonGroup() {
+  return (
+    <ButtonGroup variant="soft" aria-label="tooltip button group">
+      <Tooltip arrow title="Go to profile">
+        <Button startDecorator={<Person />}>Hover me</Button>
+      </Tooltip>
+      <Tooltip arrow title="Open settings">
+        <span>
+          <IconButton disabled>
+            <Settings />
+          </IconButton>
+        </span>
+      </Tooltip>
+      <Tooltip arrow title="Go to profile">
+        <Button endDecorator={<Person />}>Hover me</Button>
+      </Tooltip>
+    </ButtonGroup>
   );
 }

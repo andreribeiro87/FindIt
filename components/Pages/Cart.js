@@ -1,6 +1,7 @@
 import Card from "@mui/joy/Card";
+import ProductSearchCard from "../ProductSearchCard";
 
-export default function Cart() {
+export default function Cart({ products }) {
   return (
     <Card
       color="success"
@@ -14,10 +15,15 @@ export default function Cart() {
         margin: "auto",
         maxWidth: "85%",
         height: "78%",
-      }} 
+      }}
     >
-      cartoes
+      {products.map((product) => (
+        <ProductSearchCard key={product.id} product={product} />
+      ))}
+
       {/* TODO CARTOES  */}
+
+      {/*<ProductDetails /> */}
     </Card>
   );
 }

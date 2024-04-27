@@ -1,6 +1,6 @@
 import { useState, useEffect } from "react";
 
-import Filter from "../../components/Filter";
+import ProductSearchCard from "../../components/ProductSearchCard";
 
 import IconButton from "@mui/joy/IconButton";
 
@@ -59,7 +59,7 @@ export default function SearchPage({ setOpen, chosenSuperMarkets }) {
     }
     console.log(temp);
     setSearchProd(temp);
-    console.log(searchProd);
+    console.log("PILAU", searchProd);
   };
   useEffect(() => {
     if (!loading) {
@@ -131,9 +131,11 @@ export default function SearchPage({ setOpen, chosenSuperMarkets }) {
         </Card>
         <Divider orientation="horizontal" sx={{ marginBottom: 1 }} />
         <Card sx={{ overflow: "auto" }}>
-          {searchProd.map((e) => (
-            <li key={e.id}>{e.nome}</li>
-          ))}
+          {searchProd &&
+            searchProd.map((e) => (
+              // <li key={e.id}>{e.nome}</li>
+              <ProductSearchCard key={e.id} produto={e} />
+            ))}
         </Card>
       </Card>
     </>

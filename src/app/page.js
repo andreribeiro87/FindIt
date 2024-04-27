@@ -2,6 +2,8 @@
 
 import { useEffect, useState } from "react";
 import NavBar from "../../components/NavBar";
+import ProductSearchCard from "../../components/ProductSearchCard";
+import ProductDetails from "../../components/ProductDetails";
 import SearchPage from "../../components/Pages/Search";
 import User from "../../components/Pages/User";
 import Cart from "../../components/Pages/Cart";
@@ -15,6 +17,7 @@ export default function Home() {
   const [alphabetical, setAlphabetical] = useState(false);
   const [order, setOrder] = useState(null);
   const [superMarket, setSuperMarket] = useState([]);
+  const [products, setProducts] = useState([]);
 
   useEffect(() => {
     fetch("/api/getAllProdAndSupermarket", {
@@ -29,12 +32,14 @@ export default function Home() {
         // return setSuperMarkets(data);
       });
   }, []);
-  const [index, setIndex] = useState(0);
+  const [index, setIndex] = useState(2);
   return (
     <>
-      {/* <ProdutSearchCard /> */}
+      {/* <ProductSearchCard /> */}
+      {/* <ProductDetails /> */}
+
       {index == 0 && <Promotions />}
-      {index == 1 && <Cart />}
+      {index == 1 && <Cart products={products} />}
       {index == 2 && (
         <SearchPage
           setOpen={() => openModal(true)}
@@ -58,4 +63,3 @@ export default function Home() {
     </>
   );
 }
-

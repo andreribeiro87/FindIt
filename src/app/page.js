@@ -8,14 +8,16 @@ import Cart from "../../components/Pages/Cart";
 import Map from "../../components/Pages/Map";
 import Promotions from "../../components/Pages/Promations";
 import { Accessibility } from "@mui/icons-material";
+import Filter from "../../components/Filter";
 
 export default function Home() {
-  const [produtos, setProdutos] = useState([]);
-  const [prod_id_name, setProdIdName] = useState([]);
-  const [superMarkets, setSuperMarkets] = useState([]);
+  const [open, openModal] = useState(false);
+  const [alphabetical, setAlphabetical] = useState(false);
+  const [order, setOrder] = useState(null);
+  const [superMarket, setSuperMarket] = useState([]);
 
   useEffect(() => {
-    fetch("/api/getSupermarket?accessibility=false", {
+    fetch("/api/getAllProdAndSupermarket", {
       method: "GET",
       headers: {
         "Content-Type": "application/json",
@@ -24,21 +26,36 @@ export default function Home() {
       .then((res) => res.json())
       .then((data) => {
         console.log(data, "PIXA");
-        return setSuperMarkets(data);
+        // return setSuperMarkets(data);
       });
   }, []);
   const [index, setIndex] = useState(0);
   return (
     <>
       {/* <ProdutSearchCard /> */}
-
       {index == 0 && <Promotions />}
       {index == 1 && <Cart />}
-      {index == 2 && <SearchPage />}
+      {index == 2 && (
+        <SearchPage
+          setOpen={() => openModal(true)}
+          chosenSuperMarkets={superMarket}
+        />
+      )}
       {index == 3 && <Map />}
-      {index == 4 && <User />}
+      {index == 4 && <User setOpen={() => openModal(true)} />}
 
+      <Filter
+        open={open}
+        superMarket={superMarket}
+        closeModal={() => openModal(false)}
+        alphabetical={alphabetical}
+        setAlphabetical={() => setAlphabetical(!alphabetical)}
+        order={order}
+        setOrder={(p) => setOrder(p)}
+        setSuperMarket={(array) => setSuperMarket(array)}
+      />
       <NavBar index={index} changeIndex={(event, value) => setIndex(value)} />
     </>
   );
 }
+

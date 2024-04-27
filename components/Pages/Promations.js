@@ -8,16 +8,15 @@ export default function Promotions() {
       sx={{
         boxShadow: "lg",
         position: "absolute",
-        top: "5%",
+        top: "2%",
         left: 0,
         right: 0,
         margin: "auto",
-        maxWidth: "75%",
-        height: "73%",
+        maxWidth: "85%",
+        height: "78%",
       }}
     >
-      map
-      {/* TODO map  */}
+      NAO EXISTE carousel NO JOY
     </Card>
   );
 }

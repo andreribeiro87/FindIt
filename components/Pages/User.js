@@ -4,10 +4,11 @@ import { useState } from "react";
 import Card from "@mui/joy/Card";
 import CardContent from "@mui/joy/CardContent";
 import Button from "@mui/joy/Button";
-import { Container } from "@mui/joy";
+import { Container, FormControl, FormLabel, Input,Stack } from "@mui/joy";
 import Modal from "@mui/joy/Modal";
 import ModalClose from "@mui/joy/ModalClose";
-import Textarea from '@mui/joy/Textarea';
+import FormHelperText from "@mui/joy/FormHelperText";
+import InfoOutlined from "@mui/icons-material/InfoOutlined";
 
 import EditIcon from "@mui/icons-material/Edit";
 import TopicIcon from "@mui/icons-material/Topic";
@@ -19,12 +20,12 @@ export default function User({ setOpen }) {
   const [name, setName] = useState("User");
   const [email, setEmail] = useState("Email");
   const [edit, setEdit] = useState(false);
+  const [errorEmail, setErrorEmail] = useState(false);
 
   return (
     <Card
       color="danger"
       variant="soft"
-  
       sx={{
         boxShadow: "lg",
         position: "absolute",
@@ -85,15 +86,36 @@ export default function User({ setOpen }) {
           </CardContent>
         </Card>
       </CardContent>
-      {/* <Modal open={edit}    onClose={()=>setEdit(false)}>
-        <Textarea color="danger" variant="outlined" placeholder="user name.." />
-        <Textarea
-          color="danger"
-          variant="outlined"
-          placeholder="user email.."
+      <Modal
+        open={edit}
+        onClose={() => setEdit(false)}
+        sx={{ display: "flex", justifyContent: "center", alignItems: "center",              textColor: "inherit",
+        fontWeight: "lg",
+        mb: 1,
+        mt: 2,
+        p: 0,
+        level: "h4", }}
+      >
+        <Card  size="md">
+          <ModalClose variant="plain" color="danger" />
+          <form
+            onSubmit={(event) => {
+              event.preventDefault();
+              setName(document.getElementById('name').value);
+              setEmail(document.getElementById('email').value);
 
-        />
-      </Modal> */}
+            }}
+          >
+            <Stack spacing={1}>
+              <FormLabel>User Name</FormLabel>
+              <Input id="name" placeholder={name} required />
+              <FormLabel>User Email</FormLabel>
+              <Input id="email" placeholder={email} required type="email" />
+              <Button type="submit">Submit</Button>
+            </Stack>
+          </form>
+        </Card>
+      </Modal>
     </Card>
   );
 }

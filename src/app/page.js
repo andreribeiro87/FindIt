@@ -33,7 +33,6 @@ export default function Home() {
   return (
     <>
       {/* <ProdutSearchCard /> */}
-
       {index == 0 && <Promotions />}
       {index == 1 && <Cart />}
       {index == 2 && <SearchPage setOpen={()=>openModal(true)}/>}
@@ -54,3 +53,4 @@ export default function Home() {
     </>
   );
 }
+

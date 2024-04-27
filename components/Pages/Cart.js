@@ -1,5 +1,6 @@
 import Card from "@mui/joy/Card";
 
+
 export default function Cart() {
   return (
     <Card
@@ -18,6 +19,8 @@ export default function Cart() {
     >
       cartoes
       {/* TODO CARTOES  */}
+
+    {/*<ProductDetails /> */}
     </Card>
   );
 }

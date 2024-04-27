@@ -16,14 +16,16 @@ import { Podcasts } from "@mui/icons-material";
 //TODO
 // autocomplete falta
 
-export default function SearchPage({ setOpen }) {
+export default function SearchPage({ setOpen, chosenSuperMarkets }) {
   const [prod, setProd] = useState([]);
   const [searchProd, setSearchProd] = useState([]);
+  const [filteredProd, setFilteredProd] = useState([]);
 
   let loading = prod.length === 0;
   const [value, setValue] = useState("");
   const fSearch = () => {
     console.log(value);
+
     let temp = [];
     for (let i = 0; i < prod.length; i++) {
       if (
@@ -38,6 +40,7 @@ export default function SearchPage({ setOpen }) {
               .replace(/[\u0300-\u036f]/g, "")
           )
       ) {
+        console.log(chosenSuperMarkets, "PILOCAS");
         temp.push(prod[i]);
       }
     }
@@ -52,7 +55,7 @@ export default function SearchPage({ setOpen }) {
     // debugger;
 
     (async () => {
-      fetch(`/api/getAllProducts`, {
+      fetch(`/api/getAllProdAndSupermarket`, {
         method: "GET",
       })
         .then((res) => {
@@ -109,13 +112,14 @@ export default function SearchPage({ setOpen }) {
                 </IconButton>
               </>
             }
-            renderInput={(params) => <TextField {...params} label="Search" />}
+            sx={{ width: "100%" }}
+            // renderInput={(params) => <TextField {...params} label="Search" />}
           />
         </Card>
         <Divider orientation="horizontal" sx={{ marginBottom: 1 }} />
         <Card sx={{ overflow: "auto" }}>
           {searchProd.map((e) => (
-            <li>{e.nome}</li>
+            <li key={e.id}>{e.nome}</li>
           ))}
         </Card>
       </Card>

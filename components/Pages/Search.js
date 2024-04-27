@@ -27,7 +27,16 @@ export default function SearchPage({ setOpen, chosenSuperMarkets }) {
     console.log(value);
 
     let temp = [];
+    let chosenSuperMarketsIDList = chosenSuperMarkets.map((x) => x.id); // ficar so com os id
     for (let i = 0; i < prod.length; i++) {
+      let superProdIDList = prod[i].supermercados.map((x) => x.id); // ficar so com os id
+      console.log(
+        prod[i],
+        superProdIDList,
+        chosenSuperMarketsIDList,
+        chosenSuperMarketsIDList.some((r) => superProdIDList.includes(r)),
+        "PILOCAS"
+      );
       if (
         prod[i].nome
           .toLowerCase()
@@ -38,9 +47,13 @@ export default function SearchPage({ setOpen, chosenSuperMarkets }) {
               .toLowerCase()
               .normalize("NFD")
               .replace(/[\u0300-\u036f]/g, "")
-          )
+          ) &&
+        (chosenSuperMarkets.length == 0 ||
+          chosenSuperMarketsIDList.some((r) => superProdIDList.includes(r)))
       ) {
         console.log(chosenSuperMarkets, "PILOCAS");
+        console.log(prod[i], "TESTE");
+
         temp.push(prod[i]);
       }
     }

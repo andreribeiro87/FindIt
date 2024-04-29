@@ -1,26 +1,27 @@
 import { useState, useEffect } from "react";
 
 import ProductSearchCard from "../../components/ProductSearchCard";
+import ProductDetails from "../../components/ProductDetails";
+
 
 import IconButton from "@mui/joy/IconButton";
 
 import FilterAltIcon from "@mui/icons-material/FilterAlt";
 import Search from "@mui/icons-material/Search";
-import { Autocomplete, Card } from "@mui/joy";
+import { Autocomplete, Card,Box } from "@mui/joy";
 import Divider from "@mui/joy/Divider";
-import ButtonGroup from "@mui/joy/ButtonGroup";
 
-import TextField from "@mui/joy/TextField";
-import { Podcasts } from "@mui/icons-material";
 
 //TODO
 // autocomplete falta
 
-export default function SearchPage({ setOpen, chosenSuperMarkets }) {
+export default function SearchPage({ setOpen, chosenSuperMarkets,addToCart }) {
   const [prod, setProd] = useState([]);
   const [searchProd, setSearchProd] = useState([]);
   const [filteredProd, setFilteredProd] = useState([]);
-
+  const [details, setDetails] = useState(true);
+  const [prodDetails, setProdDetails] = useState({});
+  
   let loading = prod.length === 0;
   const [value, setValue] = useState("");
   const fSearch = () => {
@@ -30,13 +31,6 @@ export default function SearchPage({ setOpen, chosenSuperMarkets }) {
     let chosenSuperMarketsIDList = chosenSuperMarkets.map((x) => x.id); // ficar so com os id
     for (let i = 0; i < prod.length; i++) {
       let superProdIDList = prod[i].supermercados.map((x) => x.id); // ficar so com os id
-      console.log(
-        prod[i],
-        superProdIDList,
-        chosenSuperMarketsIDList,
-        chosenSuperMarketsIDList.some((r) => superProdIDList.includes(r)),
-        "PILOCAS"
-      );
       if (
         prod[i].nome
           .toLowerCase()
@@ -51,15 +45,12 @@ export default function SearchPage({ setOpen, chosenSuperMarkets }) {
         (chosenSuperMarkets.length == 0 ||
           chosenSuperMarketsIDList.some((r) => superProdIDList.includes(r)))
       ) {
-        console.log(chosenSuperMarkets, "PILOCAS");
-        console.log(prod[i], "TESTE");
 
         temp.push(prod[i]);
       }
     }
     console.log(temp);
     setSearchProd(temp);
-    console.log("PILAU", searchProd);
   };
   useEffect(() => {
     if (!loading) {
@@ -96,8 +87,10 @@ export default function SearchPage({ setOpen, chosenSuperMarkets }) {
           margin: "auto",
           maxWidth: "85%",
           height: "78%",
+          overflow:"auto"
         }}
       >
+        {details? <>
         <Card
           orientation="horizontal"
           variant="outline"
@@ -130,13 +123,24 @@ export default function SearchPage({ setOpen, chosenSuperMarkets }) {
           />
         </Card>
         <Divider orientation="horizontal" sx={{ marginBottom: 1 }} />
-        <Card sx={{ overflow: "auto" }}>
+        <Box sx={{ overflow: "auto" }}>
           {searchProd &&
             searchProd.map((e) => (
               // <li key={e.id}>{e.nome}</li>
-              <ProductSearchCard key={e.id} produto={e} />
+              <ProductSearchCard key={e.id} produto={e} Details={()=>{
+                setDetails(false)
+                setProdDetails(e)
+              }} addToCart={addToCart} />
             ))}
-        </Card>
+        </Box>
+        </>:
+        <ProductDetails produto={prodDetails} close={()=>{
+          setDetails(true)
+          
+        }}></ProductDetails>
+        
+        }
+        
       </Card>
     </>
   );

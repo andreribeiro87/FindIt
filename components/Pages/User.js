@@ -4,7 +4,7 @@ import { useState } from "react";
 import Card from "@mui/joy/Card";
 import CardContent from "@mui/joy/CardContent";
 import Button from "@mui/joy/Button";
-import { Container, FormControl, FormLabel, Input,Stack } from "@mui/joy";
+import { Container, FormControl, FormLabel, Input, Stack } from "@mui/joy";
 import Modal from "@mui/joy/Modal";
 import ModalClose from "@mui/joy/ModalClose";
 import FormHelperText from "@mui/joy/FormHelperText";
@@ -89,21 +89,25 @@ export default function User({ setOpen }) {
       <Modal
         open={edit}
         onClose={() => setEdit(false)}
-        sx={{ display: "flex", justifyContent: "center", alignItems: "center",              textColor: "inherit",
-        fontWeight: "lg",
-        mb: 1,
-        mt: 2,
-        p: 0,
-        level: "h4", }}
+        sx={{
+          display: "flex",
+          justifyContent: "center",
+          alignItems: "center",
+          textColor: "inherit",
+          fontWeight: "lg",
+          mb: 1,
+          mt: 2,
+          p: 0,
+          level: "h4",
+        }}
       >
-        <Card  size="md">
+        <Card size="md">
           <ModalClose variant="plain" color="danger" />
           <form
             onSubmit={(event) => {
               event.preventDefault();
-              setName(document.getElementById('name').value);
-              setEmail(document.getElementById('email').value);
-
+              setName(document.getElementById("name").value);
+              setEmail(document.getElementById("email").value);
             }}
           >
             <Stack spacing={1}>

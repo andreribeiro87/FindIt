@@ -2,14 +2,11 @@
 
 import { useEffect, useState } from "react";
 import NavBar from "../../components/NavBar";
-import ProductSearchCard from "../../components/ProductSearchCard";
-import ProductDetails from "../../components/ProductDetails";
 import SearchPage from "../../components/Pages/Search";
 import User from "../../components/Pages/User";
 import Cart from "../../components/Pages/Cart";
 import Map from "../../components/Pages/Map";
 import Promotions from "../../components/Pages/Promations";
-import { Accessibility } from "@mui/icons-material";
 import Filter from "../../components/Filter";
 
 export default function Home() {
@@ -18,32 +15,19 @@ export default function Home() {
   const [order, setOrder] = useState(null);
   const [superMarket, setSuperMarket] = useState([]);
   const [products, setProducts] = useState([]);
+  const [cart, setCart] = useState([]);
 
-  useEffect(() => {
-    fetch("/api/getAllProdAndSupermarket", {
-      method: "GET",
-      headers: {
-        "Content-Type": "application/json",
-      },
-    })
-      .then((res) => res.json())
-      .then((data) => {
-        console.log(data, "PIXA");
-        // return setSuperMarkets(data);
-      });
-  }, []);
   const [index, setIndex] = useState(2);
   return (
     <>
-      {/* <ProductSearchCard /> */}
-      {/* <ProductDetails /> */}
 
       {index == 0 && <Promotions />}
-      {index == 1 && <Cart products={products} />}
+      {index == 1 && <Cart products={cart} />}
       {index == 2 && (
         <SearchPage
           setOpen={() => openModal(true)}
           chosenSuperMarkets={superMarket}
+          addToCart={(e)=>setCart([...cart,e])}
         />
       )}
       {index == 3 && <Map />}

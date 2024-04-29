@@ -2,6 +2,7 @@ import Card from "@mui/joy/Card";
 import ProductSearchCard from "../ProductSearchCard";
 
 export default function Cart({ products }) {
+  console.log(products)
   return (
     <Card
       color="success"
@@ -17,13 +18,10 @@ export default function Cart({ products }) {
         height: "78%",
       }}
     >
-      {products.map((product) => (
-        <ProductSearchCard key={product.id} product={product} />
+      {products.map((p) => (
+        <ProductSearchCard key={p.produto.id} product={p.produto} />
       ))}
 
-      {/* TODO CARTOES  */}
-
-      {/*<ProductDetails /> */}
     </Card>
   );
 }

@@ -1,76 +1,59 @@
-import Card from "@mui/joy/Card";
+import { Card, CardContent,IconButton } from "@mui/joy";
 import Typography from "@mui/joy/Typography";
-import { blue, green, grey } from "@mui/material/colors";
+import AspectRatio from "@mui/joy/AspectRatio";
+
 import Table from "@mui/joy/Table";
 import * as React from "react";
+import { ArrowBack } from "@mui/icons-material";
 
-export default function ProductDetails() {
+export default function ProductDetails({ produto,close }) {
+  console.log(produto);
   return (
-    <Card
-      color="neutral"
-      variant="soft"
-      sx={{
-        boxShadow: "lg",
-        position: "absolute",
-        top: "0%",
-        left: 0,
-        right: 0,
-        margin: "auto",
-        maxWidth: "100%",
-        height: "94.9%",
-        backgroundColor: grey[100],
-      }}
-    >
-      <Card
-        variant="outlined"
-        sx={{ maxWidth: "100%", backgroundColor: blue[50], mb: 4 }}
-      >
-        <Typography level="h1">Atum</Typography>
-        <div>
-          <Typography level="h2" fontSize="xl" sx={{ mb: 0.25 }}>
-            Descrição
+    <>
+      <IconButton onClick={close} color="danger" sx={{position:"absolute",left:3}}><ArrowBack/></IconButton>
+      <Card variant="plain" orientation="horizontal" sx={{ p: 1,mt:5 }}>
+        <AspectRatio ratio="1" sx={{ width: "50%" }}>
+          <img src="/teste.avif" loading="lazy"/>
+        </AspectRatio>
+        <CardContent sx={{ pt: 2 }}>
+          <Typography level="title-lg">{produto.nome}</Typography>
+          <Typography level="body-md" mb={1}>
+            {produto.preco}€
           </Typography>
-          <Typography level="body-lg">
-            Peixe rico em proteínas e omega 3
+          <Typography level="body-sm">
+            {produto.descricao}
           </Typography>
-        </div>
+          <Typography level="body-sm">
+            Quantity: {produto.qtd}
+          </Typography>
+        </CardContent>
       </Card>
-
-      <Table aria-label="basic table" size="lg">
+      <Card>
+      <Table
+      variant="soft"
+        borderAxis="x"
+      >
         <tbody>
           <tr>
-            <td>
-              <b>Calorias</b>/cal
-            </td>
-            <td></td>
-            <td>6</td>
+            <th scope="row">Calories</th>
+            <td>{produto.tabela_nutritiva.calorias}</td>
           </tr>
-
           <tr>
-            <td>
-              <b>Carbohidratos</b>/g
-            </td>
-            <td></td>
-            <td>9</td>
+            <th scope="row">Carbs</th>
+            <td>{produto.tabela_nutritiva.carboidratos}</td>
           </tr>
-
           <tr>
-            <td>
-              <b>Proteinas</b>/g
-            </td>
-            <td></td>
-            <td>262</td>
+            <th scope="row">Protein</th>
+            <td>{produto.tabela_nutritiva.proteinas}</td>
           </tr>
-
           <tr>
-            <td>
-              <b>Gorduras</b>/g
-            </td>
-            <td></td>
-            <td>67</td>
+            <th scope="row">Fat</th>
+            <td>{produto.tabela_nutritiva.gorduras}</td>
           </tr>
         </tbody>
       </Table>
-    </Card>
+      </Card>
+    </>
   );
 }
+

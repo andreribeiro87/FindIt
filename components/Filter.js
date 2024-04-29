@@ -203,14 +203,10 @@ export default function BasicModal({
             >
               Alphabetical order
             </Typography>
-            <Button onClick={() => console.log(markets, "MYPILAO")}>
-              FUCKME
-            </Button>
-
             <ToggleButtonGroup
               variant="outlined"
               color="primary"
-              value={index} // index}
+              value={index}
               onChange={(event, newIndex) => {
                 setIndex(newIndex);
                 setOrder(newIndex);

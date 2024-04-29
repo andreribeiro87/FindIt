@@ -7,10 +7,17 @@ import Sheet from "@mui/joy/Sheet";
 import Chip from "@mui/joy/Chip";
 import Typography from "@mui/joy/Typography";
 
+import Add from "@mui/icons-material/Add";
+import Remove from "@mui/icons-material/Remove";
+
 import Image from "next/image";
+import { useState } from "react";
 
 export default function ProductSearchCard({ produto }) {
   console.log("MYPIXA", produto);
+
+  const [quantity, setQuantity] = useState(0);
+
   return (
     <Card
       variant="outlined"
@@ -36,30 +43,46 @@ export default function ProductSearchCard({ produto }) {
             aria-describedby="card-description"
             mb={1}
           >
-            <Link
-              overlay
-              underline="none"
-              href="#interactive-card"
-              sx={{ color: "text.tertiary" }}
-            >
-              {produto.preco}
-            </Link>
+            {produto.preco}
           </Typography>
-          <Typography level="body-xs">
-            {" "}
-            {/*on click adicionar a possibilidade de ver tudo tipo uma tool tip */}
-            Disponivel em{" "}
-            {produto.supermercados
-              .map((x) => x.nome)
-              .join(", ")
-              .slice(0, 10)
-              .concat("...")}
-          </Typography>
+          <Typography level="body-xs">Disponivel em {"\n"}</Typography>
+          <Tooltip
+            arrow
+            title={produto.supermercados.map((x) => x.nome).join(", ")} //TODO put thin on li
+            placement="bottom-start"
+          >
+            <Typography level="body-xs">
+              {" "}
+              {/*on click adicionar a possibilidade de ver tudo tipo uma tooltip */}
+              {produto.supermercados
+                .map((x) => x.nome)
+                .join(", ")
+                .slice(0, 20)
+                .concat("...")}
+            </Typography>
+          </Tooltip>
         </CardContent>
       </Card>
 
       <Card variant="plain" sx={{ p: 1 }}>
-        <TooltipButtonGroup />
+        <ButtonGroup variant="soft" aria-label="tooltip button group">
+          <Tooltip arrow title="Remove">
+            <Button onClick={() => quantity > 0 && setQuantity(quantity - 1)}>
+              <Remove />
+            </Button>
+          </Tooltip>
+          <Typography
+            sx={{ display: "flex", alignItems: "center" }}
+            level="body-xs"
+          >
+            {quantity}
+          </Typography>
+          <Tooltip arrow title="Add">
+            <Button onClick={() => setQuantity(quantity + 1)}>
+              <Add size="xs" />
+            </Button>
+          </Tooltip>
+        </ButtonGroup>
       </Card>
     </Card>
   );
@@ -71,23 +94,3 @@ import IconButton from "@mui/joy/IconButton";
 import Tooltip from "@mui/joy/Tooltip";
 import Settings from "@mui/icons-material/Settings";
 import Person from "@mui/icons-material/Person";
-
-export function TooltipButtonGroup() {
-  return (
-    <ButtonGroup variant="soft" aria-label="tooltip button group">
-      <Tooltip arrow title="Go to profile">
-        <Button startDecorator={<Person />}>Hover me</Button>
-      </Tooltip>
-      <Tooltip arrow title="Open settings">
-        <span>
-          <IconButton disabled>
-            <Settings />
-          </IconButton>
-        </span>
-      </Tooltip>
-      <Tooltip arrow title="Go to profile">
-        <Button endDecorator={<Person />}>Hover me</Button>
-      </Tooltip>
-    </ButtonGroup>
-  );
-}

@@ -126,7 +126,6 @@ export default function SearchPage({ setOpen, chosenSuperMarkets, addToCart }) {
             <Box sx={{ overflow: "auto" }}>
               {searchProd &&
                 searchProd.map((e) => (
-                  // <li key={e.id}>{e.nome}</li>
                   <ProductSearchCard
                     key={e.id}
                     produto={e}

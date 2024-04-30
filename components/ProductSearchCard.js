@@ -4,13 +4,17 @@ import CardContent from "@mui/joy/CardContent";
 import Typography from "@mui/joy/Typography";
 import Button from "@mui/joy/Button";
 import ButtonGroup from "@mui/joy/ButtonGroup";
+import { List, ListItem, Sheet } from "@mui/joy";
 import Tooltip from "@mui/joy/Tooltip";
+import IconButton from "@mui/joy/IconButton";
+import { ArrowBack } from "@mui/icons-material";
 
 import Add from "@mui/icons-material/Add";
 import Remove from "@mui/icons-material/Remove";
 import Delete from "@mui/icons-material/Delete";
 
 import { useState } from "react";
+import { Link } from "@mui/joy";
 
 export default function ProductSearchCard({
   produto,
@@ -21,6 +25,7 @@ export default function ProductSearchCard({
   cartQuantity,
 }) {
   const [quantity, setQuantity] = useState(0);
+  const [tolltip, setTolltip] = useState(false);
 
   return (
     <Card
@@ -38,29 +43,39 @@ export default function ProductSearchCard({
         <AspectRatio ratio="1" sx={{ width: "50%" }}>
           <img src="/teste.avif" loading="lazy" alt="" />
         </AspectRatio>
-        <CardContent sx={{ pt: 2 }}>
+        <CardContent sx={{ pt: 1 }}>
           <Typography level="title-lg">{produto.nome}</Typography>
           <Typography level="body-sm" mb={1}>
             {produto.preco}€
           </Typography>
           <Typography level="body-xs">Disponivel em {"\n"}</Typography>
           <Tooltip
+            open={tolltip}
             arrow
             variant="outlined"
-            title={produto.supermercados.map((x) => (
-              <Typography key={x.id}>{x.nome}</Typography>
-            ))}
-            placement="bottom-start"
+            title={
+
+              <Sheet >
+                <List marker="disc" size="sm">
+                  {produto.supermercados.map((x) => (
+                    <ListItem key={x.id} >{x.nome}</ListItem>
+                  ))}
+                </List>
+
+                <IconButton onClick={() => setTolltip(false)} color="danger" size="sm">
+                  <ArrowBack />
+                </IconButton>
+              </Sheet>
+            }
+            placement="bottom"
           >
-            <Typography level="body-xs">
-              {" "}
-              {/*on click adicionar a possibilidade de ver tudo tipo uma tooltip */}
+            <Link level="body-xs" onClick={() => setTolltip(true)}>
               {produto.supermercados
                 .map((x) => x.nome)
                 .join(", ")
                 .slice(0, 20)
                 .concat("...")}
-            </Typography>
+            </Link>
           </Tooltip>
         </CardContent>
       </Card>

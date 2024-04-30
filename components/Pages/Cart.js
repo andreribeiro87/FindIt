@@ -31,7 +31,7 @@ export default function Cart({ products, removeFromCart }) {
             <ProductSearchCard
               key={p.produto.id}
               Details={() => {
-                setDetails(false);
+                setDetails(true);
                 setProdDetails(p.produto);
               }}
               produto={p.produto}

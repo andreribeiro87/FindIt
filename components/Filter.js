@@ -38,10 +38,11 @@ export default function BasicModal({
   order,
   setOrder,
   setSuperMarket,
+  accessibility,
+  setAccessibility,
 }) {
   const [markets, setMarkets] = useState([]);
   const [index, setIndex] = useState("0");
-  const [accessibility, setAccessibility] = useState(false);
 
   let loading = open && markets.length === 0;
 
@@ -185,6 +186,7 @@ export default function BasicModal({
                   checked={accessibility}
                   onChange={() => {
                     setMarkets([]);
+                    setSuperMarket([]);
                     setAccessibility(!accessibility);
                   }}
                 />

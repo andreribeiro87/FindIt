@@ -13,11 +13,17 @@ import Divider from "@mui/joy/Divider";
 //TODO
 // autocomplete falta
 
-export default function SearchPage({ setOpen, chosenSuperMarkets, addToCart }) {
-  const [prod, setProd] = useState([]);
+export default function SearchPage({
+  setOpen,
+  chosenSuperMarkets,
+  addToCart,
+  alphabetical,
+  order,
+  accessibility,
+}) {
+  const [prod, setProd] = useState([]); // todos os produtos
   const [availableProds, setAvailableProds] = useState([]);
-  const [searchProd, setSearchProd] = useState([]);
-  const [filteredProd, setFilteredProd] = useState([]);
+  const [searchProd, setSearchProd] = useState([]); // produtos que vao ser mostrados na pesquisa
   const [details, setDetails] = useState(true);
   const [prodDetails, setProdDetails] = useState({});
 
@@ -56,7 +62,6 @@ export default function SearchPage({ setOpen, chosenSuperMarkets, addToCart }) {
       return undefined;
     }
     // debugger;
-
     (async () => {
       fetch(`/api/getAllProdAndSupermarket`, {
         method: "GET",
@@ -67,10 +72,73 @@ export default function SearchPage({ setOpen, chosenSuperMarkets, addToCart }) {
         .then((data) => {
           // supermercados do user
           setSearchProd(data);
+
           return setProd(data);
         });
     })();
-  }, [loading]);
+  }, [loading, value]);
+
+  useEffect(() => {
+    //filtrar os dados para mostrar apenas os que estao disponiveis nos supermercados escolhidos
+    if (chosenSuperMarkets.length == 0) {
+      if (accessibility) {
+        // filtrar os produtos para todos os supermercados com acessibilidade
+        let prodsComAcessibilidade = [];
+        for (let i = 0; i < prod.length; i++) {
+          for (let j = 0; j < prod[i].supermercados.length; j++) {
+            console.log(
+              prod[i],
+              prod[i].supermercados[j],
+              prod[i].supermercados[j].acessibilidade,
+              accessibility.toString(),
+              "PIPOCASQUENTES"
+            );
+            if (
+              prod[i].supermercados[j].acessibilidade ==
+              accessibility.toString()
+            ) {
+              prodsComAcessibilidade.push(prod[i]);
+            }
+          }
+        }
+        console.log(prodsComAcessibilidade, "PILOLOLOLLOLL");
+      }
+
+      if (alphabetical) {
+        console.log("pilao");
+        prod.sort((a, b) => a.nome.localeCompare(b.nome));
+      } else if (order == "1") {
+        // high to low
+        prod.sort((a, b) => b.preco - a.preco);
+      } else if (order == "2") {
+        prod.sort((a, b) => a.preco - b.preco);
+      }
+      return setSearchProd(prod);
+    }
+    //TODO FALTA COLOCAR A ACESSIBILIDADE A MUDAR OS PRODUTOS
+
+    let temp = [];
+    let chosenSuperMarketsIDList = chosenSuperMarkets.map((x) => x.id); // ficar so com os id
+
+    for (let i = 0; i < prod.length; i++) {
+      let superProdIDList = prod[i].supermercados.map((x) => x.id);
+      if (superProdIDList.some((r) => chosenSuperMarketsIDList.includes(r))) {
+        temp.push(prod[i]);
+      }
+    }
+
+    if (alphabetical) {
+      console.log("pilao");
+      temp.sort((a, b) => a.nome.localeCompare(b.nome));
+    } else if (order == "1") {
+      // high to low
+      temp = temp.sort((a, b) => b.preco - a.preco);
+    } else if (order == "2") {
+      temp = temp.sort((a, b) => a.preco - b.preco);
+    }
+    console.log(temp, "pilau");
+    return setSearchProd(temp);
+  }, [accessibility, alphabetical, chosenSuperMarkets, order, prod]);
 
   return (
     <>

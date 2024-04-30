@@ -24,8 +24,10 @@ export default function Home() {
   const [open, openModal] = useState(false);
   const [alphabetical, setAlphabetical] = useState(false);
   const [order, setOrder] = useState(null);
+  const [accessibility, setAccessibility] = useState(false);
   const [superMarket, setSuperMarket] = useState([]);
   const [products, setProducts] = useState([]);
+
   const [cart, setCart] = useState([]);
 
   const [index, setIndex] = useState(2);
@@ -41,13 +43,12 @@ export default function Home() {
           }
           changeQuantity={(q, p) => {
             for (let i = 0; i < cart.length; i++) {
-              if(cart[i].produto.id==p.id){
-                cart[i].quantity=q
+              if (cart[i].produto.id == p.id) {
+                cart[i].quantity = q;
                 break;
               }
-              
             }
-            setCart(cart)
+            setCart(cart);
           }}
         />
       )}
@@ -70,7 +71,10 @@ export default function Home() {
               console.log("oi");
               setOpenError(true);
             }
-          }}
+          }} // TODO just add to cart if the product isnt already in the cart
+          alphabetical={alphabetical}
+          order={order}
+          accessibility={accessibility}
         />
       )}
       {index == 3 && <Map />}
@@ -121,6 +125,8 @@ export default function Home() {
         order={order}
         setOrder={(p) => setOrder(p)}
         setSuperMarket={(array) => setSuperMarket(array)}
+        setAccessibility={(e) => setAccessibility(e)}
+        accessibility={accessibility}
       />
       <NavBar index={index} changeIndex={(event, value) => setIndex(value)} />
     </>

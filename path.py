@@ -1,91 +1,57 @@
-import heapq
+from urllib.request import urlopen
+from bs4 import BeautifulSoup
+from selenium import webdriver
+from selenium.webdriver.chrome.service import Service as ChromeService
+from webdriver_manager.chrome import ChromeDriverManager
 
+# htmldata = urlopen("https://pixabay.com/pt/photos/search/pao-integral")
+# soup = BeautifulSoup(htmldata, "html.parser")
+# images = soup.find_all("img")
 
-class Node:
-    def __init__(self, position, parent=None):
-        self.position = position
-        self.parent = parent
-        self.g = 0
-        self.h = 0
-        self.f = 0
+# for item in images:
+#     print(item["src"])
 
-    def __eq__(self, other):
-        return self.position == other.position
-
-    def __lt__(self, other):
-        return self.f < other.f
-
-
-def astar(start, goal):
-    open_list = []
-    closed_list = []
-
-    heapq.heappush(open_list, start)
-
-    while open_list:
-        current_node = heapq.heappop(open_list)
-        closed_list.append(current_node)
-
-        if current_node == goal:
-            path = []
-            while current_node is not None:
-                path.append(current_node.position)
-                current_node = current_node.parent
-            return path[::-1]  # Return reversed path
-
-        children = []
-        # Generate children nodes here (neighbors)
-
-        for new_position in [(0, 1), (0, -1), (1, 0), (-1, 0)]:  # Adjacent squares
-            node_position = (
-                current_node.position[0] + new_position[0],
-                current_node.position[1] + new_position[1],
-            )
-
-            # Make sure within range
-            if (
-                node_position[0] > (len(grid) - 1)
-                or node_position[0] < 0
-                or node_position[1] > (len(grid[len(grid) - 1]) - 1)
-                or node_position[1] < 0
-            ):
-                continue
-
-            # Make sure walkable terrain
-            if grid[node_position[0]][node_position[1]] == 1:
-                continue
-
-            new_node = Node(node_position, current_node)
-            children.append(new_node)
-
-        for child in children:
-            if child in closed_list:
-                continue
-
-            child.g = current_node.g + 1
-            child.h = ((child.position[0] - goal.position[0]) ** 2) + (
-                (child.position[1] - goal.position[1]) ** 2
-            )
-            child.f = child.g + child.h
-
-            if any(
-                child == open_node and child.g > open_node.g for open_node in open_list
-            ):
-                continue
-
-            heapq.heappush(open_list, child)
-
-
-# Exemplo de uso
-start = Node((0, 0))
-goal = Node((5, 5))
-grid = [
-    [0, 0, 0, 0, 0, 0],
-    [0, 0, 1, 0, 0, 0],
-    [0, 0, 1, 0, 1, 0],
-    [0, 0, 1, 0, 1, 0],
-    [0, 0, 0, 0, 1, 0],
-    [0, 0, 0, 0, 0, 0],
+names = [
+    "salada_frutas",
+    "granola",
+    "salmão",
+    "ovos",
+    "aveia",
+    "banana",
+    "abacate",
+    "frango",
+    "tomate",
 ]
-path = astar(start, goal)
-print(path)
+
+for name in names:
+    url = f"https://pixabay.com/pt/photos/search/{name}"  ## why?
+    # print(url)
+    driver = webdriver.Chrome(service=ChromeService(ChromeDriverManager().install()))
+
+    driver.get(url)
+
+    htmldata = driver.page_source
+
+    soup = BeautifulSoup(htmldata, "html.parser")
+    images = soup.find_all("img")
+    print(images[0].get("src"))
+    # for item in images:
+    #     print(item["src"])
+
+
+[
+    "https://media.istockphoto.com/id/639812110/pt/foto/fresh-red-apple-isolated-on-white-with-clipping-path.jpg?b=1&s=170667a&w=0&k=20&c=DF0WoDnJd5hsQRHsVW0sej56jVHy4tSOqDozEbOQEiQ=",
+    "https://media.istockphoto.com/id/538997548/pt/foto/feito-em-casa-iogurte.jpg?b=1&s=170667a&w=0&k=20&c=4x-rVtXl1vcMIQAS6-PiZWmMseI0i4aify2Ea5XhOwk=",
+    "https://media.istockphoto.com/id/1706233675/pt/foto/chestnuts-in-a-wooden-plate-on-a-burlap-sack.jpg?b=1&s=170667a&w=0&k=20&c=NH5E9IL-yBrjbPelGj75d2IuOoqR-geKzu9Yj0R0Etk=",
+    "https://media.istockphoto.com/id/1352426225/pt/foto/falling-carrot-slice-isolated-on-white-background-clipping-path-full-depth-of-field.jpg?b=1&s=170667a&w=0&k=20&c=eFhPT68TMSJPfrKHL3tKD4Mv7eAbh3JJj_NTQhSU2qI=",
+    "/favicon.ico",
+    "https://media.istockphoto.com/id/1469228227/pt/foto/fresh-salad-of-lentils-spinach-and-almonds.jpg?b=1&s=170667a&w=0&k=20&c=2ssbgYAKi0GyuLgMLTjfv9QNoJM4QH4y9vHth4Z6ztQ=",
+    "https://media.istockphoto.com/id/1448997223/pt/foto/abstract-scattered-cereals-seeds-muesli-grains-on-white-background-top-view.jpg?b=1&s=170667a&w=0&k=20&c=itY4m1Bf579lzbBrgsmqSysWSMbMSJmFfROZ42SlIGc=",
+    "https://media.istockphoto.com/id/1214416414/pt/foto/barbecued-salmon-fried-potatoes-and-vegetables-on-wooden-background.jpg?b=1&s=170667a&w=0&k=20&c=Z3W90gUoP8Gjd1nQnqiCsyViSMkeqLPP2D-2rnEB9AY=",
+    "https://media.istockphoto.com/id/1386932182/pt/foto/close-up-of-a-man-placing-eggs-in-the-fridge-door-shelf.jpg?b=1&s=170667a&w=0&k=20&c=gOUBeyVqbsvdxw6fHXyCLmLUOkqt9zhZ85k2Gmx4cZ4=",
+    "https://media.istockphoto.com/id/886668116/pt/foto/rolled-oats-or-oat-flakes-and-golden-wheat-ears-on-wooden-background.jpg?b=1&s=170667a&w=0&k=20&c=vlH-F71AvPqBR_HA2yFKsVwtJjQtwRY0ASxjKroSBYk=",
+    "https://media.istockphoto.com/id/1187668811/pt/foto/fresh-bananas-on-wooden-background.jpg?b=1&s=170667a&w=0&k=20&c=WO7VxHNoqLoGii1mbQYytOqfdzQd5dG8RQ7DGgULUQk=",
+    "https://media.istockphoto.com/id/1359819435/pt/foto/halves-of-fresh-avocado-on-a-cutting-board.jpg?b=1&s=170667a&w=0&k=20&c=yBEFjXAA7ozEP6NhurN3aGWWDRweG6DKYc7bSiYDnPE=",
+    "https://media.istockphoto.com/id/492787098/pt/foto/peitos-de-frango-na-t%C3%A1bua-de-corte.jpg?b=1&s=170667a&w=0&k=20&c=h8pk2QGjCUvhsEH_ndKiE2AK3Xq3gVsoI9c1u05-8aY=",
+    "https://media.istockphoto.com/id/466175630/pt/foto/tomate-isolado-em-fundo-branco.jpg?b=1&s=170667a&w=0&k=20&c=Fl5q98WOH_HDauv14m4Ah5KGNnzv_l2GyLh-GRfiziI=",
+]

@@ -48,7 +48,7 @@ export default function Home() {
                 break;
               }
             }
-            setCart(cart);
+            setCart([...cart]);
           }}
         />
       )}

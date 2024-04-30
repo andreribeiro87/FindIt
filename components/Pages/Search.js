@@ -102,6 +102,16 @@ export default function SearchPage({
           }
         }
         console.log(prodsComAcessibilidade, "PILOLOLOLLOLL");
+        if (alphabetical) {
+          console.log("pilao");
+          prodsComAcessibilidade.sort((a, b) => a.nome.localeCompare(b.nome));
+        } else if (order == "1") {
+          // high to low
+          prodsComAcessibilidade.sort((a, b) => b.preco - a.preco);
+        } else if (order == "2") {
+          prodsComAcessibilidade.sort((a, b) => a.preco - b.preco);
+        }
+        return setSearchProd(prodsComAcessibilidade);
       }
 
       if (alphabetical) {

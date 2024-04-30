@@ -3,25 +3,24 @@ import { useState, useEffect } from "react";
 import ProductSearchCard from "../../components/ProductSearchCard";
 import ProductDetails from "../../components/ProductDetails";
 
-
 import IconButton from "@mui/joy/IconButton";
 
 import FilterAltIcon from "@mui/icons-material/FilterAlt";
 import Search from "@mui/icons-material/Search";
-import { Autocomplete, Card,Box } from "@mui/joy";
+import { Autocomplete, Card, Box } from "@mui/joy";
 import Divider from "@mui/joy/Divider";
-
 
 //TODO
 // autocomplete falta
 
-export default function SearchPage({ setOpen, chosenSuperMarkets,addToCart }) {
+export default function SearchPage({ setOpen, chosenSuperMarkets, addToCart }) {
   const [prod, setProd] = useState([]);
+  const [availableProds, setAvailableProds] = useState([]);
   const [searchProd, setSearchProd] = useState([]);
   const [filteredProd, setFilteredProd] = useState([]);
   const [details, setDetails] = useState(true);
   const [prodDetails, setProdDetails] = useState({});
-  
+
   let loading = prod.length === 0;
   const [value, setValue] = useState("");
   const fSearch = () => {
@@ -29,6 +28,7 @@ export default function SearchPage({ setOpen, chosenSuperMarkets,addToCart }) {
 
     let temp = [];
     let chosenSuperMarketsIDList = chosenSuperMarkets.map((x) => x.id); // ficar so com os id
+
     for (let i = 0; i < prod.length; i++) {
       let superProdIDList = prod[i].supermercados.map((x) => x.id); // ficar so com os id
       if (
@@ -45,7 +45,6 @@ export default function SearchPage({ setOpen, chosenSuperMarkets,addToCart }) {
         (chosenSuperMarkets.length == 0 ||
           chosenSuperMarketsIDList.some((r) => superProdIDList.includes(r)))
       ) {
-
         temp.push(prod[i]);
       }
     }
@@ -87,60 +86,67 @@ export default function SearchPage({ setOpen, chosenSuperMarkets,addToCart }) {
           margin: "auto",
           maxWidth: "85%",
           height: "78%",
-          overflow:"auto"
+          overflow: "auto",
         }}
       >
-        {details? <>
-        <Card
-          orientation="horizontal"
-          variant="outline"
-          size="sm"
-          color="primary"
-        >
-          <Autocomplete
-            variant="soft"
-            size="lg"
-            disableClearable={true}
-            options={prod}
-            freeSolo={true}
-            loading={loading}
-            getOptionLabel={(option) => {
-              return option.nome;
+        {details ? (
+          <>
+            <Card
+              orientation="horizontal"
+              variant="outline"
+              size="sm"
+              color="primary"
+            >
+              <Autocomplete
+                variant="soft"
+                size="lg"
+                disableClearable={true}
+                options={prod}
+                freeSolo={true}
+                loading={loading}
+                getOptionLabel={(option) => {
+                  return option.nome;
+                }}
+                onInputChange={(event, value, reason) => setValue(value)}
+                endDecorator={
+                  <>
+                    <IconButton onClick={fSearch}>
+                      <Search size="sm" />
+                    </IconButton>
+                    <IconButton onClick={setOpen}>
+                      <FilterAltIcon size="sm" />
+                    </IconButton>
+                  </>
+                }
+                sx={{ width: "100%" }}
+                // renderInput={(params) => <TextField {...params} label="Search" />}
+              />
+            </Card>
+            <Divider orientation="horizontal" sx={{ marginBottom: 1 }} />
+            <Box sx={{ overflow: "auto" }}>
+              {searchProd &&
+                searchProd.map((e) => (
+                  // <li key={e.id}>{e.nome}</li>
+                  <ProductSearchCard
+                    key={e.id}
+                    produto={e}
+                    Details={() => {
+                      setDetails(false);
+                      setProdDetails(e);
+                    }}
+                    addToCart={addToCart}
+                  />
+                ))}
+            </Box>
+          </>
+        ) : (
+          <ProductDetails
+            produto={prodDetails}
+            close={() => {
+              setDetails(true);
             }}
-            onInputChange={(event, value, reason) => setValue(value)}
-            endDecorator={
-              <>
-                <IconButton onClick={fSearch}>
-                  <Search size="sm" />
-                </IconButton>
-                <IconButton onClick={setOpen}>
-                  <FilterAltIcon size="sm" />
-                </IconButton>
-              </>
-            }
-            sx={{ width: "100%" }}
-            // renderInput={(params) => <TextField {...params} label="Search" />}
-          />
-        </Card>
-        <Divider orientation="horizontal" sx={{ marginBottom: 1 }} />
-        <Box sx={{ overflow: "auto" }}>
-          {searchProd &&
-            searchProd.map((e) => (
-              // <li key={e.id}>{e.nome}</li>
-              <ProductSearchCard key={e.id} produto={e} Details={()=>{
-                setDetails(false)
-                setProdDetails(e)
-              }} addToCart={addToCart} />
-            ))}
-        </Box>
-        </>:
-        <ProductDetails produto={prodDetails} close={()=>{
-          setDetails(true)
-          
-        }}></ProductDetails>
-        
-        }
-        
+          ></ProductDetails>
+        )}
       </Card>
     </>
   );

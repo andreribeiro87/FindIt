@@ -20,14 +20,23 @@ export default function Home() {
   const [index, setIndex] = useState(2);
   return (
     <>
-
       {index == 0 && <Promotions />}
-      {index == 1 && <Cart products={cart} />}
+      {index == 1 && (
+        <Cart
+          products={cart}
+          removeFromCart={(e) =>
+            setCart(cart.filter((x) => x.produto.id != e.produto.id))
+          }
+        />
+      )}
       {index == 2 && (
         <SearchPage
           setOpen={() => openModal(true)}
           chosenSuperMarkets={superMarket}
-          addToCart={(e)=>setCart([...cart,e])}
+          addToCart={(e) => {
+            if (!cart.find((x) => x.produto.id == e.produto.id))
+              setCart([...cart, e]);
+          }} // TODO just add to cart if the product isnt already in the cart
         />
       )}
       {index == 3 && <Map />}

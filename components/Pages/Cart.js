@@ -1,8 +1,13 @@
 import Card from "@mui/joy/Card";
 import ProductSearchCard from "../ProductSearchCard";
+import ProductDetails from "../ProductDetails";
+import { useState } from "react";
 
-export default function Cart({ products }) {
-  console.log(products)
+export default function Cart({ products, removeFromCart }) {
+  console.log(products);
+  const [details, setDetails] = useState(true);
+  const [prodDetails, setProdDetails] = useState({});
+
   return (
     <Card
       color="success"
@@ -18,10 +23,27 @@ export default function Cart({ products }) {
         height: "78%",
       }}
     >
-      {products.map((p) => (
-        <ProductSearchCard key={p.produto.id} product={p.produto} />
-      ))}
+      {details ? (
+        products.map((p) => {
+          console.log(p.produto);
 
+          return (
+            <ProductSearchCard
+              key={p.produto.id}
+              Details={() => {
+                setDetails(false);
+                setProdDetails(p.produto);
+              }}
+              produto={p.produto}
+              isCart={true}
+              cartQuantity={p.quantity}
+              removeFromCart={removeFromCart}
+            />
+          );
+        })
+      ) : (
+        <ProductDetails close={() => setDetails(true)} produto={prodDetails} />
+      )}
     </Card>
   );
 }

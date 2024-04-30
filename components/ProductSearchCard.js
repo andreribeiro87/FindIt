@@ -8,11 +8,18 @@ import Tooltip from "@mui/joy/Tooltip";
 
 import Add from "@mui/icons-material/Add";
 import Remove from "@mui/icons-material/Remove";
+import Delete from "@mui/icons-material/Delete";
 
 import { useState } from "react";
 
-export default function ProductSearchCard({ produto,Details,addToCart}) {
-
+export default function ProductSearchCard({
+  produto,
+  Details,
+  addToCart,
+  removeFromCart,
+  isCart,
+  cartQuantity,
+}) {
   const [quantity, setQuantity] = useState(0);
 
   return (
@@ -41,7 +48,7 @@ export default function ProductSearchCard({ produto,Details,addToCart}) {
             arrow
             variant="outlined"
             title={produto.supermercados.map((x) => (
-              <Typography>{x.nome}</Typography>
+              <Typography key={x.id}>{x.nome}</Typography>
             ))}
             placement="bottom-start"
           >
@@ -58,21 +65,37 @@ export default function ProductSearchCard({ produto,Details,addToCart}) {
         </CardContent>
       </Card>
 
-      <Card variant="plain" sx={{ p: 1, pt: 0,display:"flex",justifyContent:"space-around" }} orientation="horizontal">
+      <Card
+        variant="plain"
+        sx={{ p: 1, pt: 0, display: "flex", justifyContent: "space-around" }}
+        orientation="horizontal"
+      >
+        {!isCart ? (
+          <ButtonGroup variant="soft" size="sm">
+            <Button onClick={() => z > 0 && setQuantity(quantity - 1)}>
+              <Remove />
+            </Button>
+            <Button variant="solid" disabled>
+              {quantity}
+            </Button>
+            <Button onClick={() => setQuantity(quantity + 1)}>
+              <Add />
+            </Button>
+          </ButtonGroup>
+        ) : (
+          <Typography level="body-md">Quantity: {cartQuantity}</Typography>
+        )}
         <ButtonGroup variant="soft" size="sm">
-          <Button onClick={() => z > 0 && setQuantity(quantity - 1)}>
-            <Remove />
-          </Button>
-          <Button variant="solid" disabled>
-            {quantity}
-          </Button>
-          <Button onClick={() => setQuantity(quantity + 1)}>
-            <Add />
-          </Button>
-        </ButtonGroup>
-        <ButtonGroup variant="soft" size="sm" >
-        <Button onClick={()=>addToCart({produto,quantity})}>Add</Button>
-        <Button onClick={Details}>Details</Button>
+          {isCart ? (
+            <Button onClick={() => removeFromCart({ produto })}>
+              <Delete />
+            </Button>
+          ) : (
+            <Button onClick={() => addToCart({ produto, quantity })}>
+              Add
+            </Button>
+          )}
+          <Button onClick={Details}>Details</Button>
         </ButtonGroup>
       </Card>
     </Card>

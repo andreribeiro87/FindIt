@@ -18,7 +18,11 @@ export async function GET(req) {
     let super_arr = [];
     for (let j = 0; j < supers.length; j++) {
       if (supers[j].produtos.includes(parseInt(prods[i].id))) {
-        super_arr.push({ nome: supers[j].nome, id: supers[j].id });
+        super_arr.push({
+          nome: supers[j].nome,
+          id: supers[j].id,
+          acessibilidade: supers[j].acessibilidade,
+        });
       }
     }
     prods_plus_supers.push({ ...prods[i], supermercados: super_arr });

@@ -13,8 +13,10 @@ export default function Home() {
   const [open, openModal] = useState(false);
   const [alphabetical, setAlphabetical] = useState(false);
   const [order, setOrder] = useState(null);
+  const [accessibility, setAccessibility] = useState(false);
   const [superMarket, setSuperMarket] = useState([]);
   const [products, setProducts] = useState([]);
+
   const [cart, setCart] = useState([]);
 
   const [index, setIndex] = useState(2);
@@ -37,6 +39,9 @@ export default function Home() {
             if (!cart.find((x) => x.produto.id == e.produto.id))
               setCart([...cart, e]);
           }} // TODO just add to cart if the product isnt already in the cart
+          alphabetical={alphabetical}
+          order={order}
+          accessibility={accessibility}
         />
       )}
       {index == 3 && <Map />}
@@ -51,6 +56,8 @@ export default function Home() {
         order={order}
         setOrder={(p) => setOrder(p)}
         setSuperMarket={(array) => setSuperMarket(array)}
+        setAccessibility={(e) => setAccessibility(e)}
+        accessibility={accessibility}
       />
       <NavBar index={index} changeIndex={(event, value) => setIndex(value)} />
     </>

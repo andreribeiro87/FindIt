@@ -2,8 +2,9 @@ import Card from "@mui/joy/Card";
 import ProductSearchCard from "../ProductSearchCard";
 import ProductDetails from "../ProductDetails";
 import { useState } from "react";
+import { Button, Sheet } from "@mui/joy";
 
-export default function Cart({ products, removeFromCart }) {
+export default function Cart({ products, removeFromCart,changeQuantity }) {
   console.log(products);
   const [details, setDetails] = useState(true);
   const [prodDetails, setProdDetails] = useState({});
@@ -23,6 +24,8 @@ export default function Cart({ products, removeFromCart }) {
         height: "78%",
       }}
     >
+    Your ShoppingCart
+      <Sheet sx={{overflow: "auto" }}>
       {details ? (
         products.map((p) => {
           console.log(p.produto);
@@ -37,6 +40,7 @@ export default function Cart({ products, removeFromCart }) {
               produto={p.produto}
               isCart={true}
               cartQuantity={p.quantity}
+              setCartQuantity={changeQuantity}
               removeFromCart={removeFromCart}
             />
           );
@@ -44,6 +48,11 @@ export default function Cart({ products, removeFromCart }) {
       ) : (
         <ProductDetails close={() => setDetails(true)} produto={prodDetails} />
       )}
+      </Sheet>
+    <Card orientation="horizontal">
+      <Button>Show Path</Button>
+      TOTAL:
+    </Card>
     </Card>
   );
 }

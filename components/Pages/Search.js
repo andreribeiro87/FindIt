@@ -119,7 +119,6 @@ export default function SearchPage({ setOpen, chosenSuperMarkets, addToCart }) {
                   </>
                 }
                 sx={{ width: "100%" }}
-                // renderInput={(params) => <TextField {...params} label="Search" />}
               />
             </Card>
             <Divider orientation="horizontal" sx={{ marginBottom: 1 }} />

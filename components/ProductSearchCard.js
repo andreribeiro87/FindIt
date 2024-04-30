@@ -23,6 +23,7 @@ export default function ProductSearchCard({
   removeFromCart,
   isCart,
   cartQuantity,
+  setCartQuantity,
 }) {
   const [quantity, setQuantity] = useState(0);
   const [tolltip, setTolltip] = useState(false);
@@ -54,15 +55,18 @@ export default function ProductSearchCard({
             arrow
             variant="outlined"
             title={
-
-              <Sheet >
+              <Sheet>
                 <List marker="disc" size="sm">
                   {produto.supermercados.map((x) => (
-                    <ListItem key={x.id} >{x.nome}</ListItem>
+                    <ListItem key={x.id}>{x.nome}</ListItem>
                   ))}
                 </List>
 
-                <IconButton onClick={() => setTolltip(false)} color="danger" size="sm">
+                <IconButton
+                  onClick={() => setTolltip(false)}
+                  color="danger"
+                  size="sm"
+                >
                   <ArrowBack />
                 </IconButton>
               </Sheet>
@@ -87,7 +91,7 @@ export default function ProductSearchCard({
       >
         {!isCart ? (
           <ButtonGroup variant="soft" size="sm">
-            <Button onClick={() => z > 0 && setQuantity(quantity - 1)}>
+            <Button onClick={() => quantity > 0 && setQuantity(quantity - 1)}>
               <Remove />
             </Button>
             <Button variant="solid" disabled>
@@ -98,7 +102,25 @@ export default function ProductSearchCard({
             </Button>
           </ButtonGroup>
         ) : (
-          <Typography level="body-md">Quantity: {cartQuantity}</Typography>
+          <ButtonGroup variant="soft" size="sm">
+            <Button
+              onClick={() => {
+                if (cartQuantity != 1) {
+                  setCartQuantity(cartQuantity - 1, produto);
+                } else {
+                  removeFromCart({ produto });
+                }
+              }}
+            >
+              <Remove />
+            </Button>
+            <Button variant="solid" disabled>
+              {cartQuantity}
+            </Button>
+            <Button onClick={() => setCartQuantity(cartQuantity + 1, produto)}>
+              <Add />
+            </Button>
+          </ButtonGroup>
         )}
         <ButtonGroup variant="soft" size="sm">
           {isCart ? (

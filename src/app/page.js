@@ -30,7 +30,7 @@ export default function Home() {
 
   const [cart, setCart] = useState([]);
 
-  const [index, setIndex] = useState(2);
+  const [index, setIndex] = useState(3);
   const [openError, setOpenError] = useState(false);
 
   useEffect(() => {
@@ -104,7 +104,7 @@ export default function Home() {
           accessibility={accessibility}
         />
       )}
-      {index == 3 && <Map />}
+      {index == 3 && <Map cart={cart} />}
       {index == 4 && <User setOpen={() => openModal(true)} />}
 
       {openError && (

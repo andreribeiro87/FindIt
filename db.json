@@ -1,474 +1,740 @@
 {
   "produto": [
-    {
-      "preco": 10.99,
-      "nome": "Ma\u00e7\u00e3",
-      "imagem": "maca.jpg",
-      "descricao": "Fruta refrescante e deliciosa.",
-      "tabela_nutritiva": {
-        "calorias": 52,
-        "carboidratos": 14,
-        "proteinas": 0.3,
-        "gorduras": 0.2
+      {
+          "nome": "Ma\u00e7\u00e3",
+          "imagem": "maca.jpg",
+          "descricao": "Fruta refrescante e deliciosa.",
+          "tabela_nutritiva": {
+              "calorias": 52,
+              "carboidratos": 14,
+              "proteinas": 0.3,
+              "gorduras": 0.2
+          },
+          "qtd": 5,
+          "id": 1
       },
-      "qtd": 5,
-      "id": 1
-    },
-    {
-      "preco": 5.49,
-      "nome": "Iogurte Natural",
-      "imagem": "iogurte.jpg",
-      "descricao": "Iogurte fresco e cremoso.",
-      "tabela_nutritiva": {
-        "calorias": 68,
-        "carboidratos": 4.7,
-        "proteinas": 3.5,
-        "gorduras": 3.8
+      {
+          "nome": "Iogurte Natural",
+          "imagem": "iogurte.jpg",
+          "descricao": "Iogurte fresco e cremoso.",
+          "tabela_nutritiva": {
+              "calorias": 68,
+              "carboidratos": 4.7,
+              "proteinas": 3.5,
+              "gorduras": 3.8
+          },
+          "qtd": 10,
+          "id": 2
       },
-      "qtd": 10,
-      "id": 2
-    },
-    {
-      "preco": 8.75,
-      "nome": "Castanhas",
-      "imagem": "castanhas.jpg",
-      "descricao": "Snack saud\u00e1vel e crocante.",
-      "tabela_nutritiva": {
-        "calorias": 185,
-        "carboidratos": 17,
-        "proteinas": 4,
-        "gorduras": 12
+      {
+          "nome": "Castanhas",
+          "imagem": "castanhas.jpg",
+          "descricao": "Snack saud\u00e1vel e crocante.",
+          "tabela_nutritiva": {
+              "calorias": 185,
+              "carboidratos": 17,
+              "proteinas": 4,
+              "gorduras": 12
+          },
+          "qtd": 8,
+          "id": 3
       },
-      "qtd": 8,
-      "id": 3
-    },
-    {
-      "preco": 2.99,
-      "nome": "Cenoura",
-      "imagem": "cenoura.jpg",
-      "descricao": "Vegetal fresco e crocante.",
-      "tabela_nutritiva": {
-        "calorias": 41,
-        "carboidratos": 10,
-        "proteinas": 0.9,
-        "gorduras": 0.2
+      {
+          "nome": "Cenoura",
+          "imagem": "cenoura.jpg",
+          "descricao": "Vegetal fresco e crocante.",
+          "tabela_nutritiva": {
+              "calorias": 41,
+              "carboidratos": 10,
+              "proteinas": 0.9,
+              "gorduras": 0.2
+          },
+          "qtd": 20,
+          "id": 4
       },
-      "qtd": 20,
-      "id": 4
-    },
-    {
-      "preco": 3.49,
-      "nome": "P\u00e3o Integral",
-      "imagem": "pao_integral.jpg",
-      "descricao": "P\u00e3o saud\u00e1vel e saboroso.",
-      "tabela_nutritiva": {
-        "calorias": 79,
-        "carboidratos": 13,
-        "proteinas": 3,
-        "gorduras": 1
+      {
+          "nome": "P\u00e3o Integral",
+          "imagem": "pao_integral.jpg",
+          "descricao": "P\u00e3o saud\u00e1vel e saboroso.",
+          "tabela_nutritiva": {
+              "calorias": 79,
+              "carboidratos": 13,
+              "proteinas": 3,
+              "gorduras": 1
+          },
+          "qtd": 15,
+          "id": 5
       },
-      "qtd": 15,
-      "id": 5
-    },
-    {
-      "preco": 6.25,
-      "nome": "Salada de Frutas",
-      "imagem": "salada_frutas.jpg",
-      "descricao": "Mix de frutas frescas e coloridas.",
-      "tabela_nutritiva": {
-        "calorias": 120,
-        "carboidratos": 30,
-        "proteinas": 1,
-        "gorduras": 0.5
+      {
+          "nome": "Salada de Frutas",
+          "imagem": "salada_frutas.jpg",
+          "descricao": "Mix de frutas frescas e coloridas.",
+          "tabela_nutritiva": {
+              "calorias": 120,
+              "carboidratos": 30,
+              "proteinas": 1,
+              "gorduras": 0.5
+          },
+          "qtd": 7,
+          "id": 6
       },
-      "qtd": 7,
-      "id": 6
-    },
-    {
-      "preco": 4.99,
-      "nome": "Granola",
-      "imagem": "granola.jpg",
-      "descricao": "Mistura crocante de gr\u00e3os e frutas.",
-      "tabela_nutritiva": {
-        "calorias": 390,
-        "carboidratos": 71,
-        "proteinas": 9,
-        "gorduras": 9
+      {
+          "nome": "Granola",
+          "imagem": "granola.jpg",
+          "descricao": "Mistura crocante de gr\u00e3os e frutas.",
+          "tabela_nutritiva": {
+              "calorias": 390,
+              "carboidratos": 71,
+              "proteinas": 9,
+              "gorduras": 9
+          },
+          "qtd": 10,
+          "id": 7
       },
-      "qtd": 10,
-      "id": 7
-    },
-    {
-      "preco": 7.49,
-      "nome": "Salm\u00e3o",
-      "imagem": "salmao.jpg",
-      "descricao": "Peixe rico em \u00f4mega-3 e prote\u00ednas.",
-      "tabela_nutritiva": {
-        "calorias": 208,
-        "carboidratos": 0,
-        "proteinas": 20,
-        "gorduras": 13
+      {
+          "nome": "Salm\u00e3o",
+          "imagem": "salmao.jpg",
+          "descricao": "Peixe rico em \u00f4mega-3 e prote\u00ednas.",
+          "tabela_nutritiva": {
+              "calorias": 208,
+              "carboidratos": 0,
+              "proteinas": 20,
+              "gorduras": 13
+          },
+          "qtd": 4,
+          "id": 8
       },
-      "qtd": 4,
-      "id": 8
-    },
-    {
-      "preco": 1.99,
-      "nome": "Ovos",
-      "imagem": "ovos.jpg",
-      "descricao": "Prote\u00edna de alta qualidade.",
-      "tabela_nutritiva": {
-        "calorias": 78,
-        "carboidratos": 0.6,
-        "proteinas": 6.3,
-        "gorduras": 5.3
+      {
+          "nome": "Ovos",
+          "imagem": "ovos.jpg",
+          "descricao": "Prote\u00edna de alta qualidade.",
+          "tabela_nutritiva": {
+              "calorias": 78,
+              "carboidratos": 0.6,
+              "proteinas": 6.3,
+              "gorduras": 5.3
+          },
+          "qtd": 24,
+          "id": 9
       },
-      "qtd": 24,
-      "id": 9
-    },
-    {
-      "preco": 3.99,
-      "nome": "Aveia",
-      "imagem": "aveia.jpg",
-      "descricao": "Cereal nutritivo e vers\u00e1til.",
-      "tabela_nutritiva": {
-        "calorias": 389,
-        "carboidratos": 66,
-        "proteinas": 17,
-        "gorduras": 7
+      {
+          "nome": "Aveia",
+          "imagem": "aveia.jpg",
+          "descricao": "Cereal nutritivo e vers\u00e1til.",
+          "tabela_nutritiva": {
+              "calorias": 389,
+              "carboidratos": 66,
+              "proteinas": 17,
+              "gorduras": 7
+          },
+          "qtd": 9,
+          "id": 10
       },
-      "qtd": 9,
-      "id": 10
-    },
-    {
-      "preco": 2.49,
-      "nome": "Banana",
-      "imagem": "banana.jpg",
-      "descricao": "Fruta energ\u00e9tica e vers\u00e1til.",
-      "tabela_nutritiva": {
-        "calorias": 89,
-        "carboidratos": 23,
-        "proteinas": 1.1,
-        "gorduras": 0.3
+      {
+          "nome": "Banana",
+          "imagem": "banana.jpg",
+          "descricao": "Fruta energ\u00e9tica e vers\u00e1til.",
+          "tabela_nutritiva": {
+              "calorias": 89,
+              "carboidratos": 23,
+              "proteinas": 1.1,
+              "gorduras": 0.3
+          },
+          "qtd": 15,
+          "id": 11
       },
-      "qtd": 15,
-      "id": 11
-    },
-    {
-      "preco": 8.99,
-      "nome": "Abacate",
-      "imagem": "abacate.jpg",
-      "descricao": "Fruta cremosa e rica em gorduras saud\u00e1veis.",
-      "tabela_nutritiva": {
-        "calorias": 160,
-        "carboidratos": 9,
-        "proteinas": 2,
-        "gorduras": 15
+      {
+          "nome": "Abacate",
+          "imagem": "abacate.jpg",
+          "descricao": "Fruta cremosa e rica em gorduras saud\u00e1veis.",
+          "tabela_nutritiva": {
+              "calorias": 160,
+              "carboidratos": 9,
+              "proteinas": 2,
+              "gorduras": 15
+          },
+          "qtd": 6,
+          "id": 12
       },
-      "qtd": 6,
-      "id": 12
-    },
-    {
-      "preco": 6.79,
-      "nome": "Frango",
-      "imagem": "frango.jpg",
-      "descricao": "Carne magra e rica em prote\u00ednas.",
-      "tabela_nutritiva": {
-        "calorias": 165,
-        "carboidratos": 0,
-        "proteinas": 31,
-        "gorduras": 3.6
+      {
+          "nome": "Frango",
+          "imagem": "frango.jpg",
+          "descricao": "Carne magra e rica em prote\u00ednas.",
+          "tabela_nutritiva": {
+              "calorias": 165,
+              "carboidratos": 0,
+              "proteinas": 31,
+              "gorduras": 3.6
+          },
+          "qtd": 8,
+          "id": 13
       },
-      "qtd": 8,
-      "id": 13
-    },
-    {
-      "preco": 4.25,
-      "nome": "Tomate",
-      "imagem": "tomate.jpg",
-      "descricao": "Vegetal suculento e rico em licopeno.",
-      "tabela_nutritiva": {
-        "calorias": 18,
-        "carboidratos": 3.9,
-        "proteinas": 0.9,
-        "gorduras": 0.2
+      {
+          "nome": "Tomate",
+          "imagem": "tomate.jpg",
+          "descricao": "Vegetal suculento e rico em licopeno.",
+          "tabela_nutritiva": {
+              "calorias": 18,
+              "carboidratos": 3.9,
+              "proteinas": 0.9,
+              "gorduras": 0.2
+          },
+          "qtd": 12,
+          "id": 14
       },
-      "qtd": 12,
-      "id": 14
-    },
-    {
-      "preco": 9.49,
-      "nome": "Nozes",
-      "imagem": "nozes.jpg",
-      "descricao": "Frutos secos cheios de nutrientes.",
-      "tabela_nutritiva": {
-        "calorias": 654,
-        "carboidratos": 13,
-        "proteinas": 15,
-        "gorduras": 65
+      {
+          "nome": "Nozes",
+          "imagem": "nozes.jpg",
+          "descricao": "Frutos secos cheios de nutrientes.",
+          "tabela_nutritiva": {
+              "calorias": 654,
+              "carboidratos": 13,
+              "proteinas": 15,
+              "gorduras": 65
+          },
+          "qtd": 5,
+          "id": 15
       },
-      "qtd": 5,
-      "id": 15
-    },
-    {
-      "preco": 3.99,
-      "nome": "Espinafre",
-      "imagem": "espinafre.jpg",
-      "descricao": "Vegetal verde rico em ferro e vitaminas.",
-      "tabela_nutritiva": {
-        "calorias": 23,
-        "carboidratos": 3.6,
-        "proteinas": 2.9,
-        "gorduras": 0.4
+      {
+          "nome": "Espinafre",
+          "imagem": "espinafre.jpg",
+          "descricao": "Vegetal verde rico em ferro e vitaminas.",
+          "tabela_nutritiva": {
+              "calorias": 23,
+              "carboidratos": 3.6,
+              "proteinas": 2.9,
+              "gorduras": 0.4
+          },
+          "qtd": 10,
+          "id": 16
       },
-      "qtd": 10,
-      "id": 16
-    },
-    {
-      "preco": 12.49,
-      "nome": "Queijo Cottage",
-      "imagem": "queijo_cottage.jpg",
-      "descricao": "Queijo leve e rico em prote\u00ednas.",
-      "tabela_nutritiva": {
-        "calorias": 98,
-        "carboidratos": 2.7,
-        "proteinas": 11,
-        "gorduras": 4.3
+      {
+          "nome": "Queijo Cottage",
+          "imagem": "queijo_cottage.jpg",
+          "descricao": "Queijo leve e rico em prote\u00ednas.",
+          "tabela_nutritiva": {
+              "calorias": 98,
+              "carboidratos": 2.7,
+              "proteinas": 11,
+              "gorduras": 4.3
+          },
+          "qtd": 6,
+          "id": 17
       },
-      "qtd": 6,
-      "id": 17
-    },
-    {
-      "preco": 7.99,
-      "nome": "Laranja",
-      "imagem": "laranja.jpg",
-      "descricao": "Fruta c\u00edtrica rica em vitamina C.",
-      "tabela_nutritiva": {
-        "calorias": 47,
-        "carboidratos": 12,
-        "proteinas": 0.9,
-        "gorduras": 0.1
+      {
+          "nome": "Laranja",
+          "imagem": "laranja.jpg",
+          "descricao": "Fruta c\u00edtrica rica em vitamina C.",
+          "tabela_nutritiva": {
+              "calorias": 47,
+              "carboidratos": 12,
+              "proteinas": 0.9,
+              "gorduras": 0.1
+          },
+          "qtd": 10,
+          "id": 18
       },
-      "qtd": 10,
-      "id": 18
-    },
-    {
-      "preco": 4.49,
-      "nome": "Pasta de Amendoim",
-      "imagem": "pasta_amendoim.jpg",
-      "descricao": "Creme delicioso e nutritivo.",
-      "tabela_nutritiva": {
-        "calorias": 588,
-        "carboidratos": 20,
-        "proteinas": 25,
-        "gorduras": 50
+      {
+          "nome": "Manteiga de Amendoim",
+          "imagem": "pasta_amendoim.jpg",
+          "descricao": "Creme delicioso e nutritivo.",
+          "tabela_nutritiva": {
+              "calorias": 588,
+              "carboidratos": 20,
+              "proteinas": 25,
+              "gorduras": 50
+          },
+          "qtd": 8,
+          "id": 19
       },
-      "qtd": 8,
-      "id": 19
-    },
-    {
-      "preco": 5.99,
-      "nome": "Batata Doce",
-      "imagem": "batata_doce.jpg",
-      "descricao": "Tub\u00e9rculo doce e saud\u00e1vel.",
-      "tabela_nutritiva": {
-        "calorias": 86,
-        "carboidratos": 20,
-        "proteinas": 1.6,
-        "gorduras": 0.1
+      {
+          "nome": "Batata Doce",
+          "imagem": "batata_doce.jpg",
+          "descricao": "Tub\u00e9rculo doce e saud\u00e1vel.",
+          "tabela_nutritiva": {
+              "calorias": 86,
+              "carboidratos": 20,
+              "proteinas": 1.6,
+              "gorduras": 0.1
+          },
+          "qtd": 12,
+          "id": 20
       },
-      "qtd": 12,
-      "id": 20
-    },
-    {
-      "preco": 3.75,
-      "nome": "Morangos",
-      "imagem": "morangos.jpg",
-      "descricao": "Frutas vermelhas e suculentas.",
-      "tabela_nutritiva": {
-        "calorias": 32,
-        "carboidratos": 8,
-        "proteinas": 0.7,
-        "gorduras": 0.3
+      {
+          "nome": "Morangos",
+          "imagem": "morangos.jpg",
+          "descricao": "Frutas vermelhas e suculentas.",
+          "tabela_nutritiva": {
+              "calorias": 32,
+              "carboidratos": 8,
+              "proteinas": 0.7,
+              "gorduras": 0.3
+          },
+          "qtd": 15,
+          "id": 21
       },
-      "qtd": 15,
-      "id": 21
-    },
-    {
-      "preco": 6.99,
-      "nome": "Quinoa",
-      "imagem": "quinoa.jpg",
-      "descricao": "Cereal antigo rico em prote\u00ednas.",
-      "tabela_nutritiva": {
-        "calorias": 120,
-        "carboidratos": 21,
-        "proteinas": 4,
-        "gorduras": 1.9
+      {
+          "nome": "Quinoa",
+          "imagem": "quinoa.jpg",
+          "descricao": "Cereal antigo rico em prote\u00ednas.",
+          "tabela_nutritiva": {
+              "calorias": 120,
+              "carboidratos": 21,
+              "proteinas": 4,
+              "gorduras": 1.9
+          },
+          "qtd": 8,
+          "id": 22
       },
-      "qtd": 8,
-      "id": 22
-    },
-    {
-      "preco": 4.29,
-      "nome": "Peras",
-      "imagem": "peras.jpg",
-      "descricao": "Frutas suculentas e levemente doces.",
-      "tabela_nutritiva": {
-        "calorias": 58,
-        "carboidratos": 15,
-        "proteinas": 0.4,
-        "gorduras": 0.1
+      {
+          "nome": "Peras",
+          "imagem": "peras.jpg",
+          "descricao": "Frutas suculentas e levemente doces.",
+          "tabela_nutritiva": {
+              "calorias": 58,
+              "carboidratos": 15,
+              "proteinas": 0.4,
+              "gorduras": 0.1
+          },
+          "qtd": 10,
+          "id": 23
       },
-      "qtd": 10,
-      "id": 23
-    },
-    {
-      "preco": 8.49,
-      "nome": "Am\u00eandoas",
-      "imagem": "amendoas.jpg",
-      "descricao": "Frutos secos crocantes e nutritivos.",
-      "tabela_nutritiva": {
-        "calorias": 579,
-        "carboidratos": 22,
-        "proteinas": 21,
-        "gorduras": 49
+      {
+          "nome": "Am\u00eandoas",
+          "imagem": "amendoas.jpg",
+          "descricao": "Frutos secos crocantes e nutritivos.",
+          "tabela_nutritiva": {
+              "calorias": 579,
+              "carboidratos": 22,
+              "proteinas": 21,
+              "gorduras": 49
+          },
+          "qtd": 5,
+          "id": 24
       },
-      "qtd": 5,
-      "id": 24
-    },
-    {
-      "preco": 9.99,
-      "nome": "Semente de Chia",
-      "imagem": "chia.jpg",
-      "descricao": "Sementes pequenas e poderosas.",
-      "tabela_nutritiva": {
-        "calorias": 486,
-        "carboidratos": 42,
-        "proteinas": 17,
-        "gorduras": 31
+      {
+          "nome": "Semente de Chia",
+          "imagem": "chia.jpg",
+          "descricao": "Sementes pequenas e poderosas.",
+          "tabela_nutritiva": {
+              "calorias": 486,
+              "carboidratos": 42,
+              "proteinas": 17,
+              "gorduras": 31
+          },
+          "qtd": 7,
+          "id": 25
       },
-      "qtd": 7,
-      "id": 25
-    },
-    {
-      "preco": 7.29,
-      "nome": "Br\u00f3colis",
-      "imagem": "brocolis.jpg",
-      "descricao": "Vegetal verde e cruc\u00edfero.",
-      "tabela_nutritiva": {
-        "calorias": 34,
-        "carboidratos": 7,
-        "proteinas": 2.8,
-        "gorduras": 0.4
+      {
+          "nome": "Br\u00f3colos",
+          "imagem": "brocolos.jpg",
+          "descricao": "Vegetal verde e cruc\u00edfero.",
+          "tabela_nutritiva": {
+              "calorias": 34,
+              "carboidratos": 7,
+              "proteinas": 2.8,
+              "gorduras": 0.4
+          },
+          "qtd": 10,
+          "id": 26
       },
-      "qtd": 10,
-      "id": 26
-    },
-    {
-      "preco": 3.49,
-      "nome": "Melancia",
-      "imagem": "melancia.jpg",
-      "descricao": "Fruta suculenta e refrescante.",
-      "tabela_nutritiva": {
-        "calorias": 30,
-        "carboidratos": 8,
-        "proteinas": 0.6,
-        "gorduras": 0.2
+      {
+          "nome": "Melancia",
+          "imagem": "melancia.jpg",
+          "descricao": "Fruta suculenta e refrescante.",
+          "tabela_nutritiva": {
+              "calorias": 30,
+              "carboidratos": 8,
+              "proteinas": 0.6,
+              "gorduras": 0.2
+          },
+          "qtd": 8,
+          "id": 27
       },
-      "qtd": 8,
-      "id": 27
-    },
-    {
-      "preco": 10.25,
-      "nome": "Atum Enlatado",
-      "imagem": "atum.jpg",
-      "descricao": "Peixe rico em prote\u00ednas e \u00f4mega-3.",
-      "tabela_nutritiva": {
-        "calorias": 118,
-        "carboidratos": 0,
-        "proteinas": 26,
-        "gorduras": 1
+      {
+          "nome": "Atum Enlatado",
+          "imagem": "atum.jpg",
+          "descricao": "Peixe rico em prote\u00ednas e \u00f4mega-3.",
+          "tabela_nutritiva": {
+              "calorias": 118,
+              "carboidratos": 0,
+              "proteinas": 26,
+              "gorduras": 1
+          },
+          "qtd": 6,
+          "id": 28
       },
-      "qtd": 6,
-      "id": 28
-    },
-    {
-      "preco": 5.79,
-      "nome": "Kiwi",
-      "imagem": "kiwi.jpg",
-      "descricao": "Fruta tropical e rica em vitamina C.",
-      "tabela_nutritiva": {
-        "calorias": 61,
-        "carboidratos": 15,
-        "proteinas": 1.1,
-        "gorduras": 0.5
+      {
+          "nome": "Kiwi",
+          "imagem": "kiwi.jpg",
+          "descricao": "Fruta tropical e rica em vitamina C.",
+          "tabela_nutritiva": {
+              "calorias": 61,
+              "carboidratos": 15,
+              "proteinas": 1.1,
+              "gorduras": 0.5
+          },
+          "qtd": 12,
+          "id": 29
       },
-      "qtd": 12,
-      "id": 29
-    },
-    {
-      "preco": 8.99,
-      "nome": "Pepino",
-      "imagem": "pepino.jpg",
-      "descricao": "Vegetal crocante e hidratante.",
-      "tabela_nutritiva": {
-        "calorias": 16,
-        "carboidratos": 3.6,
-        "proteinas": 0.7,
-        "gorduras": 0.1
-      },
-      "qtd": 10,
-      "id": 30
-    }
+      {
+          "nome": "Pepino",
+          "imagem": "pepino.jpg",
+          "descricao": "Vegetal crocante e hidratante.",
+          "tabela_nutritiva": {
+              "calorias": 16,
+              "carboidratos": 3.6,
+              "proteinas": 0.7,
+              "gorduras": 0.1
+          },
+          "qtd": 10,
+          "id": 30
+      }
   ],
   "supermercado": [
-    {
-      "nome": "Mercadona Av. Europa",
-      "id": 1,
-      "localizacao": {
-        "latitude": 40.416775,
-        "longitude": -3.70379
+      {
+          "nome": "Mercadona Av. Europa",
+          "id": 1,
+          "localizacao": {
+              "latitude": 40.416775,
+              "longitude": -3.70379
+          },
+          "acessibilidade": "false",
+          "produtos": [
+              {
+                  "id": 1,
+                  "preco": 12.47
+              },
+              {
+                  "id": 2,
+                  "preco": 6.37
+              },
+              {
+                  "id": 3,
+                  "preco": 7.72
+              },
+              {
+                  "id": 4,
+                  "preco": 2.77
+              },
+              {
+                  "id": 5,
+                  "preco": 5.13
+              },
+              {
+                  "id": 6,
+                  "preco": 9.11
+              },
+              {
+                  "id": 7,
+                  "preco": 6.31
+              },
+              {
+                  "id": 8,
+                  "preco": 8.99
+              },
+              {
+                  "id": 9,
+                  "preco": 1.68
+              },
+              {
+                  "id": 10,
+                  "preco": 5.92
+              },
+              {
+                  "id": 11,
+                  "preco": 3.61
+              },
+              {
+                  "id": 12,
+                  "preco": 10.02
+              },
+              {
+                  "id": 13,
+                  "preco": 7.51
+              },
+              {
+                  "id": 14,
+                  "preco": 5.87
+              },
+              {
+                  "id": 15,
+                  "preco": 14.23
+              },
+              {
+                  "id": 16,
+                  "preco": 5.12
+              },
+              {
+                  "id": 17,
+                  "preco": 11.71
+              },
+              {
+                  "id": 18,
+                  "preco": 10.44
+              },
+              {
+                  "id": 19,
+                  "preco": 5.44
+              },
+              {
+                  "id": 20,
+                  "preco": 8.15
+              },
+              {
+                  "id": 21,
+                  "preco": 3.63
+              },
+              {
+                  "id": 22,
+                  "preco": 8.81
+              },
+              {
+                  "id": 23,
+                  "preco": 5.38
+              },
+              {
+                  "id": 24,
+                  "preco": 10.0
+              },
+              {
+                  "id": 25,
+                  "preco": 12.6
+              },
+              {
+                  "id": 26,
+                  "preco": 7.63
+              },
+              {
+                  "id": 27,
+                  "preco": 4.7
+              },
+              {
+                  "id": 28,
+                  "preco": 12.82
+              },
+              {
+                  "id": 29,
+                  "preco": 5.2
+              },
+              {
+                  "id": 30,
+                  "preco": 11.3
+              }
+          ]
       },
-      "acessibilidade": "false",
-      "produtos": [
-        1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20,
-        21, 22, 23, 24, 25, 26, 27, 28, 29, 30
-      ]
-    },
-    {
-      "nome": "Continente Estacao",
-      "id": 2,
-      "localizacao": {
-        "latitude": 40.416775,
-        "longitude": -3.70379
+      {
+          "nome": "Continente Estacao",
+          "id": 2,
+          "localizacao": {
+              "latitude": 40.416775,
+              "longitude": -3.70379
+          },
+          "acessibilidade": "false",
+          "produtos": [
+              {
+                  "id": 1,
+                  "preco": 9.46
+              },
+              {
+                  "id": 2,
+                  "preco": 6.67
+              },
+              {
+                  "id": 3,
+                  "preco": 7.16
+              },
+              {
+                  "id": 4,
+                  "preco": 3.36
+              },
+              {
+                  "id": 5,
+                  "preco": 4.66
+              },
+              {
+                  "id": 6,
+                  "preco": 6.18
+              },
+              {
+                  "id": 7,
+                  "preco": 4.37
+              },
+              {
+                  "id": 8,
+                  "preco": 10.41
+              },
+              {
+                  "id": 9,
+                  "preco": 1.84
+              },
+              {
+                  "id": 16,
+                  "preco": 5.02
+              },
+              {
+                  "id": 17,
+                  "preco": 13.08
+              },
+              {
+                  "id": 18,
+                  "preco": 8.56
+              },
+              {
+                  "id": 19,
+                  "preco": 5.62
+              },
+              {
+                  "id": 20,
+                  "preco": 6.62
+              },
+              {
+                  "id": 21,
+                  "preco": 4.15
+              },
+              {
+                  "id": 22,
+                  "preco": 10.26
+              },
+              {
+                  "id": 23,
+                  "preco": 6.14
+              },
+              {
+                  "id": 24,
+                  "preco": 11.07
+              },
+              {
+                  "id": 25,
+                  "preco": 14.89
+              },
+              {
+                  "id": 26,
+                  "preco": 6.52
+              },
+              {
+                  "id": 27,
+                  "preco": 4.74
+              },
+              {
+                  "id": 28,
+                  "preco": 11.77
+              },
+              {
+                  "id": 29,
+                  "preco": 5.29
+              },
+              {
+                  "id": 30,
+                  "preco": 9.45
+              }
+          ]
       },
-      "acessibilidade": "false",
-      "produtos": [
-        1, 2, 3, 4, 5, 6, 7, 8, 9, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26,
-        27, 28, 29, 30
-      ]
-    },
-    {
-      "nome": "Auchan Glicinias",
-      "id": 3,
-      "localizacao": {
-        "latitude": 40.416775,
-        "longitude": -3.70379
+      {
+          "nome": "Auchan Glicinias",
+          "id": 3,
+          "localizacao": {
+              "latitude": 40.416775,
+              "longitude": -3.70379
+          },
+          "acessibilidade": "false",
+          "produtos": [
+              {
+                  "id": 1,
+                  "preco": 9.11
+              },
+              {
+                  "id": 2,
+                  "preco": 4.66
+              },
+              {
+                  "id": 3,
+                  "preco": 12.64
+              },
+              {
+                  "id": 4,
+                  "preco": 2.66
+              },
+              {
+                  "id": 5,
+                  "preco": 4.49
+              },
+              {
+                  "id": 6,
+                  "preco": 6.08
+              },
+              {
+                  "id": 7,
+                  "preco": 7.08
+              },
+              {
+                  "id": 8,
+                  "preco": 8.48
+              },
+              {
+                  "id": 9,
+                  "preco": 2.93
+              },
+              {
+                  "id": 10,
+                  "preco": 4.15
+              },
+              {
+                  "id": 11,
+                  "preco": 2.97
+              },
+              {
+                  "id": 12,
+                  "preco": 13.22
+              },
+              {
+                  "id": 13,
+                  "preco": 9.69
+              },
+              {
+                  "id": 14,
+                  "preco": 5.11
+              },
+              {
+                  "id": 15,
+                  "preco": 8.68
+              },
+              {
+                  "id": 16,
+                  "preco": 4.28
+              },
+              {
+                  "id": 17,
+                  "preco": 18.59
+              },
+              {
+                  "id": 18,
+                  "preco": 6.95
+              },
+              {
+                  "id": 19,
+                  "preco": 5.65
+              },
+              {
+                  "id": 20,
+                  "preco": 8.87
+              }
+          ]
       },
-      "acessibilidade": "false",
-      "produtos": [
-        1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20
-      ]
-    },
-    {
-      "nome": "Teste Acessibilidade",
-      "id": 4,
-      "localizacao": {
-        "latitude": 40.416775,
-        "longitude": -3.70379
-      },
-      "acessibilidade": "true",
-      "produtos": [30]
-    }
+      {
+          "nome": "Teste Acessibilidade",
+          "id": 4,
+          "localizacao": {
+              "latitude": 40.416775,
+              "longitude": -3.70379
+          },
+          "acessibilidade": "true",
+          "produtos": [
+              {
+                  "id": 30,
+                  "preco": 10.53
+              }
+          ]
+      }
   ]
 }

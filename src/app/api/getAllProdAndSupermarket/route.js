@@ -15,13 +15,15 @@ export async function GET(req) {
 
   for (let i = 0; i < prods.length; i++) {
     // para cada produto vamos perguntar a que supermercado pertence, pode pertencer a mais que 1
+    // vamos mudar primeiro a route para adicionar o preco
     let super_arr = [];
     for (let j = 0; j < supers.length; j++) {
-      if (supers[j].produtos.includes(parseInt(prods[i].id))) {
+      if (supers[j].produtos.map((x) => x.id).includes(parseInt(prods[i].id))) {
         super_arr.push({
           nome: supers[j].nome,
           id: supers[j].id,
           acessibilidade: supers[j].acessibilidade,
+          produto: supers[j].produtos.filter((x) => x.id == prods[i].id)[0],
         });
       }
     }

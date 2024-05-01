@@ -4,7 +4,7 @@ import CardContent from "@mui/joy/CardContent";
 import Typography from "@mui/joy/Typography";
 import Button from "@mui/joy/Button";
 import ButtonGroup from "@mui/joy/ButtonGroup";
-import { List, ListItem, Sheet } from "@mui/joy";
+import { Radio, RadioGroup, List, ListItem, Sheet } from "@mui/joy";
 import Tooltip from "@mui/joy/Tooltip";
 import IconButton from "@mui/joy/IconButton";
 import { ArrowBack } from "@mui/icons-material";
@@ -24,8 +24,10 @@ export default function ProductSearchCard({
   isCart,
   cartQuantity,
   setCartQuantity,
+  chosenOne,
 }) {
   const [quantity, setQuantity] = useState(0);
+  const [supermarket, setSupermarket] = useState([]);
   const [tolltip, setTolltip] = useState(false);
 
   return (
@@ -42,45 +44,51 @@ export default function ProductSearchCard({
     >
       <Card variant="plain" orientation="horizontal" sx={{ p: 1 }}>
         <AspectRatio ratio="1" sx={{ width: "50%" }}>
-          <img src="/teste.avif" loading="lazy" alt="" />
+          <img src={"/" + produto.imagem} loading="lazy" alt="" />
         </AspectRatio>
         <CardContent sx={{ pt: 1 }}>
           <Typography level="title-lg">{produto.nome}</Typography>
-          <Typography level="body-sm" mb={1}>
-            {produto.preco}€
-          </Typography>
-          <Typography level="body-xs">Disponivel em {"\n"}</Typography>
-          <Tooltip
-            open={tolltip}
-            arrow
-            variant="outlined"
-            title={
-              <Sheet>
-                <List marker="disc" size="sm">
-                  {produto.supermercados.map((x) => (
-                    <ListItem key={x.id}>{x.nome}</ListItem>
-                  ))}
-                </List>
 
-                <IconButton
-                  onClick={() => setTolltip(false)}
-                  color="danger"
-                  size="sm"
-                >
-                  <ArrowBack />
-                </IconButton>
-              </Sheet>
-            }
-            placement="bottom"
-          >
-            <Link level="body-xs" onClick={() => setTolltip(true)}>
-              {produto.supermercados
-                .map((x) => x.nome)
-                .join(", ")
-                .slice(0, 20)
-                .concat("...")}
-            </Link>
-          </Tooltip>
+          {!isCart ? (
+            <Tooltip
+              open={tolltip}
+              arrow
+              variant="outlined"
+              title={
+                <Sheet>
+                  <RadioGroup>
+                    {produto.supermercados.map((x) => (
+                      <Radio
+                        key={x.produto.id}
+                        value={x.produto.preco + "+" + x.id}
+                        label={x.nome + " - " + x.produto.preco + "€"}
+                        onClick={() =>
+                          setSupermarket([x.produto.preco, x.id, x.nome])
+                        }
+                      />
+                    ))}
+                  </RadioGroup>
+
+                  <IconButton
+                    onClick={() => setTolltip(false)}
+                    color="danger"
+                    size="sm"
+                  >
+                    <ArrowBack />
+                  </IconButton>
+                </Sheet>
+              }
+              placement="bottom-start"
+            >
+              <Link level="body-sm" onClick={() => setTolltip(true)}>
+                Prices
+              </Link>
+            </Tooltip>
+          ) : (
+            <Typography level="body-md">
+              {chosenOne[2]} - {chosenOne[0]}€
+            </Typography>
+          )}
         </CardContent>
       </Card>
 
@@ -106,9 +114,9 @@ export default function ProductSearchCard({
             <Button
               onClick={() => {
                 if (cartQuantity != 1) {
-                  setCartQuantity(cartQuantity - 1, produto);
+                  setCartQuantity(cartQuantity - 1, produto, chosenOne[1]);
                 } else {
-                  removeFromCart({ produto });
+                  removeFromCart(produto, chosenOne[1]);
                 }
               }}
             >
@@ -117,18 +125,24 @@ export default function ProductSearchCard({
             <Button variant="solid" disabled>
               {cartQuantity}
             </Button>
-            <Button onClick={() => setCartQuantity(cartQuantity + 1, produto)}>
+            <Button
+              onClick={() =>
+                setCartQuantity(cartQuantity + 1, produto, chosenOne[1])
+              }
+            >
               <Add />
             </Button>
           </ButtonGroup>
         )}
         <ButtonGroup variant="soft" size="sm">
           {isCart ? (
-            <Button onClick={() => removeFromCart({ produto })}>
+            <Button onClick={() => removeFromCart(produto, chosenOne[1])}>
               <Delete />
             </Button>
           ) : (
-            <Button onClick={() => addToCart({ produto, quantity })}>
+            <Button
+              onClick={() => addToCart({ produto, quantity, supermarket })}
+            >
               Add
             </Button>
           )}

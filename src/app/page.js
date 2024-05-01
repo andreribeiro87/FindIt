@@ -32,18 +32,43 @@ export default function Home() {
 
   const [index, setIndex] = useState(2);
   const [openError, setOpenError] = useState(false);
+
+  useEffect(() => {
+    // debugger;
+    (async () => {
+      fetch(`/api/getAllProdAndSupermarket`, {
+        method: "GET",
+      })
+        .then((res) => {
+          return res.json();
+        })
+        .then((data) => {
+          console.log(data);
+          // supermercados do user
+          // setSearchProd(data);
+          // return setProd(data);
+        });
+    })();
+  }, []);
+
   return (
     <>
       {index == 0 && <Promotions />}
       {index == 1 && (
         <Cart
           products={cart}
-          removeFromCart={(e) =>
-            setCart(cart.filter((x) => x.produto.id != e.produto.id))
-          }
-          changeQuantity={(q, p) => {
+          removeFromCart={(e, chosen) => {
+            setCart(
+              cart.filter(
+                (x) =>
+                  (x.produto.id == e.id && x.supermarket[1] != chosen) ||
+                  x.produto.id != e.id
+              )
+            );
+          }}
+          changeQuantity={(q, p, s) => {
             for (let i = 0; i < cart.length; i++) {
-              if (cart[i].produto.id == p.id) {
+              if (cart[i].produto.id == p.id && cart[i].supermarket[1] == s) {
                 cart[i].quantity = q;
                 break;
               }
@@ -57,10 +82,13 @@ export default function Home() {
           setOpen={() => openModal(true)}
           chosenSuperMarkets={superMarket}
           addToCart={(e) => {
-            if (e.quantity != 0) {
+            if (e.quantity != 0 && e.supermarket.length != 0) {
               find: {
                 for (let i = 0; i < cart.length; i++) {
-                  if (cart[i].produto.id == e.produto.id) {
+                  if (
+                    cart[i].produto.id == e.produto.id &&
+                    e.supermarket[1] == cart[i].supermarket[1]
+                  ) {
                     cart[i].quantity += e.quantity;
                     break find;
                   }
@@ -68,7 +96,6 @@ export default function Home() {
                 setCart([...cart, e]);
               }
             } else {
-              console.log("oi");
               setOpenError(true);
             }
           }} // TODO just add to cart if the product isnt already in the cart
@@ -109,7 +136,8 @@ export default function Home() {
                 Attention
               </Typography>
               <Typography level="body-sm" color="danger">
-                To be added to the cart, the quantity must exceed zero!
+                To be added to the cart, the quantity must exceed zero and you
+                must select a supermarket on <b>Prices</b>!
               </Typography>
             </div>
           </Alert>

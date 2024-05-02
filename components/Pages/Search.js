@@ -211,6 +211,7 @@ export default function SearchPage({
                       setProdDetails(e);
                     }}
                     addToCart={addToCart}
+                    selectedSuperMarkets={chosenSuperMarkets}
                   />
                 ))}
             </Box>

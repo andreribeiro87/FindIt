@@ -30,7 +30,7 @@ export default function Home() {
 
   const [cart, setCart] = useState([]);
 
-  const [index, setIndex] = useState(3);
+  const [index, setIndex] = useState(2);
   const [openError, setOpenError] = useState(false);
 
   useEffect(() => {

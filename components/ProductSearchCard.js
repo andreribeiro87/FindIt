@@ -7,13 +7,15 @@ import ButtonGroup from "@mui/joy/ButtonGroup";
 import { Radio, RadioGroup, List, ListItem, Sheet } from "@mui/joy";
 import Tooltip from "@mui/joy/Tooltip";
 import IconButton from "@mui/joy/IconButton";
-import { ArrowBack } from "@mui/icons-material";
+import { ArrowBack, ShoppingCart } from "@mui/icons-material";
+import ListItemIcon from "@mui/material/ListItemIcon";
+import ListItemText from "@mui/material/ListItemText";
 
 import Add from "@mui/icons-material/Add";
 import Remove from "@mui/icons-material/Remove";
 import Delete from "@mui/icons-material/Delete";
 
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { Link } from "@mui/joy";
 
 export default function ProductSearchCard({
@@ -25,10 +27,29 @@ export default function ProductSearchCard({
   cartQuantity,
   setCartQuantity,
   chosenOne,
+  selectedSuperMarkets,
 }) {
   const [quantity, setQuantity] = useState(0);
   const [supermarket, setSupermarket] = useState([]);
-  const [tolltip, setTolltip] = useState(false);
+  const [tooltip, setTooltip] = useState(false);
+  const [tooltip1, setTooltip1] = useState(false);
+
+  useEffect(() => {
+    // x.produto.preco, x.id, x.nome
+    console.log(produto);
+    if (selectedSuperMarkets != null && selectedSuperMarkets.length > 0) {
+      // get the price
+      let preco = produto.supermercados
+        .filter((x) => x.id == selectedSuperMarkets[0].id)
+        .map((x) => x.produto.preco);
+      console.log(preco);
+      setSupermarket([
+        preco[0],
+        selectedSuperMarkets[0].id,
+        selectedSuperMarkets[0].nome,
+      ]);
+    }
+  }, [produto, selectedSuperMarkets]);
 
   return (
     <Card
@@ -50,40 +71,95 @@ export default function ProductSearchCard({
           <Typography level="title-lg">{produto.nome}</Typography>
 
           {!isCart ? (
-            <Tooltip
-              open={tolltip}
-              arrow
-              variant="outlined"
-              title={
-                <Sheet>
-                  <RadioGroup>
+            <>
+              <Tooltip
+                open={tooltip1}
+                arrow
+                variant="outlined"
+                title={
+                  <Sheet>
                     {produto.supermercados.map((x) => (
-                      <Radio
-                        key={x.produto.id}
-                        value={x.produto.preco + "+" + x.id}
-                        label={x.nome + " - " + x.produto.preco + "€"}
-                        onClick={() =>
-                          setSupermarket([x.produto.preco, x.id, x.nome])
-                        }
-                      />
+                      <>
+                        <ListItem key={x.produto.id}>
+                          <ListItemIcon>
+                            <ShoppingCart />
+                          </ListItemIcon>
+                          <ListItemText
+                            primary={x.nome + " - " + x.produto.preco + "€"}
+                            // secondary="Secondary text"
+                          />
+                        </ListItem>
+                      </>
                     ))}
-                  </RadioGroup>
 
-                  <IconButton
-                    onClick={() => setTolltip(false)}
-                    color="danger"
-                    size="sm"
-                  >
-                    <ArrowBack />
-                  </IconButton>
-                </Sheet>
-              }
-              placement="bottom-start"
-            >
-              <Link level="body-sm" onClick={() => setTolltip(true)}>
-                Prices
-              </Link>
-            </Tooltip>
+                    <IconButton
+                      onClick={() => setTooltip1(false)}
+                      color="danger"
+                      size="sm"
+                    >
+                      <ArrowBack />
+                    </IconButton>
+                  </Sheet>
+                }
+                placement="bottom-start"
+              >
+                <Link level="body-sm" onClick={() => setTooltip1(true)}>
+                  Prices
+                </Link>
+              </Tooltip>
+              <Tooltip
+                open={tooltip}
+                arrow
+                variant="outlined"
+                title={
+                  <Sheet>
+                    <RadioGroup
+                      onChange={(event) => {
+                        console.log(event);
+                        //event.target.value -> id do supermercado
+                        //event.target.parentNode.parentNode.parentNode.lastChild.textContent -> nome do supermercado
+                        setSupermarket([
+                          event.target.id.split("+")[1],
+                          event.target.value,
+                          event.target.parentNode.parentNode.parentNode
+                            .lastChild.textContent,
+                        ]);
+                      }}
+                    >
+                      {produto.supermercados.map((x) => (
+                        <Radio
+                          key={x.produto.id + "+" + x.produto.preco}
+                          id={x.produto.id + "+" + x.produto.preco}
+                          value={x.id}
+                          label={x.nome}
+                          checked={
+                            selectedSuperMarkets.length > 0
+                              ? selectedSuperMarkets[0].id == x.id
+                              : false
+                          }
+                          // onClick={() =>
+                          //   setSupermarket([x.produto.preco, x.id, x.nome])
+                          // }
+                        />
+                      ))}
+                    </RadioGroup>
+
+                    <IconButton
+                      onClick={() => setTooltip(false)}
+                      color="danger"
+                      size="sm"
+                    >
+                      <ArrowBack />
+                    </IconButton>
+                  </Sheet>
+                }
+                placement="bottom-start"
+              >
+                <Link level="body-sm" onClick={() => setTooltip(true)}>
+                  Set SuperMarket
+                </Link>
+              </Tooltip>
+            </>
           ) : (
             <Typography level="body-md">
               {chosenOne[2]} - {chosenOne[0]}€

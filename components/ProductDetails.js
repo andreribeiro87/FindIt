@@ -1,15 +1,14 @@
 import { Card, CardContent, IconButton } from "@mui/joy";
 import Typography from "@mui/joy/Typography";
 import AspectRatio from "@mui/joy/AspectRatio";
-import { List, ListItem, Sheet, Link } from "@mui/joy";
-import Tooltip from "@mui/joy/Tooltip";
 import Table from "@mui/joy/Table";
 import { useState } from "react";
 import { ArrowBack } from "@mui/icons-material";
+import CloseIcon from "@mui/icons-material/Close";
+import CheckIcon from "@mui/icons-material/Check";
 
 export default function ProductDetails({ produto, close }) {
-  console.log(produto);
-  const [tolltip, setTolltip] = useState(false);
+  console.log(produto.supermercados);
 
   return (
     <>
@@ -26,46 +25,32 @@ export default function ProductDetails({ produto, close }) {
         </AspectRatio>
         <CardContent sx={{ pt: 2 }}>
           <Typography level="title-lg">{produto.nome}</Typography>
-          <Typography level="body-md" mb={1}>
-            {produto.preco}€
-          </Typography>
           <Typography level="body-sm">{produto.descricao}</Typography>
           <Typography level="body-sm">Quantity: {produto.qtd}</Typography>
         </CardContent>
       </Card>
       <Card>
-        <Typography level="body-sm">Disponivel em {"\n"}</Typography>
-        <Tooltip
-          open={tolltip}
-          arrow
-          variant="outlined"
-          title={
-            <Sheet>
-              <List marker="disc" size="sm">
-                {produto.supermercados.map((x) => (
-                  <ListItem key={x.id}>{x.nome}</ListItem>
-                ))}
-              </List>
-
-              <IconButton
-                onClick={() => setTolltip(false)}
-                color="danger"
-                size="sm"
-              >
-                <ArrowBack />
-              </IconButton>
-            </Sheet>
-          }
-          placement="bottom"
-        >
-          <Link level="body-xs" onClick={() => setTolltip(true)}>
-            {produto.supermercados
-              .map((x) => x.nome)
-              .join(", ")
-              .slice(0, 50)
-              .concat("...")}
-          </Link>
-        </Tooltip>
+        <Table variant="soft">
+          <thead>
+            <tr>
+              <th>Supermarket</th>
+              <th>Accessibility</th>
+              <th style={{ width: "15%" }}>Price</th>
+            </tr>
+          </thead>
+          <tbody>
+            {produto.supermercados.map((e) => {
+              return(
+              <tr>
+                <td>{e.nome}</td>
+                <td style={{ textAlign: "center" }}>
+                  {e.acessibilidade == "false" ? <CloseIcon /> : <CheckIcon />}
+                </td>
+                <td>{e.produto.preco}€</td>
+              </tr>)
+            })}
+          </tbody>
+        </Table>
       </Card>
       <Card>
         <Table variant="soft" borderAxis="x">

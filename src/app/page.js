@@ -6,13 +6,12 @@ import SearchPage from "../../components/Pages/Search";
 import User from "../../components/Pages/User";
 import Cart from "../../components/Pages/Cart";
 import Map from "../../components/Pages/Map";
-import Promotions from "../../components/Pages/Promations";
+import News from "../../components/Pages/News";
 import Filter from "../../components/Filter";
 
-import InfoIcon from "@mui/icons-material/Info";
-import WarningIcon from "@mui/icons-material/Warning";
-import ReportIcon from "@mui/icons-material/Report";
 import CheckCircleIcon from "@mui/icons-material/CheckCircle";
+import WarningIcon from "@mui/icons-material/Warning";
+
 import CloseRoundedIcon from "@mui/icons-material/CloseRounded";
 import * as React from "react";
 import Box from "@mui/joy/Box";
@@ -31,7 +30,7 @@ export default function Home() {
   const [cart, setCart] = useState([]);
 
   const [index, setIndex] = useState(2);
-  const [openError, setOpenError] = useState(false);
+  const [openError, setOpenError] = useState(-1);
 
   useEffect(() => {
     // debugger;
@@ -53,7 +52,7 @@ export default function Home() {
 
   return (
     <>
-      {index == 0 && <Promotions />}
+      {index == 0 && <News />}
       {index == 1 && (
         <Cart
           products={cart}
@@ -95,8 +94,15 @@ export default function Home() {
                 }
                 setCart([...cart, e]);
               }
+              setOpenError(1);
+              setTimeout(function () {
+                setOpenError(-1);
+              }, 1000);
             } else {
-              setOpenError(true);
+              setOpenError(0);
+              setTimeout(function () {
+                setOpenError(-1);
+              }, 1000);
             }
           }} // TODO just add to cart if the product isnt already in the cart
           alphabetical={alphabetical}
@@ -107,7 +113,7 @@ export default function Home() {
       {index == 3 && <Map cart={cart} />}
       {index == 4 && <User setOpen={() => openModal(true)} />}
 
-      {openError && (
+      {openError != -1 && (
         <Box
           sx={{
             display: "flex",
@@ -116,31 +122,58 @@ export default function Home() {
             flexDirection: "column",
           }}
         >
-          <Alert
-            sx={{ alignItems: "flex-start" }}
-            startDecorator={<WarningIcon />}
-            variant="soft"
-            color="danger"
-            endDecorator={
-              <IconButton
-                variant="soft"
-                color="danger"
-                onClick={() => setOpenError(false)}
-              >
-                <CloseRoundedIcon />
-              </IconButton>
-            }
-          >
-            <div>
-              <Typography level="body-lg" fontWeight="lg" color="danger">
-                Attention
-              </Typography>
-              <Typography level="body-sm" color="danger">
-                To be added to the cart, the quantity must exceed zero and you
-                must select a supermarket on <b>Prices</b>!
-              </Typography>
-            </div>
-          </Alert>
+          {openError == 0 ? (
+            <Alert
+              sx={{ alignItems: "flex-start" }}
+              startDecorator={<WarningIcon />}
+              variant="soft"
+              color="danger"
+              endDecorator={
+                <IconButton
+                  variant="soft"
+                  color="danger"
+                  onClick={() => setOpenError(-1)}
+                >
+                  <CloseRoundedIcon />
+                </IconButton>
+              }
+            >
+              <div>
+                <Typography level="body-lg" fontWeight="lg" color="danger">
+                  Attention
+                </Typography>
+                <Typography level="body-sm" color="danger">
+                  To be added to the cart, the quantity must exceed zero and you
+                  must select a supermarket on <b>Set SuperMarket</b>!
+                </Typography>
+              </div>
+            </Alert>
+          ) : (
+            <Alert
+              sx={{ alignItems: "flex-start" }}
+              startDecorator={<CheckCircleIcon />}
+              variant="soft"
+              color="success"
+              endDecorator={
+                <IconButton
+                  variant="soft"
+                  color="success"
+                  onClick={() => setOpenError(-1)}
+                >
+                  <CloseRoundedIcon />
+                </IconButton>
+              }
+            >
+              <div>
+                <Typography level="body-lg" fontWeight="lg" color="success">
+                  Attention
+                </Typography>
+                <Typography level="body-sm" color="success">
+                  Product added to cart successfully
+                </Typography>
+              </div>
+            </Alert>
+          )}
         </Box>
       )}
 

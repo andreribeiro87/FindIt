@@ -129,7 +129,7 @@ export default function Map({ cart }) {
         right: 0,
         margin: "auto",
         maxWidth: "85%",
-        height: "78%",
+        height: "80%",
         overflow: "auto",
       }}
     >

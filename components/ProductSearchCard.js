@@ -31,23 +31,23 @@ export default function ProductSearchCard({
 }) {
   const [quantity, setQuantity] = useState(0);
   const [supermarket, setSupermarket] = useState([]);
+  const [check, setCheck] = useState(false);
   const [tooltip, setTooltip] = useState(false);
   const [tooltip1, setTooltip1] = useState(false);
 
   useEffect(() => {
     // x.produto.preco, x.id, x.nome
-    console.log(produto);
     if (selectedSuperMarkets != null && selectedSuperMarkets.length > 0) {
       // get the price
       let preco = produto.supermercados
         .filter((x) => x.id == selectedSuperMarkets[0].id)
         .map((x) => x.produto.preco);
-      console.log(preco);
       setSupermarket([
         preco[0],
         selectedSuperMarkets[0].id,
         selectedSuperMarkets[0].nome,
       ]);
+      setCheck(true);
     }
   }, [produto, selectedSuperMarkets]);
 
@@ -115,7 +115,6 @@ export default function ProductSearchCard({
                   <Sheet>
                     <RadioGroup
                       onChange={(event) => {
-                        console.log(event);
                         //event.target.value -> id do supermercado
                         //event.target.parentNode.parentNode.parentNode.lastChild.textContent -> nome do supermercado
                         setSupermarket([
@@ -124,6 +123,8 @@ export default function ProductSearchCard({
                           event.target.parentNode.parentNode.parentNode
                             .lastChild.textContent,
                         ]);
+
+                        // change the
                       }}
                     >
                       {produto.supermercados.map((x) => (
@@ -133,13 +134,20 @@ export default function ProductSearchCard({
                           value={x.id}
                           label={x.nome}
                           checked={
-                            selectedSuperMarkets.length > 0
-                              ? selectedSuperMarkets[0].id == x.id
+                            // selectedSuperMarkets.length > 0 &&
+                            // supermarket != null
+                            //   ? selectedSuperMarkets[0].id == x.id
+                            //   : supermarket != null
+                            //   ? supermarket[1] == x.id
+                            //   : false
+                            check == true && supermarket[1] == x.id
+                              ? true
                               : false
                           }
-                          // onClick={() =>
-                          //   setSupermarket([x.produto.preco, x.id, x.nome])
-                          // }
+                          onClick={() => {
+                            setSupermarket([x.produto.preco, x.id, x.nome]);
+                            setCheck(true);
+                          }}
                         />
                       ))}
                     </RadioGroup>

@@ -12,28 +12,8 @@ import { useEffect } from "react";
 
 export default function Promotions() {
 
-  const [mapPosition, setMapPosition] = useState({ lat: 40.6443, lng: -8.6455 }); 
-  const [mapZoom, setMapZoom] = useState(13); 
-  let allSuper = [];
-
-  useEffect(() => {
-    // debugger;
-    (async () => {
-      fetch(`/api/getSupermarket`, {
-        method: "GET",
-      })
-        .then((res) => {
-          return res.json();
-        })
-        .then((data) => {
-          // supermercados do user
-          //only supermercados
-            allSuper = [data];
-            console.log(allSuper);
-        });
-
-    })();
-  }, []);
+  const [mapPosition, setMapPosition] = useState({ lat: 40.635, lng:-8.652  }); 
+  const [mapZoom, setMapZoom] = useState(13.5); 
 
 
 
@@ -49,11 +29,11 @@ export default function Promotions() {
     <div>
       <Card>
         <Box p={2}>
-          Search bar maybe
+          Supermarkets
         </Box>
         <Divider />
       </Card>
-      <Map position={mapPosition} zoom={mapZoom} allSuper={allSuper}/>
+      <Map position={mapPosition} zoom={mapZoom}/>
     </div>
   );
 }

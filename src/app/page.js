@@ -28,6 +28,8 @@ export default function Home() {
   const [superMarket, setSuperMarket] = useState([]);
   const [products, setProducts] = useState([]);
 
+  const [superMarketcart, setSuperMarketCart] = useState("");
+
   const [cart, setCart] = useState([]);
 
   const [index, setIndex] = useState(2);
@@ -75,6 +77,8 @@ export default function Home() {
             }
             setCart([...cart]);
           }}
+          setIndex={(e) => setIndex(e)}
+          setSuperMarketCart={(e) => setSuperMarketCart(e)}
         />
       )}
       {index == 2 && (
@@ -104,7 +108,13 @@ export default function Home() {
           accessibility={accessibility}
         />
       )}
-      {index == 3 && <Map cart={cart} />}
+      {index == 3 && (
+        <Map
+          cart={cart}
+          superMarketCart={superMarketcart}
+          setSuperMarketCart={(e) => setSuperMarketCart(e)}
+        />
+      )}
       {index == 4 && <User setOpen={() => openModal(true)} />}
 
       {openError && (

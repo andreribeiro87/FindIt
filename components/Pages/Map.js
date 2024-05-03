@@ -1,4 +1,6 @@
 import Card from "@mui/joy/Card";
+import Select from "@mui/joy/Select";
+import Option from "@mui/joy/Option";
 import {
   graph,
   waypointsCoord,
@@ -6,13 +8,17 @@ import {
   entradaCoord,
   saidaCoord,
 } from "../../public/consts.js";
-export default function Map({ cart }) {
+export default function Map({ cart, superMarketCart, setSuperMarketCart }) {
   let width = 300;
   let heigth = 300;
 
-  console.table(cart);
+  console.log(cart, superMarketCart, "TESTE");
 
-  let userProducts = cart.map((x) => "produto" + x.produto.id.toString());
+  let filteredCart = cart.filter((x) => x.supermarket[2] == superMarketCart);
+
+  let userProducts = filteredCart.map(
+    (x) => "produto" + x.produto.id.toString()
+  );
 
   function bfs(graph, start, end) {
     const queue = [[start, []]]; // Queue of [node, path]
@@ -133,7 +139,16 @@ export default function Map({ cart }) {
         overflow: "auto",
       }}
     >
-      map
+      <Select
+        defaultValue={superMarketCart}
+        onChange={(event, newValue) => setSuperMarketCart(newValue)}
+      >
+        {[...new Set(cart.map((x) => x.supermarket[2]))].map((x) => (
+          <Option key={x} value={x}>
+            {x}
+          </Option>
+        ))}
+      </Select>
       {/* TODO map  */}
       <svg
         viewBox="0 0 792 1135"
@@ -475,6 +490,7 @@ export default function Map({ cart }) {
           <path
             fill-rule="nonzero"
             fill="#4155c6"
+            display={"none"}
             stroke-width="1"
             d="M.0,7.5C.0,3.4,3.4,.0,7.5,.0C11.6,.0,15.0,3.4,15.0,7.5C15.0,11.6,11.6,15.0,7.5,15.0C3.4,15.0,.0,11.6,.0,7.5z"
             transform="matrix(0.000000,1.000000,-1.000000,0.000000,252.500000,204.654000)"
@@ -484,6 +500,7 @@ export default function Map({ cart }) {
           <path
             fill-rule="nonzero"
             fill="#4155c6"
+            display={"none"}
             stroke-width="1"
             d="M.0,7.5C.0,3.4,3.4,.0,7.5,.0C11.6,.0,15.0,3.4,15.0,7.5C15.0,11.6,11.6,15.0,7.5,15.0C3.4,15.0,.0,11.6,.0,7.5z"
             transform="matrix(0.000000,1.000000,-1.000000,0.000000,451.000000,204.654000)"
@@ -493,6 +510,7 @@ export default function Map({ cart }) {
           <path
             fill-rule="nonzero"
             fill="#4155c6"
+            display={"none"}
             stroke-width="1"
             d="M.0,7.5C.0,3.4,3.4,.0,7.5,.0C11.6,.0,15.0,3.4,15.0,7.5C15.0,11.6,11.6,15.0,7.5,15.0C3.4,15.0,.0,11.6,.0,7.5z"
             transform="matrix(0.000000,1.000000,-1.000000,0.000000,498.000000,572.904000)"
@@ -502,6 +520,7 @@ export default function Map({ cart }) {
           <path
             fill-rule="nonzero"
             fill="#4155c6"
+            display={"none"}
             stroke-width="1"
             d="M.0,7.5C.0,3.4,3.4,.0,7.5,.0C11.6,.0,15.0,3.4,15.0,7.5C15.0,11.6,11.6,15.0,7.5,15.0C3.4,15.0,.0,11.6,.0,7.5z"
             transform="matrix(0.000000,1.000000,-1.000000,0.000000,498.000000,452.404000)"
@@ -511,6 +530,7 @@ export default function Map({ cart }) {
           <path
             fill-rule="nonzero"
             fill="#4155c6"
+            display={"none"}
             stroke-width="1"
             d="M.0,7.5C.0,3.4,3.4,.0,7.5,.0C11.6,.0,15.0,3.4,15.0,7.5C15.0,11.6,11.6,15.0,7.5,15.0C3.4,15.0,.0,11.6,.0,7.5z"
             transform="matrix(0.000000,1.000000,-1.000000,0.000000,498.000000,338.904000)"
@@ -520,6 +540,7 @@ export default function Map({ cart }) {
           <path
             fill-rule="nonzero"
             fill="#4155c6"
+            display={"none"}
             stroke-width="1"
             d="M.0,7.5C.0,3.4,3.4,.0,7.5,.0C11.6,.0,15.0,3.4,15.0,7.5C15.0,11.6,11.6,15.0,7.5,15.0C3.4,15.0,.0,11.6,.0,7.5z"
             transform="matrix(0.000000,1.000000,-1.000000,0.000000,498.000000,695.404000)"
@@ -529,6 +550,7 @@ export default function Map({ cart }) {
           <path
             fill-rule="nonzero"
             fill="#4155c6"
+            display={"none"}
             stroke-width="1"
             d="M.0,7.5C.0,3.4,3.4,.0,7.5,.0C11.6,.0,15.0,3.4,15.0,7.5C15.0,11.6,11.6,15.0,7.5,15.0C3.4,15.0,.0,11.6,.0,7.5z"
             transform="matrix(0.000000,1.000000,-1.000000,0.000000,498.000000,810.154000)"
@@ -538,6 +560,7 @@ export default function Map({ cart }) {
           <path
             fill-rule="nonzero"
             fill="#4155c6"
+            display={"none"}
             stroke-width="1"
             d="M.0,7.5C.0,3.4,3.4,.0,7.5,.0C11.6,.0,15.0,3.4,15.0,7.5C15.0,11.6,11.6,15.0,7.5,15.0C3.4,15.0,.0,11.6,.0,7.5z"
             transform="matrix(0.000000,1.000000,-1.000000,0.000000,619.000000,204.654000)"
@@ -547,6 +570,7 @@ export default function Map({ cart }) {
           <path
             fill-rule="nonzero"
             fill="#4155c6"
+            display={"none"}
             stroke-width="1"
             d="M.0,7.5C.0,3.4,3.4,.0,7.5,.0C11.6,.0,15.0,3.4,15.0,7.5C15.0,11.6,11.6,15.0,7.5,15.0C3.4,15.0,.0,11.6,.0,7.5z"
             transform="matrix(0.000000,1.000000,-1.000000,0.000000,619.000000,338.904000)"
@@ -556,6 +580,7 @@ export default function Map({ cart }) {
           <path
             fill-rule="nonzero"
             fill="#4155c6"
+            display={"none"}
             stroke-width="1"
             d="M.0,7.5C.0,3.4,3.4,.0,7.5,.0C11.6,.0,15.0,3.4,15.0,7.5C15.0,11.6,11.6,15.0,7.5,15.0C3.4,15.0,.0,11.6,.0,7.5z"
             transform="matrix(0.000000,1.000000,-1.000000,0.000000,619.000000,452.404000)"
@@ -565,6 +590,7 @@ export default function Map({ cart }) {
           <path
             fill-rule="nonzero"
             fill="#4155c6"
+            display={"none"}
             stroke-width="1"
             d="M.0,7.5C.0,3.4,3.4,.0,7.5,.0C11.6,.0,15.0,3.4,15.0,7.5C15.0,11.6,11.6,15.0,7.5,15.0C3.4,15.0,.0,11.6,.0,7.5z"
             transform="matrix(0.000000,1.000000,-1.000000,0.000000,619.000000,572.904000)"
@@ -574,6 +600,7 @@ export default function Map({ cart }) {
           <path
             fill-rule="nonzero"
             fill="#4155c6"
+            display={"none"}
             stroke-width="1"
             d="M.0,7.5C.0,3.4,3.4,.0,7.5,.0C11.6,.0,15.0,3.4,15.0,7.5C15.0,11.6,11.6,15.0,7.5,15.0C3.4,15.0,.0,11.6,.0,7.5z"
             transform="matrix(0.000000,1.000000,-1.000000,0.000000,619.000000,695.404000)"
@@ -583,6 +610,7 @@ export default function Map({ cart }) {
           <path
             fill-rule="nonzero"
             fill="#4155c6"
+            display={"none"}
             stroke-width="1"
             d="M.0,7.5C.0,3.4,3.4,.0,7.5,.0C11.6,.0,15.0,3.4,15.0,7.5C15.0,11.6,11.6,15.0,7.5,15.0C3.4,15.0,.0,11.6,.0,7.5z"
             transform="matrix(0.000000,1.000000,-1.000000,0.000000,619.000000,810.154000)"
@@ -592,6 +620,7 @@ export default function Map({ cart }) {
           <path
             fill-rule="nonzero"
             fill="#4155c6"
+            display={"none"}
             stroke-width="1"
             d="M.0,7.5C.0,3.4,3.4,.0,7.5,.0C11.6,.0,15.0,3.4,15.0,7.5C15.0,11.6,11.6,15.0,7.5,15.0C3.4,15.0,.0,11.6,.0,7.5z"
             transform="matrix(0.000000,1.000000,-1.000000,0.000000,619.000000,924.904000)"
@@ -601,6 +630,7 @@ export default function Map({ cart }) {
           <path
             fill-rule="nonzero"
             fill="#4155c6"
+            display={"none"}
             stroke-width="1"
             d="M.0,7.5C.0,3.4,3.4,.0,7.5,.0C11.6,.0,15.0,3.4,15.0,7.5C15.0,11.6,11.6,15.0,7.5,15.0C3.4,15.0,.0,11.6,.0,7.5z"
             transform="matrix(0.000000,1.000000,-1.000000,0.000000,498.000000,924.904000)"
@@ -610,6 +640,7 @@ export default function Map({ cart }) {
           <path
             fill-rule="nonzero"
             fill="#4155c6"
+            display={"none"}
             stroke-width="1"
             d="M.0,7.5C.0,3.4,3.4,.0,7.5,.0C11.6,.0,15.0,3.4,15.0,7.5C15.0,11.6,11.6,15.0,7.5,15.0C3.4,15.0,.0,11.6,.0,7.5z"
             transform="matrix(0.000000,1.000000,-1.000000,0.000000,346.000000,924.904000)"
@@ -619,6 +650,7 @@ export default function Map({ cart }) {
           <path
             fill-rule="nonzero"
             fill="#4155c6"
+            display={"none"}
             stroke-width="1"
             d="M.0,7.5C.0,3.4,3.4,.0,7.5,.0C11.6,.0,15.0,3.4,15.0,7.5C15.0,11.6,11.6,15.0,7.5,15.0C3.4,15.0,.0,11.6,.0,7.5z"
             transform="matrix(0.000000,1.000000,-1.000000,0.000000,346.000000,572.904000)"
@@ -628,6 +660,7 @@ export default function Map({ cart }) {
           <path
             fill-rule="nonzero"
             fill="#4155c6"
+            display={"none"}
             stroke-width="1"
             d="M.0,7.5C.0,3.4,3.4,.0,7.5,.0C11.6,.0,15.0,3.4,15.0,7.5C15.0,11.6,11.6,15.0,7.5,15.0C3.4,15.0,.0,11.6,.0,7.5z"
             transform="matrix(0.000000,1.000000,-1.000000,0.000000,346.000000,810.154000)"
@@ -646,6 +679,7 @@ export default function Map({ cart }) {
           <path
             fill-rule="nonzero"
             fill="#4155c6"
+            display={"none"}
             stroke-width="1"
             d="M.0,7.5C.0,3.4,3.4,.0,7.5,.0C11.6,.0,15.0,3.4,15.0,7.5C15.0,11.6,11.6,15.0,7.5,15.0C3.4,15.0,.0,11.6,.0,7.5z"
             transform="matrix(0.000000,1.000000,-1.000000,0.000000,346.000000,695.404000)"
@@ -655,6 +689,7 @@ export default function Map({ cart }) {
           <path
             fill-rule="nonzero"
             fill="#4155c6"
+            display={"none"}
             stroke-width="1"
             d="M.0,7.5C.0,3.4,3.4,.0,7.5,.0C11.6,.0,15.0,3.4,15.0,7.5C15.0,11.6,11.6,15.0,7.5,15.0C3.4,15.0,.0,11.6,.0,7.5z"
             transform="matrix(0.000000,1.000000,-1.000000,0.000000,252.000000,612.154000)"
@@ -664,6 +699,7 @@ export default function Map({ cart }) {
           <path
             fill-rule="nonzero"
             fill="#4155c6"
+            display={"none"}
             stroke-width="1"
             d="M.0,7.5C.0,3.4,3.4,.0,7.5,.0C11.6,.0,15.0,3.4,15.0,7.5C15.0,11.6,11.6,15.0,7.5,15.0C3.4,15.0,.0,11.6,.0,7.5z"
             transform="matrix(0.000000,1.000000,-1.000000,0.000000,346.000000,338.904000)"
@@ -673,6 +709,7 @@ export default function Map({ cart }) {
           <path
             fill-rule="nonzero"
             fill="#4155c6"
+            display={"none"}
             stroke-width="1"
             d="M.0,7.5C.0,3.4,3.4,.0,7.5,.0C11.6,.0,15.0,3.4,15.0,7.5C15.0,11.6,11.6,15.0,7.5,15.0C3.4,15.0,.0,11.6,.0,7.5z"
             transform="matrix(0.000000,1.000000,-1.000000,0.000000,346.000000,452.404000)"

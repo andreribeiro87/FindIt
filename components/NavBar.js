@@ -11,9 +11,6 @@ import NotificationsActiveIcon from "@mui/icons-material/NotificationsActive";
 import Search from "@mui/icons-material/Search";
 import ShoppingCartIcon from "@mui/icons-material/ShoppingCart";
 
-//TODO
-
-// texto a dar cliping  
 
 
 export default function NavBar({index,changeIndex}) {
@@ -42,8 +39,8 @@ export default function NavBar({index,changeIndex}) {
           py: 1,
           flex: 1,
           transition: "0.7s",
-          fontWeight: "md",
-          fontSize: "md",
+          fontWeight: "sm",
+          fontSize: "sm",
           [`&:not(.${tabClasses.selected}):not(:hover)`]: {
             opacity: 0.7,
             fontSize:0
@@ -65,7 +62,7 @@ export default function NavBar({index,changeIndex}) {
           <ListItemDecorator>
             <NotificationsActiveIcon />
           </ListItemDecorator>
-          Notifications
+          News
         </Tab>
         <Tab
           disableIndicator

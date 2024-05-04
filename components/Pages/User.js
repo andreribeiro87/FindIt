@@ -4,11 +4,10 @@ import { useState } from "react";
 import Card from "@mui/joy/Card";
 import CardContent from "@mui/joy/CardContent";
 import Button from "@mui/joy/Button";
-import { Container, FormControl, FormLabel, Input, Stack } from "@mui/joy";
+import { Container, Divider, FormLabel, Input, Stack } from "@mui/joy";
 import Modal from "@mui/joy/Modal";
 import ModalClose from "@mui/joy/ModalClose";
-import FormHelperText from "@mui/joy/FormHelperText";
-import InfoOutlined from "@mui/icons-material/InfoOutlined";
+
 
 import EditIcon from "@mui/icons-material/Edit";
 import TopicIcon from "@mui/icons-material/Topic";
@@ -20,7 +19,6 @@ export default function User({ setOpen }) {
   const [name, setName] = useState("User");
   const [email, setEmail] = useState("Email");
   const [edit, setEdit] = useState(false);
-  const [errorEmail, setErrorEmail] = useState(false);
 
   return (
     <Card
@@ -34,12 +32,13 @@ export default function User({ setOpen }) {
         right: 0,
         margin: "auto",
         maxWidth: "85%",
-        height: "78%",
+        height: "80%",
       }}
     >
       <CardContent sx={{ display: "flex", justifyContent: "space-around" }}>
         <Container
           sx={{
+            mt:5,
             display: "flex",
             alignItems: "center",
             flexDirection: "column",
@@ -49,6 +48,7 @@ export default function User({ setOpen }) {
           <span>{name}</span>
           <span>{email}</span>
         </Container>
+        <Divider/>
         <Card size="lg">
           <CardContent sx={{ display: "flex", justifyContent: "center" }}>
             <Button
@@ -64,7 +64,7 @@ export default function User({ setOpen }) {
               color="danger"
               onClick={setOpen}
               variant="solid"
-              children={"Preferences"}
+              children={"Search Preferences"}
               startDecorator={<TopicIcon />}
             />
             <Button
@@ -108,6 +108,7 @@ export default function User({ setOpen }) {
               event.preventDefault();
               setName(document.getElementById("name").value);
               setEmail(document.getElementById("email").value);
+              setEdit(false)
             }}
           >
             <Stack spacing={1}>

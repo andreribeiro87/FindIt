@@ -20,14 +20,6 @@ import Close from "@mui/icons-material/Close";
 import SearchIcon from "@mui/icons-material/Search";
 import { useEffect, useState } from "react";
 
-// TODO
-// CLOSE MODAL esta em cima da barra de pesquisa
-// os markets nao estao no centro do card
-// umas animacoes please
-
-// enter nao funciona
-// apagar o input assim que o user mete
-// ao clicar em order devia mudar o switch
 
 export default function BasicModal({
   open,
@@ -192,7 +184,7 @@ export default function BasicModal({
                 />
               }
             >
-              Accessibility
+              Supermarket with Accessibility
             </Typography>
             <Typography
               startDecorator={

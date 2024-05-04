@@ -40,14 +40,19 @@ export default function ProductDetails({ produto, close }) {
           </thead>
           <tbody>
             {produto.supermercados.map((e) => {
-              return(
-              <tr>
-                <td>{e.nome}</td>
-                <td style={{ textAlign: "center" }}>
-                  {e.acessibilidade == "false" ? <CloseIcon /> : <CheckIcon />}
-                </td>
-                <td>{e.produto.preco}€</td>
-              </tr>)
+              return (
+                <tr key={e.id}>
+                  <td>{e.nome}</td>
+                  <td style={{ textAlign: "center" }}>
+                    {e.acessibilidade == "false" ? (
+                      <CloseIcon />
+                    ) : (
+                      <CheckIcon />
+                    )}
+                  </td>
+                  <td>{e.produto.preco}€</td>
+                </tr>
+              );
             })}
           </tbody>
         </Table>

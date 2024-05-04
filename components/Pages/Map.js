@@ -1,6 +1,9 @@
 import Card from "@mui/joy/Card";
 import Select from "@mui/joy/Select";
 import Option from "@mui/joy/Option";
+import Button from "@mui/joy/Button";
+import Sheet from "@mui/joy/Sheet";
+
 import {
   graph,
   waypointsCoord,
@@ -154,6 +157,13 @@ export default function Map({ cart, superMarketCart, setSuperMarketCart }) {
         viewBox="0 0 792 1135"
         preserveAspectRatio="xMidYMid meet"
         transform="scale(1.21, 1.21)"
+        width="100%"
+        height="100%"
+        style={{
+          maxWidth: "100%",
+          maxHeight: "75%",
+          margin: "auto",
+        }}
       >
         <g id="page1">
           {/* <rect y="0" fill="none" height="1125" x="0" width="782" /> */}

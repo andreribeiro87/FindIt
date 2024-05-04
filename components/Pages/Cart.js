@@ -104,7 +104,6 @@ export default function Cart({
         )}
         {/* </Sheet> */}
       </Sheet>
-      <Button onClick={() => console.log(products, "PILOCA")}></Button>
     </Card>
   );
 }

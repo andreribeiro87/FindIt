@@ -101,12 +101,12 @@ export default function Home() {
               setOpenError(1);
               setTimeout(function () {
                 setOpenError(-1);
-              }, 1000);
+              }, 5000);
             } else {
               setOpenError(0);
               setTimeout(function () {
                 setOpenError(-1);
-              }, 1000);
+              }, 5000);
             }
           }} // TODO just add to cart if the product isnt already in the cart
           alphabetical={alphabetical}

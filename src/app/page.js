@@ -95,14 +95,8 @@ export default function Home() {
                 setCart([...cart, e]);
               }
               setOpenError(1);
-              setTimeout(function () {
-                setOpenError(-1);
-              }, 1000);
             } else {
               setOpenError(0);
-              setTimeout(function () {
-                setOpenError(-1);
-              }, 1000);
             }
           }} // TODO just add to cart if the product isnt already in the cart
           alphabetical={alphabetical}

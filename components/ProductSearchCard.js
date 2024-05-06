@@ -80,13 +80,12 @@ export default function ProductSearchCard({
                   <Sheet>
                     {produto.supermercados.map((x) => (
                       <>
-                        <ListItem key={x.produto.id}>
+                        <ListItem key={x.produto.id+"S"+x.id}>
                           <ListItemIcon>
                             <ShoppingCart />
                           </ListItemIcon>
                           <ListItemText
                             primary={x.nome + " - " + x.produto.preco + "€"}
-                            // secondary="Secondary text"
                           />
                         </ListItem>
                       </>

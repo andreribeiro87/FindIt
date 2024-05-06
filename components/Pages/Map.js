@@ -1,4 +1,11 @@
+import { useState } from "react";
+
 import Card from "@mui/joy/Card";
+import Select from "@mui/joy/Select";
+import Option from "@mui/joy/Option";
+import Tooltip from '@mui/joy/Tooltip';
+import { SvgIcon } from "@mui/joy";
+
 import {
   graph,
   waypointsCoord,
@@ -6,13 +13,16 @@ import {
   entradaCoord,
   saidaCoord,
 } from "../../public/consts.js";
-export default function Map({ cart }) {
-  let width = 300;
-  let heigth = 300;
+export default function Map({ cart, superMarketCart, setSuperMarketCart }) {
+  const [open,setOpen]=useState(false)
+  const [openp,setOpenp]=useState("")
+  console.log(cart, superMarketCart, "TESTE");
 
-  console.table(cart);
+  let filteredCart = cart.filter((x) => x.supermarket[2] == superMarketCart);
 
-  let userProducts = cart.map((x) => "produto" + x.produto.id.toString());
+  let userProducts = filteredCart.map(
+    (x) => "produto" + x.produto.id.toString()
+  );
 
   function bfs(graph, start, end) {
     const queue = [[start, []]]; // Queue of [node, path]
@@ -133,24 +143,40 @@ export default function Map({ cart }) {
         overflow: "auto",
       }}
     >
-      map
-      {/* TODO map  */}
+{cart.length>0 ?     <><Select
+        defaultValue={superMarketCart}
+        placeholder="Chose a supermarket"
+        onChange={(event, newValue) => setSuperMarketCart(newValue)}
+      >
+        {[...new Set(cart.map((x) => x.supermarket[2]))].map((x) => (
+          <Option key={x} value={x}>
+            {x}
+          </Option>
+        ))}
+      </Select>
       <svg
         viewBox="0 0 792 1135"
         preserveAspectRatio="xMidYMid meet"
         transform="scale(1.21, 1.21)"
+        width="100%"
+        height="100%"
+        style={{
+          maxWidth: "100%",
+          maxHeight: "75%",
+          margin: "auto",
+        }}
       >
         <g id="page1">
           {/* <rect y="0" fill="none" height="1125" x="0" width="782" /> */}
           <path
-            fill-rule="nonzero"
+            fillRule="nonzero"
             fill="#cbbdb0"
             d="M.0,.0L1047.3,.0L1047.3,704.0L.0,704.0L.0,.0z"
             transform="matrix(0.000000,1.000000,-1.000000,0.000000,746.000000,47.000000)"
             id="shape1"
           />
           <path
-            fill-rule="nonzero"
+            fillRule="nonzero"
             fill="#edf0f5"
             d="M.0,.0L964.0,.0L964.0,648.0L.0,648.0L.0,.0z"
             transform="matrix(0.000000,1.000000,-1.000000,0.000000,718.000000,88.655000)"
@@ -161,7 +187,7 @@ export default function Map({ cart }) {
             id="shape3"
           >
             <path
-              fill-rule="nonzero"
+              fillRule="nonzero"
               fill="#fced6e"
               d="M.0,.0L189.0,.0L189.0,38.0L.0,38.0L.0,.0z"
             />
@@ -176,7 +202,7 @@ export default function Map({ cart }) {
             id="shape4"
           >
             <path
-              fill-rule="nonzero"
+              fillRule="nonzero"
               fill="#e88aac"
               d="M.0,.0L397.0,.0L397.0,38.0L.0,38.0L.0,.0z"
             />
@@ -191,7 +217,7 @@ export default function Map({ cart }) {
             id="group5"
           >
             <path
-              fill-rule="nonzero"
+              fillRule="nonzero"
               fill="#f1ca7b"
               d="M.0,.0L132.0,.0L132.0,38.0L.0,38.0L.0,.0z"
               transform="translate(0.000000,0.000057)"
@@ -202,7 +228,7 @@ export default function Map({ cart }) {
               id="shape7"
             >
               <path
-                fill-rule="nonzero"
+                fillRule="nonzero"
                 fill="#f1ca7b"
                 d="M.0,.0L114.0,.0L114.0,57.0L.0,57.0L.0,.0z"
               />
@@ -218,7 +244,7 @@ export default function Map({ cart }) {
             id="group8"
           >
             <path
-              fill-rule="nonzero"
+              fillRule="nonzero"
               fill="#f1ca7b"
               d="M.0,.0L132.0,.0L132.0,38.0L.0,38.0L.0,.0z"
               transform="matrix(-1.000000,0.000000,0.000000,1.000000,132.000000,0.000057)"
@@ -229,7 +255,7 @@ export default function Map({ cart }) {
               id="shape10"
             >
               <path
-                fill-rule="nonzero"
+                fillRule="nonzero"
                 fill="#f1ca7b"
                 d="M.0,.0L114.0,.0L114.0,57.0L.0,57.0L.0,.0z"
               />
@@ -242,7 +268,7 @@ export default function Map({ cart }) {
           </g>
           <g transform="translate(321.000000,117.654300)" id="shape11">
             <path
-              fill-rule="nonzero"
+              fillRule="nonzero"
               fill="#aae3ac"
               d="M.0,.0L245.0,.0L245.0,57.0L.0,57.0L.0,.0z"
             />
@@ -254,7 +280,7 @@ export default function Map({ cart }) {
           </g>
           <g transform="translate(188.000000,117.654300)" id="shape12">
             <path
-              fill-rule="nonzero"
+              fillRule="nonzero"
               fill="#d0bae0"
               d="M.0,.0L114.0,.0L114.0,57.0L.0,57.0L.0,.0z"
             />
@@ -265,28 +291,28 @@ export default function Map({ cart }) {
             </text>
           </g>
           <path
-            fill-rule="nonzero"
+            fillRule="nonzero"
             fill="#86629f"
             d="M.0,.0L151.0,.0L151.0,47.0L.0,47.0L.0,.0z"
             transform="translate(415.000000,268.654000)"
             id="shape13"
           />
           <path
-            fill-rule="nonzero"
+            fillRule="nonzero"
             fill="#86629f"
             d="M.0,.0L151.0,.0L151.0,47.0L.0,47.0L.0,.0z"
             transform="translate(415.000000,377.154000)"
             id="shape14"
           />
           <path
-            fill-rule="nonzero"
+            fillRule="nonzero"
             fill="#86629f"
             d="M.0,.0L151.0,.0L151.0,47.0L.0,47.0L.0,.0z"
             transform="translate(415.000000,495.654000)"
             id="shape15"
           />
           <path
-            fill-rule="nonzero"
+            fillRule="nonzero"
             fill="#86629f"
             d="M.0,.0L151.0,.0L151.0,47.0L.0,47.0L.0,.0z"
             transform="translate(415.000000,618.154000)"
@@ -294,25 +320,7 @@ export default function Map({ cart }) {
           />
 
           <path
-            fill-rule="nonzero"
-            fill="#ff0"
-            stroke-width="1"
-            d="M.0,7.5C.0,3.4,3.4,.0,7.5,.0C11.6,.0,15.0,3.4,15.0,7.5C15.0,11.6,11.6,15.0,7.5,15.0C3.4,15.0,.0,11.6,.0,7.5z"
-            transform="matrix(0.000000,1.000000,-1.000000,0.000000,470.000000,609.7700)"
-            id="produto7"
-            stroke="#323232"
-          />
-          <path
-            fill-rule="nonzero"
-            fill="#ff0"
-            stroke-width="1"
-            d="M.0,7.5C.0,3.4,3.4,.0,7.5,.0C11.6,.0,15.0,3.4,15.0,7.5C15.0,11.6,11.6,15.0,7.5,15.0C3.4,15.0,.0,11.6,.0,7.5z"
-            transform="matrix(0.000000,1.000000,-1.000000,0.000000,525.000000,609.7700)"
-            id="produto8"
-            stroke="#323232"
-          />
-          <path
-            fill-rule="nonzero"
+            fillRule="nonzero"
             fill="#86629f"
             d="M.0,.0L151.0,.0L151.0,47.0L.0,47.0L.0,.0z"
             transform="translate(415.000000,740.654000)"
@@ -321,7 +329,7 @@ export default function Map({ cart }) {
           <g transform="translate(415.000000,847.154000)" id="shape18">
             <path
               id="frozen"
-              fill-rule="nonzero"
+              fillRule="nonzero"
               fill="#a9e7f4"
               d="M.0,.0L151.0,.0L151.0,57.0L.0,57.0L.0,.0z"
             />
@@ -331,39 +339,13 @@ export default function Map({ cart }) {
               </tspan>
             </text>
           </g>
-          <path
-            fill-rule="nonzero"
-            fill="#ff0"
-            stroke-width="1"
-            d="M.0,7.5C.0,3.4,3.4,.0,7.5,.0C11.6,.0,15.0,3.4,15.0,7.5C15.0,11.6,11.6,15.0,7.5,15.0C3.4,15.0,.0,11.6,.0,7.5z"
-            transform="matrix(0.000000,1.000000,-1.000000,0.000000,440.000000,839.0)"
-            id="produto28"
-            stroke="#323232"
-          />
-          <path
-            fill-rule="nonzero"
-            fill="#ff0"
-            stroke-width="1"
-            d="M.0,7.5C.0,3.4,3.4,.0,7.5,.0C11.6,.0,15.0,3.4,15.0,7.5C15.0,11.6,11.6,15.0,7.5,15.0C3.4,15.0,.0,11.6,.0,7.5z"
-            transform="matrix(0.000000,1.000000,-1.000000,0.000000,550.000000,839.0)"
-            id="produto29"
-            stroke="#323232"
-          />
-          <path
-            fill-rule="nonzero"
-            fill="#ff0"
-            stroke-width="1"
-            d="M.0,7.5C.0,3.4,3.4,.0,7.5,.0C11.6,.0,15.0,3.4,15.0,7.5C15.0,11.6,11.6,15.0,7.5,15.0C3.4,15.0,.0,11.6,.0,7.5z"
-            transform="matrix(0.000000,1.000000,-1.000000,0.000000,475.000000,895.0)"
-            id="produto30"
-            stroke="#323232"
-          />
+
           <g
             transform="matrix(-1.000000,0.000000,0.000000,-1.000000,556.000000,1023.654000)"
             id="shape19"
           >
             <path
-              fill-rule="nonzero"
+              fillRule="nonzero"
               fill="#cae2e2"
               d="M.0,.0L122.0,.0L122.0,57.0L.0,57.0L.0,.0z"
             />
@@ -378,7 +360,7 @@ export default function Map({ cart }) {
             id="shape20"
           >
             <path
-              fill-rule="nonzero"
+              fillRule="nonzero"
               fill="#d4c4a2"
               d="M.0,.0L133.0,.0L133.0,57.0L.0,57.0L.0,.0z"
             />
@@ -392,35 +374,35 @@ export default function Map({ cart }) {
             </text>
           </g>
           <path
-            fill-rule="nonzero"
+            fillRule="nonzero"
             fill="#000000"
             d="M.0,.0L242.0,.0L242.0,4.0L.0,4.0L.0,.0z"
             transform="matrix(0.000000,1.000000,-1.000000,0.000000,98.000000,268.654000)"
             id="shape21"
           />
           <path
-            fill-rule="nonzero"
+            fillRule="nonzero"
             fill="#e0e1a7"
             d="M.0,.0L53.0,.0L53.0,23.0L.0,23.0L.0,.0z"
             transform="matrix(-1.000000,0.000000,0.000000,-1.000000,271.000000,664.654000)"
             id="shape22"
           />
           <path
-            fill-rule="nonzero"
+            fillRule="nonzero"
             fill="#e0e1a7"
             d="M.0,.0L53.0,.0L53.0,23.0L.0,23.0L.0,.0z"
             transform="matrix(-1.000000,0.000000,0.000000,-1.000000,271.000000,721.154000)"
             id="shape23"
           />
           <path
-            fill-rule="nonzero"
+            fillRule="nonzero"
             fill="#e0e1a7"
             d="M.0,.0L53.0,.0L53.0,23.0L.0,23.0L.0,.0z"
             transform="matrix(-1.000000,0.000000,0.000000,-1.000000,271.000000,777.654000)"
             id="shape24"
           />
           <path
-            fill-rule="nonzero"
+            fillRule="nonzero"
             fill="#e0e1a7"
             d="M.0,.0L53.0,.0L53.0,23.0L.0,23.0L.0,.0z"
             transform="matrix(-1.000000,0.000000,0.000000,-1.000000,271.000000,834.154000)"
@@ -447,7 +429,7 @@ export default function Map({ cart }) {
             </text>
           </g>
           <path
-            fill-rule="nonzero"
+            fillRule="nonzero"
             fill="#000000"
             d="M.0,.0L242.0,.0L242.0,4.0L.0,4.0L.0,.0z"
             transform="matrix(0.000000,1.000000,-1.000000,0.000000,98.000000,679.654000)"
@@ -464,455 +446,73 @@ export default function Map({ cart }) {
             </text>
           </g>
           <path
-            fill-rule="nonzero"
+            fillRule="nonzero"
             fill="#00b050"
-            stroke-width="1"
+            strokeWidth="1"
             d="M.0,7.5C.0,3.4,3.4,.0,7.5,.0C11.6,.0,15.0,3.4,15.0,7.5C15.0,11.6,11.6,15.0,7.5,15.0C3.4,15.0,.0,11.6,.0,7.5z"
             transform="matrix(0.000000,1.000000,-1.000000,0.000000,161.000000,380.154000)"
             id="entrada"
             stroke="#323232"
           />
           <path
-            fill-rule="nonzero"
-            fill="#4155c6"
-            stroke-width="1"
-            d="M.0,7.5C.0,3.4,3.4,.0,7.5,.0C11.6,.0,15.0,3.4,15.0,7.5C15.0,11.6,11.6,15.0,7.5,15.0C3.4,15.0,.0,11.6,.0,7.5z"
-            transform="matrix(0.000000,1.000000,-1.000000,0.000000,252.500000,204.654000)"
-            id="waypoint1"
-            stroke="#323232"
-          />
-          <path
-            fill-rule="nonzero"
-            fill="#4155c6"
-            stroke-width="1"
-            d="M.0,7.5C.0,3.4,3.4,.0,7.5,.0C11.6,.0,15.0,3.4,15.0,7.5C15.0,11.6,11.6,15.0,7.5,15.0C3.4,15.0,.0,11.6,.0,7.5z"
-            transform="matrix(0.000000,1.000000,-1.000000,0.000000,451.000000,204.654000)"
-            id="waypoint2"
-            stroke="#323232"
-          />
-          <path
-            fill-rule="nonzero"
-            fill="#4155c6"
-            stroke-width="1"
-            d="M.0,7.5C.0,3.4,3.4,.0,7.5,.0C11.6,.0,15.0,3.4,15.0,7.5C15.0,11.6,11.6,15.0,7.5,15.0C3.4,15.0,.0,11.6,.0,7.5z"
-            transform="matrix(0.000000,1.000000,-1.000000,0.000000,498.000000,572.904000)"
-            id="waypoint3"
-            stroke="#323232"
-          />
-          <path
-            fill-rule="nonzero"
-            fill="#4155c6"
-            stroke-width="1"
-            d="M.0,7.5C.0,3.4,3.4,.0,7.5,.0C11.6,.0,15.0,3.4,15.0,7.5C15.0,11.6,11.6,15.0,7.5,15.0C3.4,15.0,.0,11.6,.0,7.5z"
-            transform="matrix(0.000000,1.000000,-1.000000,0.000000,498.000000,452.404000)"
-            id="waypoint4"
-            stroke="#323232"
-          />
-          <path
-            fill-rule="nonzero"
-            fill="#4155c6"
-            stroke-width="1"
-            d="M.0,7.5C.0,3.4,3.4,.0,7.5,.0C11.6,.0,15.0,3.4,15.0,7.5C15.0,11.6,11.6,15.0,7.5,15.0C3.4,15.0,.0,11.6,.0,7.5z"
-            transform="matrix(0.000000,1.000000,-1.000000,0.000000,498.000000,338.904000)"
-            id="waypoint5"
-            stroke="#323232"
-          />
-          <path
-            fill-rule="nonzero"
-            fill="#4155c6"
-            stroke-width="1"
-            d="M.0,7.5C.0,3.4,3.4,.0,7.5,.0C11.6,.0,15.0,3.4,15.0,7.5C15.0,11.6,11.6,15.0,7.5,15.0C3.4,15.0,.0,11.6,.0,7.5z"
-            transform="matrix(0.000000,1.000000,-1.000000,0.000000,498.000000,695.404000)"
-            id="waypoint6"
-            stroke="#323232"
-          />
-          <path
-            fill-rule="nonzero"
-            fill="#4155c6"
-            stroke-width="1"
-            d="M.0,7.5C.0,3.4,3.4,.0,7.5,.0C11.6,.0,15.0,3.4,15.0,7.5C15.0,11.6,11.6,15.0,7.5,15.0C3.4,15.0,.0,11.6,.0,7.5z"
-            transform="matrix(0.000000,1.000000,-1.000000,0.000000,498.000000,810.154000)"
-            id="waypoint7"
-            stroke="#323232"
-          />
-          <path
-            fill-rule="nonzero"
-            fill="#4155c6"
-            stroke-width="1"
-            d="M.0,7.5C.0,3.4,3.4,.0,7.5,.0C11.6,.0,15.0,3.4,15.0,7.5C15.0,11.6,11.6,15.0,7.5,15.0C3.4,15.0,.0,11.6,.0,7.5z"
-            transform="matrix(0.000000,1.000000,-1.000000,0.000000,619.000000,204.654000)"
-            id="waypoint8"
-            stroke="#323232"
-          />
-          <path
-            fill-rule="nonzero"
-            fill="#4155c6"
-            stroke-width="1"
-            d="M.0,7.5C.0,3.4,3.4,.0,7.5,.0C11.6,.0,15.0,3.4,15.0,7.5C15.0,11.6,11.6,15.0,7.5,15.0C3.4,15.0,.0,11.6,.0,7.5z"
-            transform="matrix(0.000000,1.000000,-1.000000,0.000000,619.000000,338.904000)"
-            id="waypoint9"
-            stroke="#323232"
-          />
-          <path
-            fill-rule="nonzero"
-            fill="#4155c6"
-            stroke-width="1"
-            d="M.0,7.5C.0,3.4,3.4,.0,7.5,.0C11.6,.0,15.0,3.4,15.0,7.5C15.0,11.6,11.6,15.0,7.5,15.0C3.4,15.0,.0,11.6,.0,7.5z"
-            transform="matrix(0.000000,1.000000,-1.000000,0.000000,619.000000,452.404000)"
-            id="waypoint10"
-            stroke="#323232"
-          />
-          <path
-            fill-rule="nonzero"
-            fill="#4155c6"
-            stroke-width="1"
-            d="M.0,7.5C.0,3.4,3.4,.0,7.5,.0C11.6,.0,15.0,3.4,15.0,7.5C15.0,11.6,11.6,15.0,7.5,15.0C3.4,15.0,.0,11.6,.0,7.5z"
-            transform="matrix(0.000000,1.000000,-1.000000,0.000000,619.000000,572.904000)"
-            id="waypoint11"
-            stroke="#323232"
-          />
-          <path
-            fill-rule="nonzero"
-            fill="#4155c6"
-            stroke-width="1"
-            d="M.0,7.5C.0,3.4,3.4,.0,7.5,.0C11.6,.0,15.0,3.4,15.0,7.5C15.0,11.6,11.6,15.0,7.5,15.0C3.4,15.0,.0,11.6,.0,7.5z"
-            transform="matrix(0.000000,1.000000,-1.000000,0.000000,619.000000,695.404000)"
-            id="waypoint12"
-            stroke="#323232"
-          />
-          <path
-            fill-rule="nonzero"
-            fill="#4155c6"
-            stroke-width="1"
-            d="M.0,7.5C.0,3.4,3.4,.0,7.5,.0C11.6,.0,15.0,3.4,15.0,7.5C15.0,11.6,11.6,15.0,7.5,15.0C3.4,15.0,.0,11.6,.0,7.5z"
-            transform="matrix(0.000000,1.000000,-1.000000,0.000000,619.000000,810.154000)"
-            id="waypoint13"
-            stroke="#323232"
-          />
-          <path
-            fill-rule="nonzero"
-            fill="#4155c6"
-            stroke-width="1"
-            d="M.0,7.5C.0,3.4,3.4,.0,7.5,.0C11.6,.0,15.0,3.4,15.0,7.5C15.0,11.6,11.6,15.0,7.5,15.0C3.4,15.0,.0,11.6,.0,7.5z"
-            transform="matrix(0.000000,1.000000,-1.000000,0.000000,619.000000,924.904000)"
-            id="waypoint14"
-            stroke="#323232"
-          />
-          <path
-            fill-rule="nonzero"
-            fill="#4155c6"
-            stroke-width="1"
-            d="M.0,7.5C.0,3.4,3.4,.0,7.5,.0C11.6,.0,15.0,3.4,15.0,7.5C15.0,11.6,11.6,15.0,7.5,15.0C3.4,15.0,.0,11.6,.0,7.5z"
-            transform="matrix(0.000000,1.000000,-1.000000,0.000000,498.000000,924.904000)"
-            id="waypoint15"
-            stroke="#323232"
-          />
-          <path
-            fill-rule="nonzero"
-            fill="#4155c6"
-            stroke-width="1"
-            d="M.0,7.5C.0,3.4,3.4,.0,7.5,.0C11.6,.0,15.0,3.4,15.0,7.5C15.0,11.6,11.6,15.0,7.5,15.0C3.4,15.0,.0,11.6,.0,7.5z"
-            transform="matrix(0.000000,1.000000,-1.000000,0.000000,346.000000,924.904000)"
-            id="waypoint16"
-            stroke="#323232"
-          />
-          <path
-            fill-rule="nonzero"
-            fill="#4155c6"
-            stroke-width="1"
-            d="M.0,7.5C.0,3.4,3.4,.0,7.5,.0C11.6,.0,15.0,3.4,15.0,7.5C15.0,11.6,11.6,15.0,7.5,15.0C3.4,15.0,.0,11.6,.0,7.5z"
-            transform="matrix(0.000000,1.000000,-1.000000,0.000000,346.000000,572.904000)"
-            id="waypoint17"
-            stroke="#323232"
-          />
-          <path
-            fill-rule="nonzero"
-            fill="#4155c6"
-            stroke-width="1"
-            d="M.0,7.5C.0,3.4,3.4,.0,7.5,.0C11.6,.0,15.0,3.4,15.0,7.5C15.0,11.6,11.6,15.0,7.5,15.0C3.4,15.0,.0,11.6,.0,7.5z"
-            transform="matrix(0.000000,1.000000,-1.000000,0.000000,346.000000,810.154000)"
-            id="waypoint18"
-            stroke="#323232"
-          />
-          <path
-            fill-rule="nonzero"
+            fillRule="nonzero"
             fill="#ff0000"
-            stroke-width="1"
+            strokeWidth="1"
             d="M.0,7.5C.0,3.4,3.4,.0,7.5,.0C11.6,.0,15.0,3.4,15.0,7.5C15.0,11.6,11.6,15.0,7.5,15.0C3.4,15.0,.0,11.6,.0,7.5z"
             transform="matrix(0.000000,1.000000,-1.000000,0.000000,161.000000,793.154000)"
             id="saida"
             stroke="#323232"
           />
-          <path
-            fill-rule="nonzero"
-            fill="#4155c6"
-            stroke-width="1"
-            d="M.0,7.5C.0,3.4,3.4,.0,7.5,.0C11.6,.0,15.0,3.4,15.0,7.5C15.0,11.6,11.6,15.0,7.5,15.0C3.4,15.0,.0,11.6,.0,7.5z"
-            transform="matrix(0.000000,1.000000,-1.000000,0.000000,346.000000,695.404000)"
-            id="waypoint19"
-            stroke="#323232"
-          />
-          <path
-            fill-rule="nonzero"
-            fill="#4155c6"
-            stroke-width="1"
-            d="M.0,7.5C.0,3.4,3.4,.0,7.5,.0C11.6,.0,15.0,3.4,15.0,7.5C15.0,11.6,11.6,15.0,7.5,15.0C3.4,15.0,.0,11.6,.0,7.5z"
-            transform="matrix(0.000000,1.000000,-1.000000,0.000000,252.000000,612.154000)"
-            id="waypoint20"
-            stroke="#323232"
-          />
-          <path
-            fill-rule="nonzero"
-            fill="#4155c6"
-            stroke-width="1"
-            d="M.0,7.5C.0,3.4,3.4,.0,7.5,.0C11.6,.0,15.0,3.4,15.0,7.5C15.0,11.6,11.6,15.0,7.5,15.0C3.4,15.0,.0,11.6,.0,7.5z"
-            transform="matrix(0.000000,1.000000,-1.000000,0.000000,346.000000,338.904000)"
-            id="waypoint21"
-            stroke="#323232"
-          />
-          <path
-            fill-rule="nonzero"
-            fill="#4155c6"
-            stroke-width="1"
-            d="M.0,7.5C.0,3.4,3.4,.0,7.5,.0C11.6,.0,15.0,3.4,15.0,7.5C15.0,11.6,11.6,15.0,7.5,15.0C3.4,15.0,.0,11.6,.0,7.5z"
-            transform="matrix(0.000000,1.000000,-1.000000,0.000000,346.000000,452.404000)"
-            id="waypoint22"
-            stroke="#323232"
-          />
-          <path
-            fill-rule="nonzero"
-            fill="#ff0"
-            stroke-width="1"
-            d="M.0,7.5C.0,3.4,3.4,.0,7.5,.0C11.6,.0,15.0,3.4,15.0,7.5C15.0,11.6,11.6,15.0,7.5,15.0C3.4,15.0,.0,11.6,.0,7.5z"
-            transform="matrix(0.000000,1.000000,-1.000000,0.000000,552.500000,306.654000)"
-            id="produto2"
-            stroke="#323232"
-          />
 
-          <path
-            fill-rule="nonzero"
-            fill="#ff0"
-            stroke-width="1"
-            d="M.0,7.5C.0,3.4,3.4,.0,7.5,.0C11.6,.0,15.0,3.4,15.0,7.5C15.0,11.6,11.6,15.0,7.5,15.0C3.4,15.0,.0,11.6,.0,7.5z"
-            transform="matrix(0.000000,1.000000,-1.000000,0.000000,500.000000,306.654000)"
-            id="produto1"
-            stroke="#323232"
-          />
+          {produtosCoord
+            .filter((e) => userProducts.includes(e[1]))
+            .map((e) => (
 
-          <path
-            fill-rule="nonzero"
-            fill="#ff0"
-            stroke-width="1"
-            d="M.0,7.5C.0,3.4,3.4,.0,7.5,.0C11.6,.0,15.0,3.4,15.0,7.5C15.0,11.6,11.6,15.0,7.5,15.0C3.4,15.0,.0,11.6,.0,7.5z"
-            transform="matrix(0.000000,1.000000,-1.000000,0.000000,437.500000,416.154000)"
-            id="produto3"
-            stroke="#323232"
-          />
+              <Tooltip title={cart.filter(c=>c.produto.id==e[1].substring(7))[0].produto.nome} size="sm" open={open&&openp==e[1]}>
+              <path
+              onClick={()=>{
+                setOpenp(e[1])
+                setOpen(!open)
+              }}
 
-          <path
-            fill-rule="nonzero"
-            fill="#ff0"
-            stroke-width="1"
-            d="M.0,7.5C.0,3.4,3.4,.0,7.5,.0C11.6,.0,15.0,3.4,15.0,7.5C15.0,11.6,11.6,15.0,7.5,15.0C3.4,15.0,.0,11.6,.0,7.5z"
-            transform="matrix(0.000000,1.000000,-1.000000,0.000000,550.000000,416.154)"
-            id="produto4"
-            stroke="#323232"
-          />
-
-          <path
-            fill-rule="nonzero"
-            fill="#ff0"
-            stroke-width="1"
-            d="M.0,7.5C.0,3.4,3.4,.0,7.5,.0C11.6,.0,15.0,3.4,15.0,7.5C15.0,11.6,11.6,15.0,7.5,15.0C3.4,15.0,.0,11.6,.0,7.5z"
-            transform="matrix(0.000000,1.000000,-1.000000,0.000000,543.000000,487.654000)"
-            id="produto5"
-            stroke="#323232"
-          />
-          <path
-            fill-rule="nonzero"
-            fill="#ff0"
-            stroke-width="1"
-            d="M.0,7.5C.0,3.4,3.4,.0,7.5,.0C11.6,.0,15.0,3.4,15.0,7.5C15.0,11.6,11.6,15.0,7.5,15.0C3.4,15.0,.0,11.6,.0,7.5z"
-            transform="matrix(0.000000,1.000000,-1.000000,0.000000,503.000000,534.654000)"
-            id="produto27"
-            stroke="#323232"
-          />
-
-          <path
-            fill-rule="nonzero"
-            fill="#ff0"
-            stroke-width="1"
-            d="M.0,7.5C.0,3.4,3.4,.0,7.5,.0C11.6,.0,15.0,3.4,15.0,7.5C15.0,11.6,11.6,15.0,7.5,15.0C3.4,15.0,.0,11.6,.0,7.5z"
-            transform="matrix(0.000000,1.000000,-1.000000,0.000000,480.000000,487.654000)"
-            id="produto6"
-            stroke="#323232"
-          />
-
-          <path
-            fill-rule="nonzero"
-            fill="#ff0"
-            stroke-width="1"
-            d="M.0,7.5C.0,3.4,3.4,.0,7.5,.0C11.6,.0,15.0,3.4,15.0,7.5C15.0,11.6,11.6,15.0,7.5,15.0C3.4,15.0,.0,11.6,.0,7.5z"
-            transform="matrix(0.000000,1.000000,-1.000000,0.000000,552.500000,164.654300)"
-            id="produto18"
-            stroke="#323232"
-          />
-          <path
-            fill-rule="nonzero"
-            fill="#ff0"
-            stroke-width="1"
-            d="M.0,7.5C.0,3.4,3.4,.0,7.5,.0C11.6,.0,15.0,3.4,15.0,7.5C15.0,11.6,11.6,15.0,7.5,15.0C3.4,15.0,.0,11.6,.0,7.5z"
-            transform="matrix(0.000000,1.000000,-1.000000,0.000000,470.500000,164.654300)"
-            id="produto19"
-            stroke="#323232"
-          />
-
-          <path
-            fill-rule="nonzero"
-            fill="#ff0"
-            stroke-width="1"
-            d="M.0,7.5C.0,3.4,3.4,.0,7.5,.0C11.6,.0,15.0,3.4,15.0,7.5C15.0,11.6,11.6,15.0,7.5,15.0C3.4,15.0,.0,11.6,.0,7.5z"
-            transform="matrix(0.000000,1.000000,-1.000000,0.000000,375.500000,164.654300)"
-            id="produto20"
-            stroke="#323232"
-          />
-          <path
-            fill-rule="nonzero"
-            fill="#ff0"
-            stroke-width="1"
-            d="M.0,7.5C.0,3.4,3.4,.0,7.5,.0C11.6,.0,15.0,3.4,15.0,7.5C15.0,11.6,11.6,15.0,7.5,15.0C3.4,15.0,.0,11.6,.0,7.5z"
-            transform="matrix(0.000000,1.000000,-1.000000,0.000000,240.500000,164.654300)"
-            id="produto21"
-            stroke="#323232"
-          />
-          <path
-            fill-rule="nonzero"
-            fill="#ff0"
-            stroke-width="1"
-            d="M.0,7.5C.0,3.4,3.4,.0,7.5,.0C11.6,.0,15.0,3.4,15.0,7.5C15.0,11.6,11.6,15.0,7.5,15.0C3.4,15.0,.0,11.6,.0,7.5z"
-            transform="matrix(0.000000,1.000000,-1.000000,0.000000,625.500000,164.654300)"
-            id="produto22"
-            stroke="#323232"
-          />
-          <path
-            fill-rule="nonzero"
-            fill="#ff0"
-            stroke-width="1"
-            d="M.0,7.5C.0,3.4,3.4,.0,7.5,.0C11.6,.0,15.0,3.4,15.0,7.5C15.0,11.6,11.6,15.0,7.5,15.0C3.4,15.0,.0,11.6,.0,7.5z"
-            transform="matrix(0.000000,1.000000,-1.000000,0.000000,667.000000,756.654000)"
-            id="produto12"
-            stroke="#323232"
-          />
-          <path
-            fill-rule="nonzero"
-            fill="#ff0"
-            stroke-width="1"
-            d="M.0,7.5C.0,3.4,3.4,.0,7.5,.0C11.6,.0,15.0,3.4,15.0,7.5C15.0,11.6,11.6,15.0,7.5,15.0C3.4,15.0,.0,11.6,.0,7.5z"
-            transform="matrix(0.000000,1.000000,-1.000000,0.000000,667.000000,393.154000)"
-            id="produto10"
-            stroke="#323232"
-          />
-
-          <path
-            fill-rule="nonzero"
-            fill="#ff0"
-            stroke-width="1"
-            d="M.0,7.5C.0,3.4,3.4,.0,7.5,.0C11.6,.0,15.0,3.4,15.0,7.5C15.0,11.6,11.6,15.0,7.5,15.0C3.4,15.0,.0,11.6,.0,7.5z"
-            transform="matrix(0.000000,1.000000,-1.000000,0.000000,667.000000,330.154)"
-            id="produto9"
-            stroke="#323232"
-          />
-          <path
-            fill-rule="nonzero"
-            fill="#ff0"
-            stroke-width="1"
-            d="M.0,7.5C.0,3.4,3.4,.0,7.5,.0C11.6,.0,15.0,3.4,15.0,7.5C15.0,11.6,11.6,15.0,7.5,15.0C3.4,15.0,.0,11.6,.0,7.5z"
-            transform="matrix(0.000000,1.000000,-1.000000,0.000000,392.000000,959.654000)"
-            id="produto16"
-            stroke="#323232"
-          />
-          <path
-            fill-rule="nonzero"
-            fill="#ff0"
-            stroke-width="1"
-            d="M.0,7.5C.0,3.4,3.4,.0,7.5,.0C11.6,.0,15.0,3.4,15.0,7.5C15.0,11.6,11.6,15.0,7.5,15.0C3.4,15.0,.0,11.6,.0,7.5z"
-            transform="matrix(0.000000,1.000000,-1.000000,0.000000,325.000000,959.654000)"
-            id="produto17"
-            stroke="#323232"
-          />
-          <path
-            fill-rule="nonzero"
-            fill="#ff0"
-            stroke-width="1"
-            d="M.0,7.5C.0,3.4,3.4,.0,7.5,.0C11.6,.0,15.0,3.4,15.0,7.5C15.0,11.6,11.6,15.0,7.5,15.0C3.4,15.0,.0,11.6,.0,7.5z"
-            transform="matrix(0.000000,1.000000,-1.000000,0.000000,667.000000,527.654000)"
-            id="produto11"
-            stroke="#323232"
-          />
-          <path
-            fill-rule="nonzero"
-            fill="#ff0"
-            stroke-width="1"
-            d="M.0,7.5C.0,3.4,3.4,.0,7.5,.0C11.6,.0,15.0,3.4,15.0,7.5C15.0,11.6,11.6,15.0,7.5,15.0C3.4,15.0,.0,11.6,.0,7.5z"
-            transform="matrix(0.000000,1.000000,-1.000000,0.000000,667.000000,650.654000)"
-            id="produto13"
-            stroke="#323232"
-          />
-          <path
-            fill-rule="nonzero"
-            fill="#ff0"
-            stroke-width="1"
-            d="M.0,7.5C.0,3.4,3.4,.0,7.5,.0C11.6,.0,15.0,3.4,15.0,7.5C15.0,11.6,11.6,15.0,7.5,15.0C3.4,15.0,.0,11.6,.0,7.5z"
-            transform="matrix(0.000000,1.000000,-1.000000,0.000000,459.500000,959.654000)"
-            id="produto15"
-            stroke="#323232"
-          />
-          <path
-            fill-rule="nonzero"
-            fill="#ff0"
-            stroke-width="1"
-            d="M.0,7.5C.0,3.4,3.4,.0,7.5,.0C11.6,.0,15.0,3.4,15.0,7.5C15.0,11.6,11.6,15.0,7.5,15.0C3.4,15.0,.0,11.6,.0,7.5z"
-            transform="matrix(0.000000,1.000000,-1.000000,0.000000,520.500000,959.654000)"
-            id="produto14"
-            stroke="#323232"
-          />
-          <path
-            fill-rule="nonzero"
-            fill="#ff0"
-            stroke-width="1"
-            d="M.0,7.5C.0,3.4,3.4,.0,7.5,.0C11.6,.0,15.0,3.4,15.0,7.5C15.0,11.6,11.6,15.0,7.5,15.0C3.4,15.0,.0,11.6,.0,7.5z"
-            transform="matrix(0.000000,1.000000,-1.000000,0.000000,640.500000,959.654000)"
-            id="produto23"
-            stroke="#323232"
-          />
-
-          <path
-            fill-rule="nonzero"
-            fill="#ff0"
-            stroke-width="1"
-            d="M.0,7.5C.0,3.4,3.4,.0,7.5,.0C11.6,.0,15.0,3.4,15.0,7.5C15.0,11.6,11.6,15.0,7.5,15.0C3.4,15.0,.0,11.6,.0,7.5z"
-            transform="matrix(0.000000,1.000000,-1.000000,0.000000,499.000000,733.1540)"
-            id="produto24"
-            stroke="#323232"
-          />
-          <path
-            fill-rule="nonzero"
-            fill="#ff0"
-            stroke-width="1"
-            d="M.0,7.5C.0,3.4,3.4,.0,7.5,.0C11.6,.0,15.0,3.4,15.0,7.5C15.0,11.6,11.6,15.0,7.5,15.0C3.4,15.0,.0,11.6,.0,7.5z"
-            transform="matrix(0.000000,1.000000,-1.000000,0.000000,550.000000,733.1540)"
-            id="produto25"
-            stroke="#323232"
-          />
-          <path
-            fill-rule="nonzero"
-            fill="#ff0"
-            stroke-width="1"
-            d="M.0,7.5C.0,3.4,3.4,.0,7.5,.0C11.6,.0,15.0,3.4,15.0,7.5C15.0,11.6,11.6,15.0,7.5,15.0C3.4,15.0,.0,11.6,.0,7.5z"
-            transform="matrix(0.000000,1.000000,-1.000000,0.000000,450.000000,780.1540)"
-            id="produto26"
-            stroke="#323232"
-          />
+                fillRule="nonzero"
+                fill="#ff0"
+                strokeWidth="1"
+                d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7m0 9.5c-1.38 0-2.5-1.12-2.5-2.5s1.12-2.5 2.5-2.5 2.5 1.12 2.5 2.5-1.12 2.5-2.5 2.5"
+                id={e[1]}
+                key={e[1]}
+                transform={
+                  "matrix(0.000000,1.900000,-1.9000000,0.000000," +
+                  e[0][0] +
+                  "," +
+                  e[0][1] +
+                  ") rotate(-90) translate(-20, -20)"
+                }
+                stroke="#323232"
+              />
+              </Tooltip>
+            ))}
+          {waypointsCoord.map((e) => {
+            return (
+              <path
+                fillRule="nonzero"
+                fill="#4155c6"
+                display={"none"}
+                strokeWidth="1"
+                d="M.0,7.5C.0,3.4,3.4,.0,7.5,.0C11.6,.0,15.0,3.4,15.0,7.5C15.0,11.6,11.6,15.0,7.5,15.0C3.4,15.0,.0,11.6,.0,7.5z"
+                transform={
+                  "matrix(0.000000,1.000000,-1.000000,0.000000," +
+                  e[0][0] +
+                  "," +
+                  e[0][1] +
+                  ")"
+                }
+                id={e[1]}
+                key={e[1]}
+                stroke="#323232"
+              />
+            );
+          })}
 
           {caminhoComCoordenadas.length > 4 &&
             caminhoComCoordenadas
@@ -936,7 +536,7 @@ export default function Map({ cart }) {
                 );
               })}
         </g>
-      </svg>
+      </svg></>: <>You must have a full cart!</>}
     </Card>
   );
 }

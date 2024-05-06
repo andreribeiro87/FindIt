@@ -13,7 +13,13 @@ import Accordion from "@mui/joy/Accordion";
 import AccordionDetails from "@mui/joy/AccordionDetails";
 import AccordionSummary from "@mui/joy/AccordionSummary";
 
-export default function Cart({ products, removeFromCart, changeQuantity }) {
+export default function Cart({
+  products,
+  removeFromCart,
+  changeQuantity,
+  setIndex,
+  setSuperMarketCart,
+}) {
   const [details, setDetails] = useState(true);
   const [prodDetails, setProdDetails] = useState({});
 
@@ -69,11 +75,15 @@ export default function Cart({ products, removeFromCart, changeQuantity }) {
                         );
                     })}
                     <Card orientation="horizontal">
-                      <Button>Show Path</Button>
+                      <Button
+                        onClick={() => {
+                          setIndex(3);
+                          setSuperMarketCart(superName);
+                        }}
+                      >
+                        Show Path
+                      </Button>
                       TOTAL:
-                      {/* {total.map((x) => {
-                        if (x.supermarket == superName) return x.total;
-                      })} */}
                       {products
                         .filter((x) => x.supermarket[2] == superName)
                         .reduce((acc, x) => {
@@ -94,7 +104,6 @@ export default function Cart({ products, removeFromCart, changeQuantity }) {
         )}
         {/* </Sheet> */}
       </Sheet>
-      <Button onClick={() => console.log(products, "PILOCA")}></Button>
     </Card>
   );
 }

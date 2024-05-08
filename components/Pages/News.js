@@ -8,7 +8,7 @@ import ArrowForwardIosIcon from "@mui/icons-material/ArrowForwardIos";
 import ArrowBackIosNewIcon from "@mui/icons-material/ArrowBackIosNew";
 
 export default function News() {
-  const images = ["image1.jpg", "image2.jpg", "image3.jpg"];
+  const images = ["../findit-high-resolution-logo.png", "../"];
 
   const [activeIndex, setActiveIndex] = React.useState(0);
 
@@ -36,7 +36,7 @@ export default function News() {
   return (
     <Slide direction="right" in={true} timeout={500}>
       <Card
-        color="neutral"
+        color="white"
         variant="soft"
         sx={{
           boxShadow: "lg",
@@ -63,7 +63,8 @@ export default function News() {
             src={`/images/${images[activeIndex]}`}
             alt={`Slide ${activeIndex}`}
             layout="fill"
-            objectFit="cover"
+            objectFit="contain"
+            quality={100}
           />
         </div>
         <Button

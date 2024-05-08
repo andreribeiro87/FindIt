@@ -10,9 +10,9 @@ import dynamic from "next/dynamic";
 import { MapContainer } from "react-leaflet";
 import { useEffect } from "react";
 
-export default function Promotions() {
+export default function SupermarketSearch() {
 
-  const [mapPosition, setMapPosition] = useState({ lat: 40.635, lng:-8.652  }); 
+  const [mapPosition, setMapPosition] = useState({ lat: 40.635, lng:-8.650  }); 
   const [mapZoom, setMapZoom] = useState(13.5); 
 
 
@@ -20,7 +20,7 @@ export default function Promotions() {
   const Map = useMemo(() => dynamic(
     () => import('../MapComponent'),
     { 
-      loading: () => <p>A map is loading</p>,
+      loading: () => <p>Loading</p>,
       ssr: false
     }
   ), [])
@@ -29,11 +29,14 @@ export default function Promotions() {
     <div>
       <Card>
         <Box p={2}>
-          Supermarkets
+         Tap on the icons to see more
         </Box>
         <Divider />
       </Card>
       <Map position={mapPosition} zoom={mapZoom}/>
+
+      
     </div>
+
   );
 }

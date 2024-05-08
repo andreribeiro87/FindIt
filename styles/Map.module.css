@@ -1,5 +1,16 @@
 .map {
     width: 100%;
-    height: 30rem;
+    height: 43.37rem;
 }
 
+.dirbutton {
+    background-color: #007bff; 
+    color: white; 
+    padding: 8px 16px; 
+    border: none; 
+    cursor: pointer; 
+}
+
+.dirbutton:hover {
+    background-color: #0056b3;
+}

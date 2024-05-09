@@ -80,7 +80,7 @@ export default function ProductSearchCard({
                   <Sheet>
                     {produto.supermercados.map((x) => (
                       <>
-                        <ListItem key={x.produto.id+"S"+x.id}>
+                        <ListItem key={x.produto.id + "S" + x.id}>
                           <ListItemIcon>
                             <ShoppingCart />
                           </ListItemIcon>
@@ -163,9 +163,11 @@ export default function ProductSearchCard({
                 placement="bottom-start"
               >
                 <Link level="body-sm" onClick={() => setTooltip(true)}>
-                  Set SuperMarket
+                  {supermarket.length == 0 ? "Set SuperMarket" : "Change it"}
                 </Link>
               </Tooltip>
+              <Typography level="body-xs">Selected supermarket</Typography>
+              <Typography level="body-xs">{supermarket[2]}</Typography>
             </>
           ) : (
             <Typography level="body-md">

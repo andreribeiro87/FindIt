@@ -8,7 +8,7 @@ import ArrowForwardIosIcon from "@mui/icons-material/ArrowForwardIos";
 import ArrowBackIosNewIcon from "@mui/icons-material/ArrowBackIosNew";
 
 export default function News() {
-  const images = ["../findit-high-resolution-logo.png", "../"];
+  const images = ["/findit-high-resolution-logo.png"];
 
   const [activeIndex, setActiveIndex] = React.useState(0);
 

@@ -6,6 +6,7 @@ import SearchPage from "../../components/Pages/Search";
 import User from "../../components/Pages/User";
 import Cart from "../../components/Pages/Cart";
 import Map from "../../components/Pages/Map";
+import SupermarketSearch from "../../components/Pages/SupermarketSearch";
 import News from "../../components/Pages/News";
 import Filter from "../../components/Filter";
 
@@ -18,6 +19,7 @@ import Box from "@mui/joy/Box";
 import Alert from "@mui/joy/Alert";
 import IconButton from "@mui/joy/IconButton";
 import Typography from "@mui/joy/Typography";
+import InitialSearchPage from "../../components/Pages/InitialSearchPage";
 
 export default function Home() {
   const [open, openModal] = useState(false);
@@ -28,11 +30,12 @@ export default function Home() {
   const [products, setProducts] = useState([]);
 
   const [superMarketcart, setSuperMarketCart] = useState("");
-
   const [cart, setCart] = useState([]);
 
   const [index, setIndex] = useState(2);
   const [openError, setOpenError] = useState(-1);
+
+  const [iWantSeeWhat, setiWantSeeWhat] = useState("");
 
   useEffect(() => {
     // debugger;
@@ -81,38 +84,43 @@ export default function Home() {
         />
       )}
       {index == 2 && (
-        <SearchPage
-          setOpen={() => openModal(true)}
-          chosenSuperMarkets={superMarket}
-          addToCart={(e) => {
-            if (e.quantity != 0 && e.supermarket.length != 0) {
-              find: {
-                for (let i = 0; i < cart.length; i++) {
-                  if (
-                    cart[i].produto.id == e.produto.id &&
-                    e.supermarket[1] == cart[i].supermarket[1]
-                  ) {
-                    cart[i].quantity += e.quantity;
-                    break find;
+        <>
+          <SearchPage
+            setiWantSeeWhat={(e) => setiWantSeeWhat(e)}
+            iWantSeeWhat={iWantSeeWhat}
+            setOpen={() => openModal(true)}
+            chosenSuperMarkets={superMarket}
+            setChosenSuperMarket={(array) => setSuperMarket(array)}
+            addToCart={(e) => {
+              if (e.quantity != 0 && e.supermarket.length != 0) {
+                find: {
+                  for (let i = 0; i < cart.length; i++) {
+                    if (
+                      cart[i].produto.id == e.produto.id &&
+                      e.supermarket[1] == cart[i].supermarket[1]
+                    ) {
+                      cart[i].quantity += e.quantity;
+                      break find;
+                    }
                   }
+                  setCart([...cart, e]);
                 }
-                setCart([...cart, e]);
+                setOpenError(1);
+                setTimeout(function () {
+                  setOpenError(-1);
+                }, 5000);
+              } else {
+                setOpenError(0);
+                setTimeout(function () {
+                  setOpenError(-1);
+                }, 5000);
               }
-              setOpenError(1);
-              setTimeout(function () {
-                setOpenError(-1);
-              }, 5000);
-            } else {
-              setOpenError(0);
-              setTimeout(function () {
-                setOpenError(-1);
-              }, 5000);
-            }
-          }} // TODO just add to cart if the product isnt already in the cart
-          alphabetical={alphabetical}
-          order={order}
-          accessibility={accessibility}
-        />
+            }} // TODO just add to cart if the product isnt already in the cart
+            alphabetical={alphabetical}
+            order={order}
+            accessibility={accessibility}
+          />
+        </>
       )}
       {index == 3 && (
         <Map

@@ -6,9 +6,12 @@ import ProductDetails from "../../components/ProductDetails";
 import IconButton from "@mui/joy/IconButton";
 
 import FilterAltIcon from "@mui/icons-material/FilterAlt";
+import ArrowBack from "@mui/icons-material/ArrowBack";
 import Search from "@mui/icons-material/Search";
 import { Autocomplete, Card, Box } from "@mui/joy";
 import Divider from "@mui/joy/Divider";
+import SupermarketSearch from "./SupermarketSearch";
+import InitialSearchPage from "./InitialSearchPage";
 
 //TODO
 // autocomplete falta
@@ -16,10 +19,13 @@ import Divider from "@mui/joy/Divider";
 export default function SearchPage({
   setOpen,
   chosenSuperMarkets,
+  setChosenSuperMarket,
   addToCart,
   alphabetical,
   order,
   accessibility,
+  setiWantSeeWhat,
+  iWantSeeWhat,
 }) {
   const [prod, setProd] = useState([]); // todos os produtos
   const [availableProds, setAvailableProds] = useState([]);
@@ -167,7 +173,18 @@ export default function SearchPage({
           overflow: "auto",
         }}
       >
-        {details ? (
+        {iWantSeeWhat == "" ? (
+          <>
+            <InitialSearchPage setiWantSeeWhat={setiWantSeeWhat} />
+          </>
+        ) : iWantSeeWhat == "supermarket" ? (
+          <>
+            <SupermarketSearch
+              setiWantSeeWhat={setiWantSeeWhat}
+              setChosenSuperMarket={setChosenSuperMarket}
+            />
+          </>
+        ) : details ? (
           <>
             <Card
               orientation="horizontal"
@@ -175,6 +192,13 @@ export default function SearchPage({
               size="sm"
               color="primary"
             >
+              <IconButton
+                onClick={() => setiWantSeeWhat("")}
+                color="danger"
+                size="sm"
+              >
+                <ArrowBack />
+              </IconButton>
               <Autocomplete
                 variant="soft"
                 size="lg"

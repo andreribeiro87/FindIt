@@ -1,21 +1,21 @@
 {
   "id": "2",
-  "name": "My awesome PWA app",
-  "short_name": "PWA App",
+  "name": "FindIt",
+  "short_name": "FindIt",
   "icons": [
     {
-      "src": "/image1.png",
+      "src": "/findit-high-resolution-logo.png",
       "sizes": "192x192",
       "type": "image/png",
       "purpose": "any maskable"
     },
     {
-      "src": "/image1.png",
+      "src": "/findit-high-resolution-logo.png",
       "sizes": "384x384",
       "type": "image/png"
     },
     {
-      "src": "/image1.png",
+      "src": "/findit-high-resolution-logo.png",
       "sizes": "512x512",
       "type": "image/png"
     }

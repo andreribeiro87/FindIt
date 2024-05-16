@@ -18,6 +18,12 @@ import Delete from "@mui/icons-material/Delete";
 import { useState, useEffect } from "react";
 import { Link } from "@mui/joy";
 
+import InfoIcon from "@mui/icons-material/Info";
+
+import CloseRoundedIcon from "@mui/icons-material/CloseRounded";
+import Box from "@mui/joy/Box";
+import Alert from "@mui/joy/Alert";
+
 export default function ProductSearchCard({
   produto,
   Details,
@@ -34,6 +40,7 @@ export default function ProductSearchCard({
   const [check, setCheck] = useState(false);
   const [tooltip, setTooltip] = useState(false);
   const [tooltip1, setTooltip1] = useState(false);
+  const [close, setClose] = useState(false);
 
   useEffect(() => {
     // x.produto.preco, x.id, x.nome
@@ -106,6 +113,8 @@ export default function ProductSearchCard({
                   Prices
                 </Link>
               </Tooltip>
+              <Link level="body-sm">{supermarket[2]}</Link>
+
               <Tooltip
                 open={tooltip}
                 arrow
@@ -152,7 +161,7 @@ export default function ProductSearchCard({
                     </RadioGroup>
 
                     <IconButton
-                      onClick={() => setTooltip(false)}
+                      onClick={() => {setTooltip(false);setClose(true)}}
                       color="danger"
                       size="sm"
                     >
@@ -162,12 +171,51 @@ export default function ProductSearchCard({
                 }
                 placement="bottom-start"
               >
-                <Link level="body-sm" onClick={() => setTooltip(true)}>
-                  {supermarket.length == 0 ? "Set SuperMarket" : "Change it"}
+                <Link
+                  level="body-xs"
+                  onClick={() => {setTooltip(true)}}
+                  color={supermarket.length == 0 ? "primary" : "neutral"}
+                >
+                  {supermarket.length == 0 ? "Set SuperMarket" : "Change it..."}
                 </Link>
               </Tooltip>
-              <Typography level="body-xs">Selected supermarket</Typography>
-              <Typography level="body-xs">{supermarket[2]}</Typography>
+              {supermarket.length != 0 && close && (
+                <Box
+                  sx={{
+                    position:"absolute",
+                    left:0,
+                    right:0,
+                    top:2,
+                    display: "flex",
+                    gap: 2,
+                    width: "100%",
+                    flexDirection: "column",
+                  }}
+                >
+                  <Alert
+                    sx={{ alignItems: "flex-start" }}
+                    startDecorator={<InfoIcon />}
+                    variant="soft"
+                    color="primary"
+                    endDecorator={
+                      <IconButton
+                        variant="soft"
+                        color="primary"
+                        onClick={() => setClose(false)}
+                      >
+                        <CloseRoundedIcon />
+                      </IconButton>
+                    }
+                  >
+                    <div>
+                      <div>Attention</div>
+                      <Typography level="body-sm" color="primary">
+                        You chose {supermarket[2]}!
+                      </Typography>
+                    </div>
+                  </Alert>
+                </Box>
+              )}
             </>
           ) : (
             <Typography level="body-md">

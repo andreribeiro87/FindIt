@@ -48,13 +48,13 @@ export default function Cart({
         {details ? (
           <AccordionGroup>
             {[...new Set(products.map((x) => x.supermarket[2]))].map(
-              (superName) => (
-                <Accordion
+              (superName,i) => (
+                <Accordion defaultExpanded={i == 0?true:false}
                   // sx={{ p: 0, maxWidth: "85%" }}
                   // nested
                   key={superName}
                 >
-                  <AccordionSummary> {superName}</AccordionSummary>
+                  <AccordionSummary > {superName}</AccordionSummary>
                   <AccordionDetails>
                     {products.map((p) => {
                       if (p.supermarket[2] == superName)

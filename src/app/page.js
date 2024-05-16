@@ -12,6 +12,7 @@ import Filter from "../../components/Filter";
 
 import CheckCircleIcon from "@mui/icons-material/CheckCircle";
 import WarningIcon from "@mui/icons-material/Warning";
+import InfoIcon from "@mui/icons-material/Info";
 
 import CloseRoundedIcon from "@mui/icons-material/CloseRounded";
 import * as React from "react";
@@ -36,6 +37,7 @@ export default function Home() {
   const [openError, setOpenError] = useState(-1);
 
   const [iWantSeeWhat, setiWantSeeWhat] = useState("");
+  const [firstTime, setFirstTime] = useState(true);
 
   useEffect(() => {
     // debugger;
@@ -130,6 +132,41 @@ export default function Home() {
         />
       )}
       {index == 4 && <User setOpen={() => openModal(true)} />}
+
+      {iWantSeeWhat == "produtos" &&
+        firstTime && (
+          <Box
+            sx={{
+              display: "flex",
+              gap: 2,
+              width: "100%",
+              flexDirection: "column",
+            }}
+          >
+            <Alert
+              sx={{ alignItems: "flex-start" }}
+              startDecorator={<InfoIcon />}
+              variant="soft"
+              color="neutral"
+              endDecorator={
+                <IconButton
+                  variant="soft"
+                  color="neutral"
+                  onClick={() => setFirstTime(false)}
+                >
+                  <CloseRoundedIcon />
+                </IconButton>
+              }
+            >
+              <div>
+                <div>Attention</div>
+                <Typography level="body-sm" color="neutral">
+                  In order to add a product you must select an supermarket.
+                </Typography>
+              </div>
+            </Alert>
+          </Box>
+        )}
 
       {openError != -1 && (
         <Box
